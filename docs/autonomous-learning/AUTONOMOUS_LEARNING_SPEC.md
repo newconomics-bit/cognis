@@ -1,947 +1,1440 @@
-Autonomous Learning System Specification
+AUTONOMOUS LEARNING SPECIFICATION
 
-Project: Cognis AI
-Document: Autonomous Learning System Specification
-Version: 1.0
-Status: Proposed
-Language: Bahasa Indonesia
-Parent Documents: "AGENTS.md", "PRD.md", "docs/architecture/SYSTEM_ARCHITECTURE.md"
+COGNIS
+
+Document Version: 1.0
+Product Version: MVP v1
+Status: Proposed Specification Baseline
+Document Owner: Founder
+System: Autonomous Learning System (ALS)
+Primary Language: Indonesian
+Primary Timezone: Asia/Jakarta
 
 ---
 
-1. Tujuan
+1. Purpose
 
-Dokumen ini mendefinisikan cara kerja Autonomous Learning System (ALS) pada Cognis AI.
+Dokumen ini mendefinisikan mekanisme pembelajaran Cognis sebagai Autonomous Learning System (ALS).
 
-ALS merupakan sistem pembelajaran terstruktur yang memungkinkan Cognis untuk:
+Tujuannya adalah memastikan bahwa Cognis tidak hanya menjalankan penelitian dan mengumpulkan informasi, tetapi juga mampu mengubah hasil penelitian menjadi pengetahuan terstruktur yang memiliki sumber, bukti, konteks, dan riwayat.
 
-1. Menerima tujuan dan arahan pembelajaran dari pengguna.
-2. Mengidentifikasi kompetensi yang perlu dikembangkan.
-3. Melakukan riset dan mengumpulkan sumber informasi.
-4. Mengevaluasi kualitas dan relevansi informasi.
-5. Menyusun pengetahuan baru secara terstruktur.
-6. Menguji peningkatan kemampuan melalui evaluasi dan benchmark.
-7. Mengidentifikasi kelemahan serta mengusulkan perbaikan.
-8. Meminta persetujuan pengguna sebelum menerapkan perubahan permanen yang memengaruhi sistem.
-9. Memverifikasi hasil perubahan dan melakukan rollback apabila terjadi regresi.
+Dokumen ini mengatur:
 
-ALS tidak boleh menyamakan aktivitas membaca, menyimpan informasi, dan peningkatan kecerdasan. Peningkatan kemampuan harus dibuktikan melalui hasil evaluasi.
+1. Definisi pembelajaran dalam sistem Cognis.
+2. Alur pembelajaran otomatis.
+3. Penentuan topik dan tujuan pembelajaran.
+4. Pengumpulan serta evaluasi informasi.
+5. Pembentukan dan penyimpanan pengetahuan.
+6. Pengelolaan riwayat pengetahuan.
+7. Evaluasi kualitas pembelajaran.
+8. Batas otonomi sistem.
+9. Arah pengembangan ALS menuju peningkatan kemampuan yang terukur.
 
-2. Prinsip Dasar
+Implementasi MVP harus mengikuti batas produk pada "PRD.md" dan arsitektur pada "SYSTEM_ARCHITECTURE.md".
 
-2.1 Evidence-Based Learning
+---
 
-Setiap pengetahuan baru harus didukung oleh sumber atau bukti yang dapat diperiksa.
+2. ALS Vision
 
-Sistem wajib membedakan:
+Cognis dirancang untuk menjadi sistem AI khusus yang terus memperluas dan meningkatkan kemampuan analisisnya dalam bidang:
 
-- Fakta terverifikasi.
-- Klaim dari sumber tertentu.
-- Interpretasi atau analisis.
-- Asumsi.
+- Economics.
+- Business.
+- Geopolitics.
+- Finance.
+- Financial Markets.
+
+Cognis harus dapat menjalankan siklus pembelajaran secara sistematis:
+
+Research → Validate → Evaluate → Store → Report → Assess
+
+Dalam pengembangan jangka panjang, sistem diharapkan mampu:
+
+- Mengidentifikasi kesenjangan pengetahuan.
+- Menemukan kelemahan dalam hasil analisis.
+- Menentukan kebutuhan pembelajaran berikutnya.
+- Mengusulkan perbaikan berdasarkan bukti.
+- Menguji perubahan kemampuan.
+- Mempertahankan perubahan yang terbukti berhasil.
+- Membatalkan perubahan yang menghasilkan regresi.
+
+Namun, kemampuan mengubah sistem secara permanen bukan bagian dari MVP v1.
+
+MVP berfokus pada pembuktian proses pengumpulan dan pengelolaan pengetahuan yang dapat dipercaya.
+
+---
+
+3. Definition of Learning
+
+Istilah learning harus digunakan secara tepat agar sistem tidak membuat klaim peningkatan kemampuan yang keliru.
+
+Cognis membedakan empat bentuk pembelajaran.
+
+3.1 Information Acquisition
+
+Proses memperoleh informasi baru melalui penelitian.
+
+Contoh:
+
+- Meneliti kebijakan moneter terbaru.
+- Mempelajari perkembangan industri semikonduktor.
+- Mengumpulkan informasi tentang pasar energi.
+- Membandingkan kebijakan ekonomi beberapa negara.
+
+Hasil:
+
+Informasi dan materi penelitian yang telah dikumpulkan.
+
+3.2 Persistent Knowledge Acquisition
+
+Proses mengubah hasil penelitian menjadi catatan pengetahuan yang terstruktur dan tersimpan secara persisten.
+
+Contoh:
+
+- Menyimpan hubungan antara suku bunga dan biaya pinjaman.
+- Menyimpan temuan tentang perubahan kebijakan perdagangan.
+- Menyimpan analisis terhadap struktur pasar komoditas.
+- Menyimpan perbedaan pandangan beberapa sumber terhadap suatu peristiwa.
+
+Hasil:
+
+Knowledge Records yang memiliki provenance dan dapat ditemukan kembali.
+
+3.3 Capability Improvement
+
+Proses meningkatkan kemampuan sistem dalam menyelesaikan tugas tertentu.
+
+Contoh:
+
+- Meningkatkan ketepatan analisis makroekonomi.
+- Meningkatkan kemampuan membedakan korelasi dan kausalitas.
+- Mengurangi kesalahan membaca data pasar.
+- Meningkatkan kualitas analisis risiko.
+
+Hasil:
+
+Peningkatan performa yang dibuktikan melalui evaluasi dan benchmark yang konsisten.
+
+Capability Improvement belum menjadi proses otomatis pada MVP v1.
+
+3.4 Model Training or Parameter Modification
+
+Proses mengubah parameter model melalui training, fine-tuning, atau metode optimasi lainnya.
+
+Proses ini berbeda dari penyimpanan pengetahuan.
+
+Menambah Knowledge Records tidak berarti parameter model berubah.
+
+Model yang menerima konteks dari knowledge retrieval juga tidak otomatis mengalami training.
+
+Model training atau parameter modification tidak termasuk dalam MVP v1.
+
+3.5 Learning Claims
+
+Cognis harus menggunakan istilah berikut secara konsisten:
+
+Activity| Valid Description
+Mengumpulkan informasi| Research completed
+Mengevaluasi bukti| Evidence evaluated
+Menyimpan hasil| Knowledge stored
+Mengakses pengetahuan tersimpan| Knowledge retrieved
+Memperoleh hasil benchmark lebih baik| Measured performance improvement
+Mengubah parameter model| Model training or fine-tuning
+
+Sistem tidak boleh mengklaim telah meningkatkan kecerdasan atau kemampuan hanya karena jumlah pengetahuan tersimpan bertambah.
+
+---
+
+4. Core Learning Principles
+
+4.1 Evidence Before Conclusion
+
+Setiap klaim penting harus didukung bukti atau secara eksplisit diberi status belum terverifikasi.
+
+4.2 Research Before Storage
+
+Informasi tidak boleh langsung dimasukkan sebagai pengetahuan tanpa melalui pemeriksaan sumber dan evaluasi bukti sesuai pipeline.
+
+4.3 Context Preservation
+
+Informasi harus mempertahankan konteks:
+
+- Waktu.
+- Wilayah.
+- Objek yang dibahas.
+- Kondisi berlakunya informasi.
+- Asumsi yang digunakan.
+- Batas penerapan kesimpulan.
+
+4.4 Source Traceability
+
+Setiap Knowledge Record harus dapat ditelusuri ke sumber dan proses penelitian yang menghasilkannya.
+
+4.5 Uncertainty Transparency
+
+Cognis harus menyatakan ketika:
+
+- Bukti tidak cukup.
+- Sumber saling bertentangan.
+- Data tidak tersedia.
+- Kesimpulan membutuhkan asumsi.
+- Informasi mungkin sudah tidak relevan.
+
+4.6 Controlled Autonomy
+
+Cognis boleh melakukan pembelajaran yang telah didefinisikan secara otomatis.
+
+Cognis tidak boleh memperluas kewenangannya sendiri melalui hasil penelitian atau output model.
+
+4.7 Measured Development
+
+Setiap klaim peningkatan kemampuan harus memiliki bukti evaluasi yang dapat diperiksa dan dibandingkan.
+
+---
+
+5. MVP Learning Scope
+
+5.1 Included Capabilities
+
+MVP v1 harus mampu:
+
+1. Memulai pembelajaran secara manual.
+2. Memulai pembelajaran berdasarkan jadwal.
+3. Menggunakan topik pembelajaran yang telah ditentukan.
+4. Menjalankan penelitian secara otomatis.
+5. Memvalidasi sumber penelitian.
+6. Mengevaluasi klaim dan bukti.
+7. Menyimpan hasil pembelajaran.
+8. Mempertahankan hubungan pengetahuan dengan sumber.
+9. Menghasilkan laporan pembelajaran.
+10. Menampilkan riwayat pembelajaran.
+
+5.2 Excluded Capabilities
+
+MVP v1 tidak mencakup:
+
+1. Automatic Competency Assessment.
+2. Automatic Curriculum Modification.
+3. Automatic Faculty Promotion.
+4. Automatic Learning Difficulty Adjustment.
+5. Autonomous Improvement Proposal Execution.
+6. Founder Approval Workflow.
+7. Automatic System Prompt Modification.
+8. Automatic Policy Modification.
+9. Automatic Architecture Modification.
+10. Automatic Model Fine-Tuning.
+11. Automatic Model Replacement Based on Self-Evaluation.
+12. Self-Defined Expansion of System Permissions.
+
+Fitur tersebut merupakan arah pengembangan ALS berikutnya dan memerlukan spesifikasi serta pengujian tersendiri.
+
+5.3 MVP Learning Boundary
+
+MVP hanya boleh belajar dalam pengertian:
+
+Information Acquisition + Persistent Knowledge Acquisition.
+
+Tidak boleh ada klaim bahwa Cognis telah melakukan Capability Improvement atau Model Training kecuali proses tersebut benar-benar diimplementasikan dan dibuktikan pada versi berikutnya.
+
+---
+
+6. Learning Architecture
+
+6.1 Main Learning Cycle
+
+Siklus pembelajaran MVP:
+
+Learning Trigger
+       |
+       v
+Learning Job Creation
+       |
+       v
+Learning Topic Initialization
+       |
+       v
+Research Planning
+       |
+       v
+Research Execution
+       |
+       v
+Source Validation
+       |
+       v
+Evidence Evaluation
+       |
+       v
+Knowledge Synthesis
+       |
+       v
+Knowledge Storage
+       |
+       v
+Learning Report
+       |
+       v
+Learning Cycle Completed
+
+Tahap Knowledge Synthesis merupakan aktivitas pengolahan hasil evaluasi sebelum penyimpanan. Tahap ini berada dalam tanggung jawab pipeline dan tidak menambahkan klaim tanpa dasar.
+
+Alur tersebut mengikuti enam tahap utama yang ditetapkan dalam PRD dan Architecture.
+
+6.2 Learning Cycle Identity
+
+Setiap siklus pembelajaran harus memiliki:
+
+- Learning Cycle ID.
+- Job ID.
+- Domain.
+- Topic.
+- Learning Objective.
+- Trigger Type.
+- Scheduled Time jika tersedia.
+- Actual Start Time.
+- Completion Time.
+- Configuration Reference.
+- Final Status.
+
+Satu Learning Cycle menghasilkan satu Job atau memiliki hubungan yang eksplisit dengan Job yang menjalankannya.
+
+6.3 Learning Cycle Isolation
+
+Setiap siklus harus memiliki konteks dan identitas yang jelas.
+
+Hasil penelitian dari satu job tidak boleh secara tidak sengaja dicampur dengan hasil job lain.
+
+Penggabungan informasi dari beberapa siklus hanya diperbolehkan melalui mekanisme sintesis atau relasi pengetahuan yang eksplisit.
+
+---
+
+7. Learning Topic Management
+
+7.1 Topic Sources
+
+MVP mendukung dua sumber topik:
+
+Manual Topic
+
+Topik dimasukkan secara langsung oleh Founder atau operator.
+
+Scheduled Topic
+
+Topik diperoleh dari jadwal pembelajaran yang telah dikonfigurasi sebelumnya.
+
+7.2 Topic Definition
+
+Setiap topik pembelajaran idealnya memiliki:
+
+- Topic ID.
+- Topic Name.
+- Domain.
+- Description.
+- Learning Objective.
+- Scope.
+- Temporal Context.
+- Research Constraints.
+- Expected Output.
+
+Tidak semua field harus wajib untuk setiap topik, tetapi sistem harus memiliki validasi yang memadai agar penelitian tidak berjalan dengan konteks yang ambigu.
+
+7.3 Topic Boundaries
+
+Topik harus memiliki batas penelitian yang cukup jelas.
+
+Contoh topik yang terlalu luas:
+
+"Pelajari ekonomi dunia."
+
+Contoh topik yang lebih operasional:
+
+"Analisis hubungan perubahan suku bunga The Federal Reserve dengan arus modal ke negara berkembang selama periode tertentu."
+
+Research planning boleh memecah topik menjadi beberapa pertanyaan penelitian yang lebih kecil selama tetap berada dalam ruang lingkup tujuan awal.
+
+7.4 Topic Expansion
+
+Pada MVP, sistem tidak boleh mengubah tujuan utama pembelajaran secara otomatis.
+
+Sistem boleh menemukan pertanyaan turunan yang relevan untuk membantu penelitian, tetapi pertanyaan tersebut harus tetap terhubung dengan tujuan pembelajaran awal.
+
+Perluasan kurikulum secara permanen berada di luar ruang lingkup MVP.
+
+---
+
+8. Research Planning
+
+8.1 Purpose
+
+Research Planning mengubah topik pembelajaran menjadi rencana penelitian yang dapat dijalankan.
+
+8.2 Planning Requirements
+
+Sistem harus dapat mengidentifikasi:
+
+- Tujuan penelitian.
+- Pertanyaan utama.
+- Sub-questions jika diperlukan.
+- Jenis informasi yang diperlukan.
+- Konteks waktu.
+- Batas wilayah atau objek.
+- Kebutuhan sumber primer.
+- Kebutuhan perbandingan sumber.
+- Batas penggunaan resource.
+
+8.3 Research Plan Output
+
+Output minimum:
+
+- Research Plan ID.
+- Learning Cycle ID.
+- Primary Question.
+- Supporting Questions.
+- Research Scope.
+- Time Context.
+- Retrieval Strategy.
+- Expected Evidence Types.
+
+8.4 Planning Constraints
+
+Research planning tidak boleh:
+
+- Mengubah domain utama secara sepihak.
+- Menghapus tujuan pembelajaran.
+- Memperluas ruang lingkup tanpa batas.
+- Menjadikan asumsi model sebagai fakta.
+- Menganggap sumber tertentu valid sebelum diperiksa.
+
+Rencana penelitian dapat disesuaikan selama proses apabila ditemukan kendala, tetapi perubahan harus tercatat.
+
+---
+
+9. Research Execution
+
+9.1 Research Objectives
+
+Research bertujuan memperoleh informasi relevan yang cukup untuk menjawab pertanyaan penelitian.
+
+Keberhasilan tidak ditentukan oleh jumlah artikel yang dikumpulkan.
+
+9.2 Research Source Priority
+
+Urutan prioritas sumber secara umum:
+
+1. Dokumen primer dan publikasi resmi.
+2. Data dan laporan lembaga yang kredibel.
+3. Penelitian akademik dan publikasi ilmiah.
+4. Laporan industri dengan metodologi yang jelas.
+5. Media berita yang memiliki standar editorial.
+6. Analisis atau opini pakar.
+7. Sumber lain yang relevan tetapi memiliki keterbatasan.
+
+Urutan tersebut bukan aturan mutlak.
+
+Jenis sumber yang paling tepat bergantung pada topik dan jenis klaim yang diteliti.
+
+Contoh:
+
+- Untuk kebijakan moneter, dokumen bank sentral menjadi sumber utama.
+- Untuk laporan keuangan, laporan resmi perusahaan menjadi sumber primer.
+- Untuk data perdagangan, statistik resmi lebih relevan daripada opini media.
+- Untuk analisis sentimen, sumber komunitas dapat menjadi data observasi tetapi tidak otomatis mewakili seluruh populasi.
+
+9.3 Research Diversity
+
+Untuk klaim penting, sistem harus mengupayakan pemeriksaan dari lebih dari satu sumber independen apabila sumber pembanding tersedia.
+
+Dua artikel yang mengutip satu laporan yang sama tidak otomatis dihitung sebagai dua bukti independen.
+
+9.4 Research Completion
+
+Penelitian dapat dinyatakan selesai apabila:
+
+- Pertanyaan utama telah ditangani.
+- Materi relevan telah dikumpulkan atau ketidaktersediaannya dicatat.
+- Sumber telah memiliki identitas.
+- Keterbatasan retrieval telah dicatat.
+- Hasil penelitian siap diteruskan ke validasi sumber.
+
+Research completion tidak berarti pertanyaan penelitian pasti telah terjawab.
+
+---
+
+10. Source Validation
+
+10.1 Validation Dimensions
+
+Setiap sumber dievaluasi berdasarkan dimensi berikut:
+
+Authority
+
+Kredibilitas penerbit, organisasi, penulis, atau institusi.
+
+Relevance
+
+Keterkaitan isi sumber dengan pertanyaan penelitian.
+
+Recency
+
+Kesesuaian waktu publikasi atau pembaruan dengan karakter informasi.
+
+Transparency
+
+Kejelasan data, metode, referensi, dan kepentingan yang mungkin memengaruhi isi.
+
+Accessibility
+
+Kemampuan sistem memeriksa materi dan metadata yang diperlukan.
+
+10.2 Contextual Validation
+
+Sistem harus mempertimbangkan karakter bidang penelitian.
+
+Informasi ekonomi dan pasar finansial sering memiliki sensitivitas waktu yang tinggi.
+
+Sebaliknya, konsep teori ekonomi tertentu mungkin tetap relevan meskipun sumbernya lebih lama.
+
+Sistem tidak boleh menerapkan satu aturan recency yang sama untuk seluruh jenis pengetahuan.
+
+10.3 Source Limitations
+
+Sistem harus mencatat keterbatasan seperti:
+
+- Tidak tersedia tanggal publikasi.
+- Penulis tidak diketahui.
+- Metodologi tidak dijelaskan.
+- Data tidak dapat diperiksa.
+- Sumber merupakan opini.
+- Informasi telah diperbarui.
+- Konten hanya tersedia sebagian.
+- Sumber tidak dapat diakses.
+
+10.4 Validation Output
+
+Setiap sumber harus memiliki:
+
+- Validation Result.
+- Validation Dimensions.
+- Limitations.
+- Validation Reason.
+- Validation Timestamp.
+
+Hasil validasi harus membedakan antara sumber yang dapat digunakan, sumber yang perlu pembatasan, dan sumber yang tidak layak menjadi dasar kesimpulan.
+
+10.5 No Fabricated Validation
+
+Metadata yang tidak tersedia harus ditandai tidak tersedia.
+
+Sistem tidak boleh mengisi kekosongan metadata menggunakan tebakan model.
+
+---
+
+11. Evidence Evaluation
+
+11.1 Claim Identification
+
+Sistem harus mengidentifikasi klaim penting yang ditemukan dalam sumber.
+
+Klaim harus memiliki konteks yang cukup agar tidak kehilangan makna ketika dipisahkan dari dokumen asal.
+
+11.2 Claim Classification
+
+Klaim minimal dapat dikategorikan sebagai:
+
+- Descriptive Claim.
+- Quantitative Claim.
+- Causal Claim.
+- Comparative Claim.
+- Predictive Claim.
+- Interpretive Claim.
+- Normative Claim.
+
+Klasifikasi menentukan cara evaluasi yang sesuai.
+
+Sebagai contoh:
+
+Klaim kausal membutuhkan dasar yang lebih kuat daripada sekadar dua variabel bergerak bersamaan.
+
+Prediksi harus menyertakan asumsi dan kondisi yang dapat memengaruhi hasil.
+
+11.3 Evidence Assessment Dimensions
+
+Bukti dievaluasi berdasarkan:
+
+Directness
+
+Seberapa langsung bukti mendukung klaim.
+
+Source Quality
+
+Kualitas dan keterbatasan sumber asal.
+
+Independence
+
+Apakah bukti berasal dari sumber yang independen atau hanya mengulang sumber yang sama.
+
+Consistency
+
+Apakah bukti sejalan dengan bukti lain yang tersedia.
+
+Recency
+
+Apakah bukti masih sesuai dengan konteks waktu penelitian.
+
+Methodological Strength
+
+Apakah metode pengumpulan dan analisis data memadai untuk jenis klaim.
+
+Contradiction
+
+Apakah terdapat bukti yang bertentangan.
+
+11.4 Evidence Strength Classification
+
+MVP menggunakan klasifikasi kualitatif:
+
+Classification| Meaning
+Strong Support| Bukti relevan dan cukup kuat mendukung klaim
+Moderate Support| Bukti mendukung klaim tetapi memiliki keterbatasan
+Weak Support| Dukungan bukti terbatas atau tidak langsung
+Insufficient Evidence| Bukti belum cukup untuk menilai klaim
+Conflicting Evidence| Terdapat bukti penting yang bertentangan
+
+Klasifikasi tersebut bukan probabilitas statistik dan tidak boleh disajikan sebagai persentase keyakinan tanpa metode kuantitatif yang tervalidasi.
+
+11.5 Contradictory Evidence
+
+Ketika sumber berbeda menghasilkan kesimpulan yang bertentangan, Cognis harus:
+
+1. Mengidentifikasi klaim yang berbeda.
+2. Mengidentifikasi sumber terkait.
+3. Membandingkan waktu data.
+4. Membandingkan metode penelitian.
+5. Membandingkan konteks dan asumsi.
+6. Menjelaskan kemungkinan penyebab perbedaan.
+7. Menyatakan apabila konflik belum dapat diselesaikan.
+
+Sistem tidak boleh memilih satu kesimpulan hanya karena lebih mudah diringkas.
+
+11.6 Uncertainty Recording
+
+Setiap evaluasi penting harus dapat mencatat:
+
+- Missing Data.
+- Conflicting Information.
+- Unverified Assumptions.
+- Methodological Limitations.
+- Temporal Limitations.
+- Alternative Explanations.
+
+11.7 Evaluation Output
+
+Output minimum:
+
+- Claim ID.
+- Claim Statement.
+- Claim Type.
+- Supporting Evidence.
+- Contradicting Evidence.
+- Evidence Strength.
+- Assessment Reason.
+- Uncertainty.
+- Limitations.
+- Evaluation Timestamp.
+
+---
+
+12. Knowledge Synthesis
+
+12.1 Purpose
+
+Knowledge Synthesis menyusun hasil penelitian dan evaluasi menjadi bentuk pengetahuan yang koheren.
+
+Sintesis harus mempertahankan perbedaan antara:
+
+- Fakta yang didukung bukti.
+- Interpretasi.
+- Hubungan antar-konsep.
 - Hipotesis.
 - Prediksi.
-- Informasi yang belum dapat diverifikasi.
+- Kesimpulan sementara.
 
-Sistem dilarang mengubah hipotesis menjadi fakta hanya karena hipotesis tersebut muncul berulang kali.
+12.2 Synthesis Requirements
 
-2.2 Competency-Based Learning
+Sistem harus:
 
-Pembelajaran harus diarahkan pada penguasaan kompetensi, bukan sekadar penyelesaian materi.
+- Menggabungkan informasi relevan tanpa menghilangkan sumber.
+- Mengidentifikasi temuan yang konsisten.
+- Menandai pertentangan.
+- Mengidentifikasi hubungan antar-klaim.
+- Mempertahankan konteks waktu.
+- Menyatakan asumsi.
+- Menyatakan batas penerapan pengetahuan.
 
-Setiap aktivitas pembelajaran harus memiliki hubungan dengan satu atau lebih kompetensi dalam "COMPETENCY_CURRICULUM.md".
+12.3 Knowledge Granularity
 
-2.3 Measurable Improvement
+Knowledge Record sebaiknya menyimpan satu unit pengetahuan yang dapat dipahami dan ditelusuri.
 
-Setiap klaim peningkatan kemampuan harus memiliki hasil evaluasi yang bisa dibandingkan.
+Hindari dua ekstrem:
 
-Sistem harus membedakan:
+- Menyimpan seluruh artikel sebagai satu catatan tanpa struktur.
+- Memecah informasi menjadi terlalu banyak potongan kecil hingga kehilangan konteks.
 
-- Knowledge acquisition: pengetahuan baru berhasil diperoleh.
-- Skill development: kemampuan menjalankan tugas meningkat.
-- Performance improvement: hasil benchmark meningkat.
-- Operational improvement: sistem menjadi lebih efisien, stabil, atau akurat.
+Unit pengetahuan dapat berupa satu konsep, fakta, hubungan, temuan, atau interpretasi yang memiliki konteks yang jelas.
 
-Keempat hal tersebut tidak boleh dianggap sebagai ukuran yang sama.
+12.4 No Unsupported Synthesis
 
-2.4 Human-Governed Evolution
+Sistem tidak boleh menghasilkan hubungan sebab-akibat atau pola baru hanya karena beberapa informasi muncul dalam penelitian yang sama.
 
-ALS boleh melakukan riset, analisis, eksperimen yang aman, dan menyusun proposal perubahan secara otomatis.
-
-Namun, perubahan permanen yang memengaruhi perilaku, konfigurasi penting, kebijakan, arsitektur, kode produksi, atau parameter model harus melalui persetujuan pengguna sesuai mekanisme governance.
-
-2.5 Reproducibility
-
-Setiap proses pembelajaran harus memiliki catatan yang cukup untuk ditelusuri dan diulang.
-
-Catatan minimal mencakup:
-
-- Tujuan pembelajaran.
-- Waktu pelaksanaan.
-- Versi model dan konfigurasi.
-- Sumber informasi.
-- Metode yang digunakan.
-- Hasil evaluasi.
-- Kesimpulan.
-- Status persetujuan.
-- Perubahan yang diterapkan, jika ada.
+Setiap hubungan yang disimpulkan harus memiliki dasar dan diberi label sesuai kekuatan dukungannya.
 
 ---
 
-3. Batasan Autonomous Learning
+13. Knowledge Storage
 
-ALS memiliki tiga tingkat aktivitas.
+13.1 Knowledge Record Requirements
 
-Level 1: Autonomous Research
+Setiap Knowledge Record minimal mencakup:
 
-Sistem boleh melakukan aktivitas berikut tanpa persetujuan untuk setiap langkah:
-
-- Menerima tugas pembelajaran yang telah diberikan.
-- Menyusun rencana riset.
-- Mengumpulkan sumber.
-- Membaca dan meringkas informasi.
-- Membandingkan berbagai perspektif.
-- Mengidentifikasi kontradiksi.
-- Menyusun catatan pengetahuan.
-- Melakukan pemeriksaan kualitas sumber.
-- Menghasilkan laporan pembelajaran.
-- Menjalankan evaluasi dalam lingkungan yang aman.
-
-Hasil pada level ini belum otomatis menjadi perubahan permanen pada sistem.
-
-Level 2: Controlled Experimentation
-
-Sistem boleh melakukan eksperimen yang memiliki batasan jelas pada lingkungan terisolasi.
-
-Contoh:
-
-- Membandingkan beberapa prompt.
-- Menguji konfigurasi model.
-- Menguji metode retrieval.
-- Menguji strategi analisis.
-- Membandingkan pendekatan penyelesaian tugas.
-- Menguji pipeline pembelajaran pada dataset evaluasi.
-
-Eksperimen tidak boleh mengubah lingkungan produksi secara langsung.
-
-Eksperimen harus memiliki batasan biaya, waktu, data, serta ruang lingkup.
-
-Level 3: Approved System Evolution
-
-Perubahan permanen hanya boleh diterapkan setelah memperoleh persetujuan pengguna.
-
-Contoh:
-
-- Menambahkan pengetahuan ke basis pengetahuan permanen.
-- Mengubah kurikulum kompetensi.
-- Mengubah konfigurasi utama.
-- Mengubah system prompt inti.
-- Mengubah alur kerja agent.
-- Memperbarui kode produksi.
-- Mengubah kebijakan operasional.
-- Melakukan fine-tuning atau pembaruan bobot model.
-
-Persetujuan harus mengacu pada proposal perubahan yang spesifik. Persetujuan terhadap satu proposal tidak otomatis menjadi izin untuk perubahan lain.
-
----
-
-4. Learning Lifecycle
-
-Setiap siklus pembelajaran mengikuti tahapan berikut:
-
-1. Objective Definition
-2. Competency Mapping
-3. Learning Planning
-4. Research and Evidence Collection
-5. Information Validation
-6. Knowledge Synthesis
-7. Knowledge Structuring
-8. Competency Evaluation
-9. Learning Report
-10. Improvement Proposal
-11. Human Approval
-12. Controlled Implementation
-13. Post-Implementation Evaluation
-14. Rollback or Finalization
-
-4.1 Objective Definition
-
-Sistem menentukan tujuan pembelajaran berdasarkan instruksi pengguna atau tugas yang telah disetujui.
-
-Setiap tujuan harus spesifik dan dapat dievaluasi.
-
-Contoh tujuan yang baik:
-
-"Mempelajari hubungan kebijakan suku bunga Federal Reserve terhadap pergerakan DXY, US Treasury yield, dan harga emas."
-
-Contoh tujuan yang buruk:
-
-"Belajar ekonomi lebih dalam."
-
-Tujuan yang terlalu luas harus dipecah menjadi beberapa subtujuan.
-
-4.2 Competency Mapping
-
-Sistem menghubungkan tujuan pembelajaran dengan kompetensi dalam kurikulum.
-
-Contoh:
-
-Tujuan| Kompetensi
-Menganalisis kebijakan moneter| Monetary Economics
-Memahami pergerakan yield| Fixed Income Fundamentals
-Menganalisis harga emas| Financial Market Analysis
-Menghubungkan beberapa variabel| Causal Reasoning
-Membuat kesimpulan| Evidence-Based Reasoning
-
-Jika kompetensi belum tersedia, sistem boleh mengusulkan kompetensi baru. Penambahan permanen mengikuti persetujuan pengguna.
-
-4.3 Learning Planning
-
-Sistem menyusun rencana pembelajaran yang berisi:
-
-- Pertanyaan utama.
-- Subpertanyaan.
-- Sumber yang dibutuhkan.
-- Metode riset.
-- Target hasil.
-- Kompetensi terkait.
-- Kriteria keberhasilan.
-- Estimasi biaya API.
-- Estimasi durasi.
-- Risiko dan keterbatasan.
-
-Sistem harus memprioritaskan sumber yang kredibel dan relevan.
-
-4.4 Research and Evidence Collection
-
-Sistem mengumpulkan informasi dari sumber yang tersedia.
-
-Prioritas sumber bergantung pada konteks, tetapi secara umum mencakup:
-
-1. Publikasi akademik dan jurnal ilmiah.
-2. Data dan publikasi institusi resmi.
-3. Laporan perusahaan dan organisasi.
-4. Buku dan referensi profesional.
-5. Media berita bereputasi.
-6. Analisis industri dan penelitian independen.
-7. Diskusi komunitas sebagai sumber pengalaman atau opini, bukan otomatis fakta.
-
-Sistem harus memperhatikan tanggal publikasi, periode data, konteks, dan kemungkinan konflik kepentingan.
-
-Untuk informasi yang berubah cepat, sistem wajib memperhatikan kebaruan data.
-
-4.5 Information Validation
-
-Sebelum informasi masuk ke tahap sintesis, sistem harus mengevaluasi:
-
-- Kredibilitas sumber.
-- Relevansi terhadap tujuan.
-- Kejelasan metodologi.
-- Konsistensi informasi.
-- Kecocokan periode data.
-- Potensi bias.
-- Ketersediaan bukti pendukung.
-- Tingkat ketidakpastian.
-
-Klaim penting sebaiknya diperiksa melalui lebih dari satu sumber independen apabila memungkinkan.
-
-Sumber yang saling mengutip tidak boleh dianggap sebagai bukti independen.
-
-Jika sumber bertentangan, sistem harus mencatat pertentangan tersebut dan tidak memaksakan satu kesimpulan tanpa dasar.
-
-4.6 Knowledge Synthesis
-
-Sistem menyusun informasi menjadi pemahaman yang koheren.
-
-Hasil sintesis harus mencakup:
-
-- Konsep utama.
-- Hubungan antarvariabel.
-- Mekanisme atau proses.
-- Bukti pendukung.
-- Perbedaan perspektif.
-- Kontradiksi.
-- Keterbatasan.
-- Kesimpulan.
-- Pertanyaan lanjutan.
-
-Sistem harus menghindari ringkasan yang hanya menggabungkan potongan informasi tanpa menjelaskan hubungan sebab-akibat.
-
-4.7 Knowledge Structuring
-
-Pengetahuan hasil pembelajaran harus disusun dalam format terstruktur.
-
-Setiap catatan pengetahuan minimal memiliki:
-
-- Unique ID.
-- Judul.
+- Knowledge ID.
+- Learning Cycle ID.
 - Domain.
-- Subdomain.
-- Kompetensi terkait.
-- Ringkasan.
-- Isi utama.
-- Jenis klaim.
-- Sumber referensi.
-- Tanggal pengumpulan.
-- Tanggal pembaruan.
-- Tingkat keyakinan.
-- Keterbatasan.
-- Status verifikasi.
-- Versi catatan.
-
-Sistem juga harus mendeteksi kemungkinan duplikasi dan konflik dengan pengetahuan yang sudah ada.
-
-Pengetahuan baru tidak boleh menimpa catatan sebelumnya tanpa proses pembaruan yang dapat ditelusuri.
-
----
-
-5. Knowledge Promotion Policy
-
-ALS harus membedakan pengetahuan sementara dan pengetahuan permanen.
-
-5.1 Temporary Research Notes
-
-Catatan sementara berisi hasil pengumpulan informasi yang belum selesai divalidasi.
-
-Catatan ini tidak boleh diperlakukan sebagai pengetahuan terverifikasi.
-
-5.2 Candidate Knowledge
-
-Pengetahuan yang telah melalui proses validasi dan sintesis dapat diajukan sebagai Candidate Knowledge.
-
-Candidate Knowledge dapat digunakan dalam eksperimen atau evaluasi terbatas, dengan statusnya tetap terlihat.
-
-5.3 Approved Knowledge
-
-Pengetahuan menjadi Approved Knowledge setelah melewati proses governance dan persetujuan yang sesuai.
-
-Status ini tidak berarti informasi tersebut selalu benar. Informasi tetap dapat diperbarui ketika ditemukan bukti baru.
-
-5.4 Archived Knowledge
-
-Pengetahuan yang sudah tidak relevan, kedaluwarsa, atau terbukti keliru harus dapat diarsipkan.
-
-Catatan lama tetap dipertahankan untuk audit dan penelusuran perubahan.
-
----
-
-6. Continuous Evaluation
-
-ALS tidak boleh menilai keberhasilannya hanya berdasarkan jumlah materi yang dibaca atau catatan yang disimpan.
-
-Evaluasi harus mengukur kemampuan menyelesaikan tugas.
-
-6.1 Evaluation Methods
-
-Metode evaluasi dapat mencakup:
-
-- Knowledge recall.
-- Conceptual understanding.
-- Problem solving.
-- Quantitative reasoning.
-- Causal analysis.
-- Evidence assessment.
-- Research quality.
-- Decision-making.
-- Cross-domain reasoning.
-- Practical task execution.
-
-6.2 Baseline Evaluation
-
-Sebelum program pembelajaran dimulai, sistem harus membuat baseline untuk kompetensi yang relevan.
-
-Baseline menjadi titik pembanding untuk evaluasi berikutnya.
-
-6.3 Post-Learning Evaluation
-
-Setelah pembelajaran, sistem menjalankan evaluasi menggunakan tugas yang sesuai dengan kompetensi target.
-
-Evaluasi sebaiknya menggunakan kasus yang tidak identik dengan contoh yang dipakai selama pembelajaran.
-
-6.4 Holdout Evaluation
-
-Sistem harus menyediakan pertanyaan atau kasus evaluasi yang tidak digunakan sebagai bahan pembelajaran langsung.
-
-Tujuannya untuk mengukur apakah kemampuan benar-benar meningkat, bukan hanya menghafal jawaban.
-
-6.5 Regression Evaluation
-
-Sebelum dan sesudah perubahan sistem, evaluasi harus memeriksa apakah kemampuan lain mengalami penurunan.
-
-Peningkatan satu kompetensi tidak boleh dibayar dengan kerusakan kemampuan yang sebelumnya sudah baik tanpa alasan dan persetujuan yang jelas.
-
----
-
-7. Improvement Proposal Engine
-
-Setelah evaluasi, ALS menganalisis kelemahan yang ditemukan.
-
-Contoh kategori kelemahan:
-
-- Kurangnya pengetahuan dasar.
-- Kesalahan penalaran.
-- Pemahaman konsep yang dangkal.
-- Ketergantungan pada satu sumber.
-- Kesalahan interpretasi data.
-- Ketidakmampuan menghubungkan beberapa domain.
-- Kualitas riset yang buruk.
-- Penggunaan model yang tidak sesuai.
-- Retrieval yang tidak relevan.
-- Prompt atau workflow yang tidak efektif.
-
-Sistem kemudian menyusun Improvement Proposal.
-
-7.1 Proposal Structure
-
-Setiap proposal wajib berisi:
-
-1. Proposal ID.
-2. Judul perubahan.
-3. Masalah yang ditemukan.
-4. Bukti yang mendukung temuan.
-5. Akar masalah yang diduga.
-6. Solusi yang diusulkan.
-7. Komponen yang terdampak.
-8. Estimasi biaya.
-9. Risiko.
-10. Rencana pengujian.
-11. Kriteria keberhasilan.
-12. Rencana rollback.
-13. Dampak jika proposal ditolak.
-
-Proposal harus menjelaskan mengapa solusi tersebut lebih baik daripada kondisi saat ini.
-
-7.2 Proposal Priority
-
-Proposal dapat dikategorikan berdasarkan:
-
-- Critical: berhubungan dengan keamanan, integritas data, atau kegagalan sistem serius.
-- High: kelemahan yang berdampak besar terhadap kualitas hasil.
-- Medium: peningkatan kualitas yang bermanfaat tetapi tidak mendesak.
-- Low: optimasi kecil atau peningkatan kenyamanan.
-
-Prioritas harus didukung alasan yang jelas, bukan sekadar penilaian subjektif model.
-
----
-
-8. Human Approval and Governance
-
-8.1 Approval Requirement
-
-Setiap proposal perubahan permanen harus menunggu persetujuan pengguna.
-
-Status proposal:
-
-- Draft.
-- Under Review.
-- Approved.
-- Rejected.
-- Expired.
-- Implementing.
-- Testing.
-- Completed.
-- Rolled Back.
-- Failed.
-
-8.2 Approval Interface
-
-Pengguna harus menerima ringkasan yang mudah dipahami melalui Telegram atau antarmuka Cognis.
-
-Ringkasan minimal mencakup:
-
-- Apa yang ingin diubah.
-- Mengapa perubahan dibutuhkan.
-- Bukti atau hasil evaluasi.
-- Manfaat yang diharapkan.
-- Risiko.
-- Estimasi biaya.
-- Cara membatalkan perubahan.
-
-Pengguna harus dapat menerima atau menolak proposal.
-
-Persetujuan harus terikat pada Proposal ID dan versi proposal. Jika proposal berubah secara material, persetujuan lama tidak berlaku.
-
-8.3 No Approval, No Permanent Change
-
-Jika pengguna belum memberikan persetujuan:
-
-- Proposal tetap menunggu.
-- Perubahan tidak diterapkan.
-- Sistem tidak boleh menganggap diam sebagai persetujuan.
-- Sistem boleh melanjutkan riset lain yang tidak bergantung pada perubahan tersebut.
-
-8.4 Sensitive Changes
-
-Perubahan pada keamanan, autentikasi, otorisasi, pengelolaan rahasia, akses data, dan kebijakan keselamatan memerlukan pemeriksaan lebih ketat.
-
-ALS tidak boleh menonaktifkan kontrol keamanan, memperluas hak akses, atau mengubah mekanisme persetujuan secara mandiri.
-
----
-
-9. Controlled Implementation
-
-Setelah proposal disetujui, sistem harus menerapkan perubahan melalui proses terkontrol.
-
-Urutannya:
-
-1. Verifikasi persetujuan.
-2. Verifikasi versi proposal.
-3. Membuat snapshot kondisi sebelum perubahan.
-4. Memastikan backup tersedia jika diperlukan.
-5. Menjalankan perubahan pada lingkungan yang sesuai.
-6. Menjalankan automated tests.
-7. Menjalankan benchmark terkait.
-8. Membandingkan hasil sebelum dan sesudah.
-9. Memeriksa dampak samping.
-10. Menentukan apakah perubahan dapat diterima.
-11. Menyimpan audit log.
-
-Sistem tidak boleh langsung mengubah produksi hanya karena implementasi berhasil dijalankan tanpa error.
-
-Perubahan kode harus melalui prosedur pengembangan, review, pengujian, dan deployment yang ditetapkan dalam governance proyek.
-
----
-
-10. Rollback and Recovery
-
-Setiap perubahan permanen harus memiliki rencana pemulihan.
-
-Rollback diperlukan ketika:
-
-- Automated tests gagal.
-- Benchmark menunjukkan regresi yang melewati batas toleransi.
-- Muncul kerusakan data.
-- Keamanan sistem menurun.
-- Biaya operasional meningkat secara tidak wajar.
-- Hasil perubahan tidak sesuai kriteria keberhasilan.
-- Sistem menjadi tidak stabil.
-
-10.1 Rollback Procedure
-
-1. Hentikan proses perubahan.
-2. Catat kegagalan dan bukti terkait.
-3. Kembalikan konfigurasi atau versi sebelumnya.
-4. Pulihkan data dari backup apabila diperlukan.
-5. Jalankan kembali pengujian.
-6. Pastikan sistem kembali ke kondisi stabil.
-7. Buat laporan insiden.
-8. Tandai proposal sebagai Rolled Back atau Failed.
-
-Rollback tidak boleh menghapus audit log atau menyembunyikan kegagalan.
-
-10.2 Recovery Principle
-
-Prioritas pemulihan:
-
-1. Keamanan.
-2. Integritas data.
-3. Ketersediaan layanan.
-4. Konsistensi pengetahuan.
-5. Kinerja dan efisiensi.
-
----
-
-11. Learning Job Management
-
-Pembelajaran dapat berlangsung lama dan melibatkan banyak permintaan API.
-
-Karena itu, ALS harus menggunakan sistem job management yang mendukung:
-
-- Job queue.
-- Background workers.
-- Task status.
-- Checkpointing.
-- Retry dengan batas maksimal.
-- Exponential backoff.
-- Timeout.
-- Rate limit handling.
-- Cost tracking.
-- Cancellation.
-- Resume after failure.
-
-11.1 Job Status
-
-Status job minimal:
-
-- Pending.
-- Queued.
-- Running.
-- Paused.
-- Waiting for Retry.
-- Completed.
-- Failed.
-- Cancelled.
-
-Status job harus dapat diperiksa pengguna.
-
-11.2 Checkpointing
-
-Pekerjaan yang panjang harus dibagi menjadi beberapa tahap.
-
-Setiap tahap harus menyimpan hasil sementara agar pekerjaan dapat dilanjutkan setelah gangguan.
-
-Sistem tidak boleh mengulang seluruh proses dari awal jika checkpoint yang valid tersedia.
-
-11.3 Retry Policy
-
-Retry harus memiliki batas maksimal.
-
-Sistem harus membedakan:
-
-- Temporary failure.
-- Rate limit.
-- Provider outage.
-- Invalid request.
-- Authentication failure.
-- Data validation failure.
-
-Kesalahan permanen tidak boleh terus diulang sampai menghabiskan biaya API.
-
-11.4 Resource Budget
-
-Setiap job harus memiliki batas:
-
-- Maximum API calls.
-- Maximum token usage.
-- Maximum estimated cost.
-- Maximum execution time.
-- Maximum retries.
-
-Jika batas tercapai, job harus dihentikan atau menunggu persetujuan tambahan sesuai kebijakan.
-
----
-
-12. Model Strategy and Model Evolution
-
-ALS dapat menggunakan beberapa model untuk tugas yang berbeda.
-
-Contoh peran:
-
-- Research Model: riset dan sintesis informasi.
-- Reasoning Model: analisis dan pemecahan masalah.
-- Evaluation Model: evaluasi hasil.
-- Lightweight Model: klasifikasi, ekstraksi, dan tugas sederhana.
-
-Pemilihan model tidak boleh hanya berdasarkan reputasi atau ukuran model.
-
-Sistem harus membandingkan kualitas hasil, latensi, biaya, dan reliabilitas.
-
-12.1 Model Independence
-
-ALS tidak boleh mengasumsikan bahwa semua model memiliki kemampuan atau keterbatasan yang sama.
-
-Setiap model harus melalui evaluasi sesuai tugas yang akan diberikan.
-
-12.2 Model Knowledge versus Model Weights
-
-ALS harus membedakan tiga bentuk peningkatan:
-
-1. External Knowledge: pengetahuan melalui database dan retrieval.
-2. System Capability: peningkatan melalui workflow, tools, prompt, dan konfigurasi.
-3. Model Weight Evolution: perubahan parameter model melalui fine-tuning atau pelatihan.
-
-Menyimpan pengetahuan ke database tidak berarti bobot model berubah.
-
-Fine-tuning atau training hanya boleh dilakukan melalui pipeline terpisah, dengan dataset, validasi, benchmark, persetujuan, dan mekanisme rollback yang jelas.
-
-ALS tidak boleh mengklaim bahwa sistem telah melatih atau meningkatkan bobot model ketika yang dilakukan hanya memperbarui database atau prompt.
-
----
-
-13. Daily Learning Workflow
-
-Siklus harian dirancang untuk memberikan ritme pembelajaran yang konsisten tanpa memaksa semua pekerjaan selesai dalam satu sesi.
-
-13.1 Morning Briefing
-
-Target waktu: sekitar pukul 07.00 WIB.
-
-Jika pengguna belum memberikan arahan harian, Cognis mengirim pesan untuk meminta brief.
-
-Brief dapat berisi:
-
-- Topik pembelajaran.
-- Pertanyaan yang ingin dijawab.
-- Peristiwa yang perlu diteliti.
-- Kompetensi yang ingin dikembangkan.
-- Tugas khusus.
-
-Jika tidak ada brief, sistem tidak boleh mengarang prioritas pribadi pengguna. Sistem dapat menunggu arahan atau menjalankan agenda pembelajaran rutin yang sebelumnya telah disetujui.
-
-13.2 Learning Session
-
-Setelah brief diterima, sistem:
-
-1. Membuat learning job.
-2. Menentukan kompetensi terkait.
-3. Menyusun rencana.
-4. Menjalankan riset.
-5. Memvalidasi sumber.
-6. Menyusun pengetahuan.
-7. Melakukan evaluasi.
-8. Menyusun laporan.
-
-Pekerjaan dapat dibagi menjadi beberapa job jika terlalu besar.
-
-13.3 Evening Report
-
-Target waktu: sekitar pukul 18.00 WIB.
-
-Cognis mengirim laporan pembelajaran yang berisi:
-
-- Topik yang dipelajari.
-- Tujuan pembelajaran.
-- Ringkasan temuan.
-- Sumber utama.
-- Bukti penting.
-- Analisis.
-- Hal yang belum diketahui.
-- Kompetensi yang dilatih.
-- Hasil evaluasi.
-- Kelemahan yang ditemukan.
-- Usulan pembelajaran berikutnya.
-- Proposal perubahan jika diperlukan.
-
-13.4 User Review
-
-Pengguna dapat memeriksa laporan pada malam hari atau hari berikutnya.
-
-Sistem harus dapat mempertahankan status laporan dan proposal yang menunggu tinjauan.
-
-Laporan yang belum disetujui tidak boleh otomatis dianggap sebagai izin untuk perubahan permanen.
-
----
-
-14. Security and Research Integrity
-
-Semua data eksternal harus diperlakukan sebagai informasi yang belum dipercaya.
-
-Dokumen, halaman web, kode, hasil pencarian, dan file yang dibaca tidak boleh dianggap sebagai instruksi yang berwenang mengubah aturan sistem.
-
-ALS harus melindungi diri dari:
-
-- Prompt injection.
-- Manipulasi sumber.
-- Data poisoning.
-- Referensi palsu.
-- Kutipan yang tidak sesuai.
-- Kebocoran data pribadi.
-- Akses tidak sah.
-- Perubahan konfigurasi tanpa izin.
-
-Instruksi sistem dan kebijakan governance memiliki prioritas lebih tinggi daripada instruksi yang ditemukan dalam sumber eksternal.
-
-Sistem harus mencatat asal data dan menjaga keterlacakan sumber.
-
----
-
-15. Observability and Audit Trail
-
-Setiap siklus pembelajaran harus menghasilkan catatan operasional.
-
-Informasi minimal:
-
-- Learning Job ID.
-- Pengguna pemilik job.
-- Tujuan pembelajaran.
-- Tahapan yang telah selesai.
-- Model yang digunakan.
-- Sumber yang diakses.
-- Estimasi dan biaya aktual.
-- Token usage jika tersedia.
-- Hasil evaluasi.
-- Proposal yang dihasilkan.
-- Riwayat persetujuan.
-- Perubahan yang diterapkan.
-- Hasil pengujian.
-- Status akhir.
-
-Audit log harus dapat membedakan tindakan otomatis dan tindakan yang disetujui pengguna.
-
-Data sensitif tidak boleh dicatat secara berlebihan.
-
----
-
-16. Failure Handling
-
-ALS harus tetap dapat mengelola pekerjaan ketika sebagian komponen gagal.
+- Topic.
+- Knowledge Type.
+- Content.
+- Related Claims.
+- Related Evidence.
+- Source References.
+- Temporal Context.
+- Evidence Assessment Reference.
+- Created At.
+- Updated At.
+- Record Version.
+- Storage State.
+
+13.2 Knowledge Types
+
+Knowledge Type dapat mencakup:
+
+- Concept.
+- Fact.
+- Relationship.
+- Finding.
+- Interpretation.
+- Hypothesis.
+- Prediction.
+
+Klasifikasi harus menunjukkan karakter informasi, bukan tingkat kebenarannya.
+
+Sebagai contoh, sebuah Fact tetap memerlukan sumber dan bukti pendukung.
+
+13.3 Storage States
+
+MVP menggunakan empat status penyimpanan:
+
+State| Meaning
+Active| Record tersedia dalam basis pengetahuan
+Superseded| Record memiliki versi atau informasi lebih baru yang menggantikannya
+Archived| Record dipertahankan untuk riwayat tetapi tidak menjadi pilihan utama retrieval
+Quarantined| Record dibatasi penggunaannya karena masalah integritas, provenance, atau kualitas data
+
+Status tersebut menjelaskan kondisi penyimpanan, bukan kebenaran informasi.
+
+13.4 Storage State Rules
+
+- Record baru dapat disimpan sebagai Active apabila memenuhi validasi penyimpanan.
+- Record yang memiliki masalah integritas dapat ditempatkan dalam Quarantined.
+- Informasi yang digantikan oleh versi lebih baru dapat ditandai Superseded.
+- Record lama yang tidak lagi diperlukan dalam hasil retrieval utama dapat diarsipkan.
+- Perubahan status harus mempertahankan riwayat.
+- Record tidak boleh dihapus hanya karena ditemukan informasi yang berbeda.
+
+13.5 Knowledge Quality Separation
+
+Kondisi penyimpanan harus dipisahkan dari kualitas bukti.
 
 Contoh:
 
-Kondisi| Tindakan
-API provider gagal| Retry terbatas atau ganti provider sesuai kebijakan
-Rate limit| Exponential backoff
-Sumber tidak tersedia| Tandai sumber gagal dan cari alternatif
-Data saling bertentangan| Catat konflik dan turunkan tingkat keyakinan
-Evaluasi gagal| Jangan klaim peningkatan
-Biaya melebihi batas| Pause atau hentikan job
-Persetujuan belum diberikan| Tahan perubahan permanen
-Implementasi gagal| Jalankan rollback
-Worker berhenti| Lanjutkan dari checkpoint jika valid
+Sebuah Knowledge Record dapat berstatus Active dengan klasifikasi evidence Weak Support.
 
-Kegagalan harus menghasilkan status yang jelas, bukan diam-diam dianggap berhasil.
+Artinya record tersimpan dan dapat diperiksa, tetapi bukti yang mendukung isinya masih lemah.
+
+Sistem tidak boleh mengartikan Active sebagai Verified Truth.
+
+13.6 Knowledge Retrieval
+
+MVP harus memungkinkan pencarian kembali Knowledge Records melalui identitas, domain, topik, dan metadata yang tersedia.
+
+Jika pengetahuan digunakan sebagai konteks untuk proses AI berikutnya, sistem harus mempertahankan referensi sumber dan status evaluasinya.
+
+Sistem tidak perlu memasukkan seluruh basis pengetahuan ke setiap prompt.
+
+Hanya pengetahuan yang relevan dengan tugas yang seharusnya dipertimbangkan untuk digunakan.
+
+13.7 Duplicate and Conflicting Knowledge
+
+Apabila informasi baru mirip dengan informasi yang sudah tersimpan, sistem harus membandingkan identitas, konteks, waktu, dan sumber sebelum membuat record baru atau menghubungkannya dengan record yang ada.
+
+Kemiripan teks tidak otomatis berarti kedua informasi identik.
+
+Apabila dua Knowledge Records berbeda, sistem harus mempertahankan keduanya jika perbedaannya bermakna.
 
 ---
 
-17. Key Performance Indicators
+14. Learning Report
 
-Kinerja ALS dievaluasi melalui beberapa kelompok metrik.
+14.1 Purpose
 
-17.1 Learning Quality
+Learning Report menjelaskan apa yang dipelajari Cognis melalui satu siklus pembelajaran.
 
-- Accuracy.
+Laporan harus menjadi representasi yang dapat diaudit atas hasil pipeline.
+
+14.2 Required Report Structure
+
+Setiap laporan minimal memuat:
+
+1. Learning Cycle Identity.
+2. Topic and Learning Objective.
+3. Research Scope.
+4. Executive Summary.
+5. Key Findings.
+6. Source Validation Results.
+7. Evidence Assessment.
+8. Supporting and Contradicting Evidence.
+9. Knowledge Records Created.
+10. Uncertainty and Limitations.
+11. Conclusions.
+12. Unresolved Questions.
+13. Model and Configuration Metadata yang relevan.
+
+14.3 Report Language
+
+Bahasa Indonesia menjadi bahasa utama.
+
+Istilah asing dapat digunakan jika lebih akurat, tetapi penjelasan harus tetap mudah dipahami.
+
+14.4 Report Integrity
+
+Laporan harus dihasilkan dari hasil penelitian dan evaluasi yang tersimpan.
+
+Sistem tidak boleh menambahkan sumber, angka, atau klaim yang tidak terdapat dalam data proses tanpa menandainya sebagai informasi tambahan yang belum diverifikasi.
+
+14.5 Report Status
+
+Laporan hanya boleh dinyatakan selesai setelah berhasil disimpan dan dapat diakses kembali.
+
+Kegagalan pembuatan atau penyimpanan laporan harus tercatat sebagai kegagalan tahap pipeline.
+
+---
+
+15. Learning Quality Evaluation
+
+15.1 Purpose
+
+Kualitas pembelajaran harus dievaluasi berdasarkan hasil dan integritas proses.
+
+Keberhasilan tidak boleh dinilai hanya melalui panjang laporan, jumlah sumber, atau penilaian model terhadap output-nya sendiri.
+
+15.2 MVP Evaluation Dimensions
+
+Research Coverage
+
+Apakah pertanyaan penelitian telah ditangani secara memadai?
+
+Source Quality
+
+Apakah sumber yang digunakan sesuai dengan karakter penelitian?
+
+Claim Traceability
+
+Apakah klaim penting dapat ditelusuri ke sumber dan bukti?
+
+Evidence Quality
+
+Apakah kesimpulan memiliki dukungan yang memadai?
+
+Contradiction Handling
+
+Apakah informasi yang bertentangan telah dicatat dan dijelaskan?
+
+Knowledge Integrity
+
+Apakah pengetahuan tersimpan dengan metadata dan provenance yang benar?
+
+Report Quality
+
+Apakah laporan menggambarkan hasil penelitian dengan akurat?
+
+15.3 Human Review
+
+MVP harus memungkinkan Founder atau operator memeriksa laporan dan hasil penelitian.
+
+Pemeriksaan manusia dapat digunakan untuk:
+
+- Menilai ketepatan kesimpulan.
+- Mengidentifikasi kesalahan evaluasi.
+- Menemukan sumber yang kurang tepat.
+- Menilai kegunaan pengetahuan tersimpan.
+- Memberikan catatan untuk perbaikan implementasi.
+
+Human review pada MVP tidak menjadi approval workflow untuk perubahan sistem permanen.
+
+15.4 Baseline Establishment
+
+Metrik kualitas yang memerlukan penilaian atau benchmark harus memiliki baseline.
+
+Sistem tidak boleh menggunakan nilai target yang belum diuji seolah-olah sudah terbukti.
+
+Baseline dapat dibangun dari kumpulan tugas evaluasi awal dan hasil pemeriksaan manusia.
+
+15.5 Learning Evaluation Record
+
+Hasil evaluasi harus dapat mencatat:
+
+- Learning Cycle ID.
+- Evaluator Type.
+- Evaluation Criteria.
+- Evaluation Result.
+- Findings.
+- Identified Weaknesses.
+- Evaluation Timestamp.
+
+---
+
+16. Learning Failure Handling
+
+16.1 Failure Categories
+
+Kegagalan pembelajaran dapat dikategorikan sebagai:
+
+Trigger Failure
+
+Gagal membuat atau memulai job.
+
+Research Failure
+
+Gagal memperoleh informasi yang diperlukan.
+
+Source Validation Failure
+
+Gagal memeriksa sumber atau metadata.
+
+Evidence Evaluation Failure
+
+Gagal mengevaluasi klaim dan bukti.
+
+Knowledge Storage Failure
+
+Gagal menyimpan hasil pembelajaran.
+
+Report Generation Failure
+
+Gagal menghasilkan atau menyimpan laporan.
+
+Resource Failure
+
+Batas resource, rate limit, atau biaya tidak memungkinkan proses dilanjutkan.
+
+16.2 Failure Requirements
+
+Setiap kegagalan harus:
+
+- Dicatat.
+- Terhubung dengan Job ID.
+- Terhubung dengan Stage Run ID jika relevan.
+- Memiliki kategori error.
+- Menyimpan informasi yang cukup untuk diagnosis.
+- Tidak menampilkan secret.
+- Mempertahankan data tahap sebelumnya yang telah tersimpan dengan benar.
+
+16.3 Partial Learning Results
+
+Jika pipeline gagal setelah sebagian tahap berhasil, sistem boleh mempertahankan hasil sementara yang valid.
+
+Namun, sistem tidak boleh menyajikan hasil parsial sebagai laporan pembelajaran final yang telah selesai.
+
+16.4 Retry
+
+Retry harus mengikuti kebijakan dari "SYSTEM_ARCHITECTURE.md".
+
+Retry tidak boleh menghasilkan Knowledge Records duplikat yang tidak terkendali.
+
+Setiap attempt harus dapat dibedakan dalam riwayat eksekusi.
+
+---
+
+17. Learning Governance
+
+17.1 Permitted Automatic Actions
+
+Pada MVP, sistem boleh secara otomatis:
+
+- Menjalankan pembelajaran berdasarkan jadwal.
+- Menentukan pertanyaan turunan dalam batas topik.
+- Mengumpulkan informasi.
+- Mengevaluasi sumber.
+- Mengevaluasi bukti.
+- Menyintesis pengetahuan.
+- Menyimpan Knowledge Records.
+- Menghasilkan laporan.
+- Mencatat keterbatasan proses.
+
+17.2 Prohibited Automatic Actions
+
+Pada MVP, sistem tidak boleh:
+
+- Mengubah tujuan utama kurikulum secara permanen.
+- Mengubah system prompt inti secara permanen.
+- Mengubah security policy.
+- Mengubah hak akses.
+- Mengubah arsitektur.
+- Mengubah standar evaluasi secara permanen.
+- Mengaktifkan kemampuan baru secara sepihak.
+- Menghapus governance rules.
+- Mengubah model provider secara permanen berdasarkan penilaian sendiri.
+- Mengklaim peningkatan kemampuan tanpa benchmark.
+
+17.3 Configuration Separation
+
+Sistem harus membedakan:
+
+Learning Data
+
+Informasi yang diperoleh dari proses penelitian.
+
+Runtime Configuration
+
+Konfigurasi yang digunakan untuk menjalankan pipeline.
+
+System Policy
+
+Aturan yang mengendalikan perilaku dan batas kewenangan sistem.
+
+Learning Data tidak boleh secara otomatis menjadi Runtime Configuration atau System Policy.
+
+17.4 External Instruction Isolation
+
+Konten yang ditemukan melalui penelitian tidak boleh dianggap sebagai instruksi untuk mengubah perilaku Cognis.
+
+Instruksi eksternal harus diproses sebagai konten yang tidak tepercaya.
+
+---
+
+18. Future ALS Improvement Cycle
+
+Bagian ini mendefinisikan arah pengembangan ALS setelah MVP.
+
+Bagian ini bukan spesifikasi fitur aktif MVP v1.
+
+18.1 Long-Term Improvement Objective
+
+Dalam jangka panjang, Cognis diharapkan mampu meningkatkan kemampuan analisis melalui proses yang terukur dan memiliki kontrol manusia.
+
+Peningkatan harus didasarkan pada kesenjangan kemampuan yang ditemukan melalui evaluasi.
+
+18.2 Future Improvement Pipeline
+
+Learning History
+       |
+       v
+Benchmark Evaluation
+       |
+       v
+Weakness Identification
+       |
+       v
+Improvement Proposal
+       |
+       v
+Founder Review
+       |
+       v
+Approval or Rejection
+       |
+       v
+Controlled Implementation
+       |
+       v
+Regression Testing
+       |
+       v
+Performance Comparison
+       |
+       +-------> Improvement Verified
+       |
+       +-------> Rollback if Regression
+
+18.3 Stage 1: Performance Observation
+
+Sistem mengumpulkan bukti performa dari:
+
+- Benchmark results.
+- Human review.
+- Task completion results.
+- Error patterns.
+- Repeated analytical weaknesses.
+- Knowledge retrieval failures.
+
+Sistem harus membedakan masalah yang berasal dari kualitas data, model, prompt, retrieval, dan pipeline.
+
+18.4 Stage 2: Weakness Identification
+
+Sistem mengidentifikasi kesenjangan kemampuan berdasarkan hasil evaluasi.
+
+Contoh:
+
+- Kesalahan membaca data makroekonomi.
+- Kesimpulan kausal yang tidak didukung bukti.
+- Ketidakmampuan mengenali sumber yang saling bertentangan.
+- Analisis risiko yang mengabaikan konteks waktu.
+- Penggunaan data lama sebagai kondisi terkini.
+
+Kelemahan yang diidentifikasi harus memiliki contoh dan bukti pendukung.
+
+18.5 Stage 3: Improvement Proposal
+
+Sistem boleh mengusulkan perubahan yang menjelaskan:
+
+- Masalah yang ditemukan.
+- Bukti masalah.
+- Akar masalah yang diduga.
+- Perubahan yang diusulkan.
+- Komponen yang terdampak.
+- Risiko perubahan.
+- Kebutuhan pengujian.
+- Kriteria keberhasilan.
+- Rencana rollback.
+
+Proposal bukan perintah untuk langsung mengubah sistem.
+
+18.6 Stage 4: Founder Review
+
+Dalam versi masa depan, Founder harus dapat:
+
+- Meninjau proposal.
+- Memeriksa bukti.
+- Memeriksa dampak perubahan.
+- Menyetujui proposal.
+- Menolak proposal.
+- Meminta revisi.
+
+Persetujuan harus dicatat dan terkait dengan versi proposal yang tepat.
+
+18.7 Stage 5: Controlled Implementation
+
+Perubahan yang disetujui harus:
+
+- Diterapkan dalam lingkungan yang terkendali.
+- Memiliki versi.
+- Memiliki perubahan yang dapat ditelusuri.
+- Memiliki batas scope.
+- Memiliki pengujian yang sesuai.
+- Tidak mengubah komponen di luar otorisasi.
+
+18.8 Stage 6: Regression Testing
+
+Perubahan harus dibandingkan dengan baseline sebelum diterapkan.
+
+Pengujian minimal mempertimbangkan:
+
+- Functional correctness.
 - Evidence quality.
-- Source reliability.
-- Reasoning quality.
-- Citation correctness.
-- Knowledge consistency.
+- Analytical consistency.
+- Security.
+- Reliability.
+- Resource usage.
+- Regression on existing tasks.
 
-17.2 Competency Development
+Peningkatan satu metrik tidak boleh dianggap berhasil jika menyebabkan regresi serius pada aspek lain.
 
-- Baseline score.
-- Post-learning score.
-- Holdout performance.
-- Regression rate.
-- Competency mastery progress.
+18.9 Stage 7: Rollback
 
-17.3 Operational Efficiency
+Jika perubahan gagal memenuhi kriteria:
 
-- Cost per learning job.
-- Average completion time.
-- API failure rate.
-- Retry rate.
-- Job recovery rate.
-- Token efficiency.
+- Perubahan harus dapat dibatalkan.
+- Versi sebelumnya harus dapat dipulihkan.
+- Hasil pengujian harus disimpan.
+- Penyebab kegagalan harus dianalisis.
+- Perubahan tidak boleh diaktifkan kembali tanpa evaluasi.
 
-17.4 Governance Quality
+18.10 Future Autonomy Boundary
 
-- Approval compliance.
-- Unauthorized change count.
-- Rollback success rate.
-- Audit completeness.
-- Proposal acceptance and rejection rate.
+Otonomi yang lebih besar hanya boleh dipertimbangkan setelah sistem memiliki:
 
-Target angka KPI ditetapkan setelah baseline sistem tersedia. Sistem tidak boleh membuat target keberhasilan palsu tanpa data awal yang memadai.
-
----
-
-18. Minimum Acceptance Criteria
-
-Implementasi awal ALS dianggap memenuhi fondasi spesifikasi ketika:
-
-1. Pengguna dapat memberikan tujuan pembelajaran.
-2. Sistem dapat memetakan tujuan ke kompetensi.
-3. Sistem dapat membuat rencana pembelajaran.
-4. Sistem dapat menjalankan learning job secara bertahap.
-5. Sistem dapat menyimpan checkpoint.
-6. Sistem dapat mengumpulkan dan mencatat sumber.
-7. Sistem dapat membedakan fakta, asumsi, interpretasi, dan prediksi.
-8. Sistem dapat menghasilkan Candidate Knowledge.
-9. Sistem dapat melakukan evaluasi sebelum dan sesudah pembelajaran.
-10. Sistem dapat membuat laporan dalam Bahasa Indonesia.
-11. Sistem dapat mengidentifikasi kelemahan.
-12. Sistem dapat menghasilkan Improvement Proposal.
-13. Sistem dapat meminta persetujuan pengguna.
-14. Sistem tidak menerapkan perubahan permanen tanpa persetujuan.
-15. Sistem dapat menguji perubahan yang telah disetujui.
-16. Sistem dapat melakukan rollback.
-17. Sistem memiliki audit trail.
-18. Sistem memiliki batas penggunaan API dan biaya.
-
-Kriteria ini menjadi dasar pengujian sebelum ALS diperluas.
-
----
-
-19. Implementation Phases
-
-Phase 1: Learning Foundation
-
-Fokus:
-
-- Learning job management.
-- Research workflow.
-- Source tracking.
-- Knowledge structuring.
-- Candidate Knowledge.
-- Learning report.
-
-Belum melakukan perubahan otomatis pada sistem produksi.
-
-Phase 2: Competency and Evaluation
-
-Fokus:
-
-- Competency mapping.
-- Baseline evaluation.
-- Benchmark execution.
-- Holdout evaluation.
-- Regression detection.
-- Competency progress tracking.
-
-Phase 3: Autonomous Improvement Proposal
-
-Fokus:
-
-- Weakness analysis.
-- Root cause analysis.
-- Improvement Proposal Engine.
-- Approval workflow.
-- Proposal history.
-
-Phase 4: Controlled System Evolution
-
-Fokus:
-
-- Approved implementation.
-- Versioning.
-- Automated testing.
-- Benchmark comparison.
-- Rollback.
+- Benchmark yang stabil.
+- Baseline performa.
 - Audit trail.
+- Version control.
+- Regression testing.
+- Rollback mechanism.
+- Access control yang memadai.
+- Persetujuan manusia untuk perubahan yang berdampak permanen.
 
-Phase 5: Model Evolution
+---
+
+19. Learning Observability
+
+19.1 Required Records
+
+Setiap siklus pembelajaran harus memiliki catatan yang memungkinkan proses ditelusuri.
+
+Catatan minimal:
+
+- Learning Cycle ID.
+- Job ID.
+- Learning Objective.
+- Research Plan.
+- Research Result.
+- Source Validation Result.
+- Evidence Assessment.
+- Knowledge Records.
+- Learning Report.
+- Model Invocation Metadata.
+- Configuration References.
+- Failure Records jika ada.
+
+19.2 Model and Prompt Traceability
+
+Sistem harus mencatat versi model dan konfigurasi prompt yang digunakan dalam proses pembelajaran.
+
+Tujuannya adalah memungkinkan perbandingan hasil antara konfigurasi berbeda.
+
+Sistem tidak boleh menganggap dua hasil setara apabila model atau konfigurasi yang digunakan berbeda tanpa melakukan evaluasi.
+
+19.3 Learning History
+
+Riwayat pembelajaran harus memungkinkan operator menjawab:
+
+- Apa yang dipelajari?
+- Mengapa topik tersebut dipilih?
+- Sumber apa yang digunakan?
+- Klaim apa yang ditemukan?
+- Bukti apa yang mendukungnya?
+- Apa yang belum diketahui?
+- Pengetahuan apa yang disimpan?
+- Model dan konfigurasi apa yang digunakan?
+- Apakah proses berhasil atau gagal?
+
+---
+
+20. Security Requirements
+
+20.1 Untrusted Research Content
+
+Semua materi eksternal harus dianggap sebagai input yang tidak tepercaya.
+
+Materi tersebut tidak boleh memperoleh akses terhadap:
+
+- System prompt.
+- API keys.
+- Credentials.
+- Internal configuration.
+- Database administration.
+- File system operations.
+- Privileged tools.
+
+20.2 Data Access Separation
+
+Akses terhadap Knowledge Records, Job Records, konfigurasi, dan data operasional harus mengikuti batas otorisasi.
+
+Research Engine dan model eksternal tidak boleh memiliki akses langsung yang tidak diperlukan ke seluruh data sistem.
+
+20.3 Knowledge Integrity
+
+Data yang disimpan harus mempertahankan identitas, sumber, dan riwayat.
+
+Perubahan yang tidak sah harus dapat dideteksi sejauh mekanisme teknis yang diterapkan memungkinkan.
+
+20.4 No Self-Authorization
+
+Tidak ada output model yang dapat digunakan sebagai otorisasi untuk memberikan kewenangan tambahan kepada model itu sendiri.
+
+---
+
+21. Configuration and Resource Controls
+
+21.1 Learning Configuration
+
+Setiap job harus dapat mengidentifikasi konfigurasi yang digunakan.
+
+Konfigurasi dapat mencakup:
+
+- Research Scope.
+- Search Limits.
+- Source Retrieval Limits.
+- Model Selection.
+- Prompt Version.
+- Token Limits.
+- Timeout.
+- Retry Policy.
+- Resource Limits.
+- Time Context.
+
+21.2 Resource Limits
+
+Setiap tahap harus memiliki batas penggunaan resource yang ditetapkan secara teknis.
+
+Sistem tidak boleh melakukan pencarian, pemanggilan model, atau retry tanpa batas.
+
+21.3 Cost Awareness
+
+Apabila provider menyediakan data penggunaan atau biaya, sistem harus mencatatnya.
+
+Data yang tidak tersedia harus ditandai tidak tersedia dan tidak boleh diperkirakan sebagai biaya aktual.
+
+21.4 Configuration Versioning
+
+Setiap perubahan konfigurasi harus memiliki identitas atau versi baru.
+
+Riwayat pembelajaran harus menyimpan referensi konfigurasi yang benar-benar digunakan saat job berjalan.
+
+---
+
+22. MVP Acceptance Criteria
+
+Mekanisme pembelajaran MVP v1 dinyatakan memenuhi spesifikasi apabila:
+
+22.1 Learning Initialization
+
+- Job dapat dimulai secara manual.
+- Job dapat dimulai melalui Scheduler.
+- Setiap job memiliki topik dan tujuan pembelajaran.
+- Setiap job memiliki identitas yang dapat ditelusuri.
+
+22.2 Research
+
+- Sistem mampu mengubah topik menjadi rencana penelitian.
+- Sistem mampu melakukan pencarian informasi.
+- Sistem menyimpan identitas sumber.
+- Sistem mencatat keterbatasan retrieval.
+
+22.3 Source Validation
+
+- Sistem mengevaluasi kelayakan sumber.
+- Sistem menyimpan alasan evaluasi.
+- Sistem tidak mengarang metadata.
+- Sumber lemah dapat dibedakan dari sumber yang layak digunakan.
+
+22.4 Evidence Evaluation
+
+- Klaim utama dapat diidentifikasi.
+- Bukti dapat dihubungkan dengan klaim.
+- Bukti pendukung dan bertentangan dapat direpresentasikan.
+- Ketidakpastian dapat dicatat.
+- Kesimpulan mengikuti kekuatan bukti.
+
+22.5 Knowledge Storage
+
+- Knowledge Records disimpan secara persisten.
+- Record memiliki provenance.
+- Storage State terpisah dari Evidence Assessment.
+- Riwayat perubahan dapat ditelusuri.
+- Pengetahuan dapat ditemukan kembali.
+
+22.6 Learning Report
+
+- Laporan dihasilkan dari hasil pipeline.
+- Laporan memiliki referensi sumber.
+- Laporan menampilkan keterbatasan.
+- Laporan dapat diakses kembali.
+- Laporan tidak menyajikan klaim lemah sebagai fakta pasti.
+
+22.7 Governance
+
+- Sistem tidak mengubah prompt inti secara otomatis.
+- Sistem tidak mengubah policy secara otomatis.
+- Sistem tidak mengubah kurikulum inti secara permanen.
+- Sistem tidak melakukan fine-tuning otomatis.
+- Tidak ada self-approval untuk perubahan sistem.
+
+22.8 End-to-End Learning
+
+Satu siklus penuh harus berhasil dijalankan dan diuji:
+
+Learning Trigger → Research → Source Validation → Evidence Evaluation → Knowledge Storage → Learning Report
+
+Semua hubungan data dan provenance harus dapat diperiksa.
+
+---
+
+23. Future Development Roadmap
+
+Phase 1: Reliable Knowledge Acquisition
 
 Fokus:
 
-- Dataset preparation.
-- Dataset quality evaluation.
-- Fine-tuning experiments.
-- Model benchmarking.
-- Model versioning.
-- Deployment approval.
-- Model rollback.
+- Research automation.
+- Source validation.
+- Evidence evaluation.
+- Knowledge storage.
+- Learning report.
+- Job observability.
 
-Tahap ini hanya dijalankan setelah fondasi pembelajaran, evaluasi, dan governance dapat diandalkan.
+Status: MVP v1.
+
+Phase 2: Competency-Based Learning
+
+Potensi kemampuan:
+
+- Competency Registry.
+- Curriculum Mapping.
+- Learning Objectives.
+- Competency Assessment.
+- Benchmark Management.
+- Learning Progress Tracking.
+
+Phase 3: Learning Gap Analysis
+
+Potensi kemampuan:
+
+- Weakness Detection.
+- Performance Analysis.
+- Repeated Error Detection.
+- Learning Gap Identification.
+- Improvement Proposal Generation.
+
+Phase 4: Governed Self-Improvement
+
+Potensi kemampuan:
+
+- Founder Approval.
+- Controlled Configuration Changes.
+- Prompt Version Management.
+- Regression Testing.
+- Rollback Management.
+
+Phase 5: Advanced Learning Systems
+
+Potensi kemampuan:
+
+- Specialized Learning Agents.
+- Advanced Knowledge Retrieval.
+- Model Evaluation and Routing.
+- Controlled Fine-Tuning.
+- Advanced Benchmark Systems.
+- Selective Automation of Approved Improvements.
+
+Roadmap merupakan arah pengembangan, bukan komitmen bahwa seluruh fitur sudah dirancang atau diimplementasikan.
 
 ---
 
-20. Open Design Decisions
+24. Final Learning Principle
 
-Hal berikut masih harus dievaluasi sebelum implementasi:
+Cognis tidak boleh mengukur pembelajaran berdasarkan jumlah informasi yang dikumpulkan.
 
-1. Format standar knowledge record.
-2. Pemilihan database dan strategi retrieval.
-3. Teknologi job queue.
-4. Strategi versioning knowledge.
-5. Format benchmark dan scoring rubric.
-6. Strategi evaluasi lintas model.
-7. Batas biaya per job dan per hari.
-8. Mekanisme approval melalui Telegram.
-9. Strategi backup dan rollback.
-10. Integrasi dataset untuk eksperimen fine-tuning.
+Pembelajaran harus menghasilkan pengetahuan yang:
 
-Keputusan teknis harus dicatat dalam Architecture Decision Record (ADR) ketika sudah ditetapkan.
+- Relevan.
+- Memiliki konteks.
+- Memiliki sumber.
+- Didukung bukti.
+- Menyatakan keterbatasan.
+- Dapat ditemukan kembali.
+- Dapat dievaluasi.
+- Dapat dikoreksi.
 
----
+Peningkatan kemampuan harus dibuktikan melalui pengujian, bukan narasi yang dibuat oleh model itu sendiri.
 
-21. Final Design Principle
+Cognis must distinguish what it has collected, what it has verified, what it understands, and what it can actually do better.
 
-ALS dirancang untuk membuat Cognis semakin mampu melalui proses pembelajaran yang dapat diperiksa, diukur, dan dikendalikan.
-
-Sistem harus mampu belajar secara mandiri, tetapi tidak boleh menganggap dirinya selalu benar.
-
-Sistem harus mampu mengidentifikasi kelemahannya, tetapi tidak boleh mengubah aturan dan fondasi produksinya secara sepihak.
-
-Sistem harus mampu mengusulkan evolusi, tetapi setiap perubahan permanen harus memiliki bukti, pengujian, persetujuan, dan mekanisme pemulihan.
-
-Prinsip utamanya: Learn autonomously, evaluate objectively, evolve with approval.
+Itulah fondasi ALS yang dapat dipercaya.
