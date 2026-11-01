@@ -2069,4 +2069,4 @@ Cognis harus berkembang dari fondasi yang kuat menuju analisis yang semakin komp
 
 Sistem tidak boleh menyamakan banyaknya informasi dengan pengetahuan, pengetahuan dengan pemahaman, atau pemahaman dengan kemampuan menerapkan.
 
-The objective is not to collect everything. The objective is to build the ability to understand, evaluate, and reason across interconnected systems.
+The objective is not to collect everything. The objective is to build the ability to understand, evaluate, and reason across interconnected systems. 
