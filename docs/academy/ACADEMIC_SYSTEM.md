@@ -1,710 +1,1680 @@
-COGNIS ACADEMY
+ACADEMIC SYSTEM
 
-Academic System Specification
+COGNIS
 
-Document ID: CA-ACA-001
-Version: 1.0.0
-Status: Initial Specification
-Project: Cognis AI
-Subsystem: Cognis Academy
-Language: Bahasa Indonesia
+Document Version: 1.0
+Product Version: MVP v1
+Status: Proposed Academic Structure Baseline
+Document Owner: Founder
+System: Cognis Academic System
+Primary Language: Indonesian
+Primary Timezone: Asia/Jakarta
 
 ---
 
 1. Purpose
 
-Cognis Academy adalah sistem pendidikan berbasis kompetensi yang dirancang untuk mengembangkan kemampuan intelektual Cognis AI secara bertahap, terukur, dan dapat diaudit.
+Dokumen ini mendefinisikan struktur akademik internal Cognis untuk mengorganisasi bidang pengetahuan, kompetensi, program pembelajaran, dan aktivitas penelitian.
 
-Cognis tidak boleh berpindah ke fakultas berikutnya hanya karena jadwal pembelajaran selesai, jumlah materi telah dibaca, atau sistem menganggap proses belajarnya sudah cukup.
+Tujuan Academic System adalah memberikan struktur yang konsisten terhadap proses pembelajaran Cognis agar setiap aktivitas memiliki hubungan yang jelas dengan bidang studi dan tujuan pembelajaran.
 
-Setiap perpindahan fakultas wajib melalui proses:
+Dokumen ini mengatur:
 
-1. Pembelajaran mandiri.
-2. Latihan dan penerapan pengetahuan.
-3. Evaluasi internal.
-4. Penyusunan laporan akademik.
-5. Pengujian langsung oleh Founder.
-6. Persetujuan eksplisit dari Founder.
+1. Struktur organisasi akademik.
+2. Fakultas dan departemen.
+3. Program studi.
+4. Mata pembelajaran dan modul.
+5. Learning Units.
+6. Learning Activities.
+7. Hubungan antara struktur akademik dan kurikulum.
+8. Pengelolaan katalog akademik.
+9. Pembagian tanggung jawab akademik.
+10. Batas implementasi Academic System pada MVP.
 
-Founder memiliki kewenangan akhir untuk menyetujui atau menolak kenaikan tingkat akademik Cognis.
+Academic System menjadi lapisan organisasi akademik yang menggunakan kompetensi dari "COMPETENCY_CURRICULUM.md".
 
-Prinsip utama: Cognis harus membuktikan kompetensinya sebelum memperoleh akses ke fakultas berikutnya.
-
-2. Academic Philosophy
-
-Cognis Academy dibangun berdasarkan tujuh prinsip.
-
-2.1 Competency Over Completion
-
-Keberhasilan pembelajaran ditentukan oleh kemampuan menerapkan pengetahuan, bukan banyaknya materi yang telah dipelajari.
-
-Menyelesaikan seluruh materi tidak otomatis berarti menguasai materi tersebut.
-
-2.2 Sequential Learning
-
-Fakultas memiliki urutan pembelajaran dan hubungan prasyarat.
-
-Cognis harus menyelesaikan persyaratan akademik fakultas sebelumnya sebelum memulai fakultas berikutnya.
-
-2.3 Human-Validated Progression
-
-Sistem boleh melakukan evaluasi otomatis dan merekomendasikan kenaikan tingkat.
-
-Namun, sistem tidak boleh menyetujui kelulusannya sendiri.
-
-Persetujuan Founder wajib menjadi syarat pembukaan fakultas berikutnya.
-
-2.4 Independent Evaluation
-
-Evaluasi tidak boleh hanya mengandalkan penilaian mandiri oleh model yang sedang diuji.
-
-Sistem harus menggunakan benchmark, rubrik, kasus baru, pemeriksaan fakta, dan evaluator yang terpisah sejauh memungkinkan.
-
-2.5 Continuous Improvement
-
-Kelemahan yang ditemukan selama pembelajaran harus menjadi dasar remedial dan perbaikan kurikulum.
-
-Kognis tidak perlu mengulang seluruh materi ketika hanya sebagian kompetensi yang belum dikuasai.
-
-2.6 Knowledge Integration
-
-Pengetahuan dari fakultas sebelumnya tetap digunakan ketika Cognis mempelajari fakultas berikutnya.
-
-Kompetensi dasar harus menjadi fondasi untuk memahami persoalan yang lebih kompleks.
-
-2.7 Controlled Evolution
-
-Persetujuan kenaikan fakultas tidak memberikan izin otomatis untuk mengubah kode, konfigurasi sistem, prompt inti, model, atau mekanisme keamanan.
-
-Perubahan permanen tetap mengikuti prosedur Autonomous Learning System (ALS) dan Security Governance.
-
-3. Academic Structure
-
-Cognis Academy memiliki lima fakultas utama dan satu program lintas fakultas.
-
-3.1 Faculty 1: Cognitive Foundations
-
-Tujuan: Membangun fondasi berpikir, penalaran, analisis, dan evaluasi informasi.
-
-Materi utama:
-
-1. Logic and Reasoning
-2. Mathematics for Analysis
-3. Probability and Statistics
-4. Causal Reasoning
-5. Scientific Method
-6. Critical Thinking
-7. Systems Thinking
-8. Cognitive Bias and Decision Making
-9. Evidence Evaluation
-10. Strategic Reasoning and Game Theory
-
-Kompetensi yang diharapkan:
-
-- Mampu menyusun argumen yang konsisten.
-- Mampu mengidentifikasi kesalahan logika.
-- Mampu membedakan korelasi dan kausalitas.
-- Mampu menggunakan probabilitas untuk menilai ketidakpastian.
-- Mampu mengevaluasi kualitas bukti.
-- Mampu menjelaskan keterbatasan suatu kesimpulan.
-- Mampu menganalisis hubungan antarvariabel dalam suatu sistem.
-
-3.2 Faculty 2: Economics & Monetary Systems
-
-Tujuan: Memahami bagaimana kegiatan ekonomi, sistem moneter, lembaga keuangan, dan kebijakan ekonomi bekerja.
-
-Materi utama:
-
-1. Microeconomics
-2. Macroeconomics
-3. History of Money
-4. Monetary Economics
-5. Central Banking
-6. Banking Systems
-7. Inflation and Interest Rates
-8. Fiscal and Monetary Policy
-9. International Trade
-10. Economic Growth and Development
-11. Economic Crises
-12. Economic Schools of Thought
-
-Kompetensi yang diharapkan:
-
-- Mampu menjelaskan mekanisme ekonomi.
-- Mampu menganalisis kebijakan moneter dan fiskal.
-- Mampu memahami hubungan uang, kredit, suku bunga, dan inflasi.
-- Mampu membandingkan berbagai pemikiran ekonomi secara kritis.
-- Mampu menganalisis dampak keputusan ekonomi terhadap berbagai pelaku.
-
-3.3 Faculty 3: Business & Finance
-
-Tujuan: Memahami bagaimana bisnis dibangun, dijalankan, dibiayai, dan dikembangkan.
-
-Materi utama:
-
-1. Business Fundamentals
-2. Business Models
-3. Entrepreneurship
-4. Accounting
-5. Financial Statements
-6. Corporate Finance
-7. Capital Allocation
-8. Financial Planning
-9. Risk Management
-10. Business Strategy
-11. Operations and Supply Chain
-12. Competitive Analysis
-13. Corporate Governance
-
-Kompetensi yang diharapkan:
-
-- Mampu menganalisis model bisnis.
-- Mampu membaca laporan keuangan.
-- Mampu memahami arus kas dan profitabilitas.
-- Mampu mengevaluasi keputusan investasi bisnis.
-- Mampu mengidentifikasi risiko operasional dan keuangan.
-- Mampu menyusun rekomendasi strategi berbasis data.
-
-3.4 Faculty 4: Geopolitics & International Relations
-
-Tujuan: Memahami hubungan antarnegara, kepentingan strategis, kekuatan politik, dan pengaruh geopolitik terhadap sistem global.
-
-Materi utama:
-
-1. International Relations
-2. Geopolitical Theory
-3. Political Economy
-4. International Institutions
-5. Global Trade Relations
-6. Energy Geopolitics
-7. Resource Competition
-8. Strategic Alliances
-9. International Conflicts
-10. Sanctions and Economic Warfare
-11. Regional Security
-12. Global Power Dynamics
-
-Kompetensi yang diharapkan:
-
-- Mampu menganalisis kepentingan aktor internasional.
-- Mampu memahami hubungan politik dan ekonomi.
-- Mampu mengidentifikasi risiko geopolitik.
-- Mampu menganalisis dampak konflik terhadap perdagangan, energi, dan pasar.
-- Mampu membedakan fakta, propaganda, interpretasi, dan spekulasi.
-
-3.5 Faculty 5: Financial Markets & Quantitative Analysis
-
-Tujuan: Memahami mekanisme pasar keuangan serta kemampuan melakukan analisis kuantitatif dan pengambilan keputusan dalam kondisi tidak pasti.
-
-Materi utama:
-
-1. Financial Market Fundamentals
-2. Foreign Exchange Market
-3. Commodity Markets
-4. Equity Markets
-5. Bond Markets
-6. Cryptocurrency and Digital Assets
-7. Market Microstructure
-8. Technical Analysis
-9. Fundamental Analysis
-10. Quantitative Analysis
-11. Portfolio Theory
-12. Risk and Money Management
-13. Derivatives
-14. Algorithmic Trading
-15. Market Psychology
-
-Kompetensi yang diharapkan:
-
-- Mampu menjelaskan mekanisme pasar.
-- Mampu menganalisis faktor fundamental dan teknikal.
-- Mampu mengolah data pasar secara kuantitatif.
-- Mampu memahami likuiditas, volatilitas, dan struktur pasar.
-- Mampu mengukur risiko dan mengevaluasi strategi.
-- Mampu membedakan hasil backtest, simulasi, dan kinerja nyata.
-
-3.6 Cross-Faculty Program: Research & Decision Lab
-
-Research & Decision Lab bukan fakultas keenam dan tidak memiliki gerbang kenaikan tingkat tersendiri.
-
-Program ini berjalan lintas fakultas untuk mengintegrasikan pengetahuan dari berbagai bidang.
-
-Aktivitasnya meliputi:
-
-- Analisis kasus nyata.
-- Penelitian lintas disiplin.
-- Penyusunan hipotesis.
-- Pengujian hipotesis.
-- Analisis risiko.
-- Penyusunan skenario.
-- Evaluasi keputusan.
-- Pemecahan persoalan kompleks.
-
-Contoh:
-
-Cognis menganalisis kenaikan harga minyak dengan menggabungkan ekonomi, geopolitik, sistem moneter, dan pasar komoditas.
-
-Program ini membantu memastikan bahwa pengetahuan tidak terpisah menjadi kumpulan mata pelajaran yang tidak saling terhubung.
-
-4. Academic Roles
-
-Cognis Academy memiliki enam peran utama.
-
-4.1 Academic Planner
-
-Bertanggung jawab atas:
-
-- Penyusunan rencana pembelajaran.
-- Pengelolaan urutan mata pelajaran.
-- Pemeriksaan prasyarat.
-- Penjadwalan pembelajaran.
-- Pemantauan progres akademik.
-
-4.2 Teacher Model
-
-Bertanggung jawab atas:
-
-- Menjelaskan materi.
-- Menyusun contoh.
-- Menyiapkan latihan.
-- Memberikan penjelasan tambahan.
-- Mengembangkan materi pembelajaran.
-
-Teacher Model dapat menggunakan model AI yang berbeda dari model utama Cognis.
-
-4.3 Student Model
-
-Student Model adalah model utama Cognis yang sedang dikembangkan dan dievaluasi.
-
-Tanggung jawabnya:
-
-- Mempelajari materi.
-- Menyelesaikan latihan.
-- Melakukan penelitian.
-- Menjawab ujian.
-- Menerapkan kompetensi.
-- Menyusun laporan hasil pembelajaran.
-
-4.4 Evaluator
-
-Evaluator bertugas mengukur kualitas hasil belajar Cognis.
-
-Evaluator menilai:
-
-- Ketepatan jawaban.
-- Kekuatan penalaran.
-- Kualitas bukti.
-- Konsistensi kesimpulan.
-- Kemampuan mengakui ketidakpastian.
-- Kemampuan menerapkan pengetahuan pada kasus baru.
-
-Evaluator sebaiknya menggunakan model atau mekanisme penilaian yang berbeda dari Student Model.
-
-Jika evaluasi hanya menggunakan model yang sama dengan konfigurasi prompt berbeda, sistem wajib mencatat bahwa independensi penilaiannya terbatas.
-
-4.5 Benchmark Engine
-
-Benchmark Engine menyediakan pengujian yang terstruktur dan dapat diulang.
-
-Tugasnya:
-
-- Menyimpan kumpulan soal evaluasi.
-- Menyediakan kasus baru.
-- Menjalankan tes kompetensi.
-- Mengukur perkembangan kemampuan.
-- Membandingkan hasil antarperiode.
-- Menyimpan hasil pengujian.
-
-Sebagian soal benchmark harus menjadi data pengujian tertutup agar Student Model tidak hanya menghafal pertanyaan yang digunakan untuk latihan.
-
-4.6 Founder / Human Validator
-
-Founder memiliki kewenangan akhir atas progres akademik Cognis.
-
-Founder dapat:
-
-- Menguji Cognis secara langsung.
-- Memberikan kasus baru.
-- Mempertanyakan penalaran.
-- Meminta sumber bukti.
-- Meminta pengujian tambahan.
-- Meminta remedial.
-- Menyetujui kelulusan.
-- Menolak kelulusan.
-- Menahan kenaikan fakultas.
-
-Tidak ada sistem otomatis yang boleh mengambil alih kewenangan persetujuan akhir tersebut.
-
-5. Learning Lifecycle
-
-Setiap fakultas mengikuti siklus pembelajaran yang sama.
-
-Stage 1: Academic Preparation
-
-Academic Planner menentukan:
-
-- Kompetensi yang harus dipelajari.
-- Urutan materi.
-- Prasyarat.
-- Sumber belajar.
-- Target pembelajaran.
-- Metode evaluasi.
-
-Materi harus sesuai dengan kurikulum fakultas yang sedang aktif.
-
-Stage 2: Autonomous Learning
-
-Student Model mulai mempelajari materi berdasarkan jadwal yang telah ditentukan.
-
-Aktivitas dapat mencakup:
-
-- Membaca sumber.
-- Melakukan penelitian.
-- Membandingkan perspektif.
-- Membuat ringkasan.
-- Menyusun catatan pengetahuan.
-- Mengidentifikasi pertanyaan yang belum terjawab.
-
-Seluruh hasil pembelajaran harus menggunakan Bahasa Indonesia, kecuali nama, istilah teknis, kode, dan judul sumber asli yang memang perlu dipertahankan.
-
-Stage 3: Practical Exercises
-
-Cognis harus menerapkan pengetahuan melalui latihan.
-
-Latihan dapat berbentuk:
-
-- Pertanyaan konseptual.
-- Pemecahan masalah.
-- Studi kasus.
-- Analisis data.
-- Perbandingan teori.
-- Penyusunan argumen.
-- Evaluasi keputusan.
-
-Kesulitan latihan harus meningkat secara bertahap.
-
-Stage 4: Internal Assessment
-
-Setelah menyelesaikan materi dan latihan, sistem melakukan evaluasi internal.
-
-Evaluasi mencakup:
-
-1. Knowledge Assessment.
-2. Reasoning Assessment.
-3. Application Assessment.
-4. Evidence Assessment.
-5. Uncertainty Assessment.
-6. Transfer Assessment.
-
-Transfer Assessment menguji kemampuan menerapkan pengetahuan dalam situasi baru yang tidak identik dengan contoh latihan.
-
-Stage 5: Remedial
-
-Jika terdapat kompetensi yang belum memenuhi standar, sistem membuat rencana remedial.
-
-Remedial harus:
-
-- Menyebutkan kompetensi yang lemah.
-- Mengidentifikasi dugaan penyebab kelemahan.
-- Memberikan materi tambahan.
-- Menyediakan latihan yang relevan.
-- Menguji ulang kompetensi tersebut.
-
-Cognis tidak boleh menyembunyikan kelemahan dengan hanya menampilkan nilai rata-rata yang tinggi.
-
-Stage 6: Academic Report
-
-Setelah memenuhi persyaratan internal, Cognis menyusun laporan kepada Founder.
-
-Laporan minimal memuat:
-
-- Nama fakultas.
-- Mata pelajaran yang telah dipelajari.
-- Kompetensi yang dikuasai.
-- Hasil evaluasi.
-- Bukti penerapan kemampuan.
-- Kelemahan yang ditemukan.
-- Materi yang masih perlu diperbaiki.
-- Rekomendasi kelulusan.
-- Tingkat ketidakpastian evaluasi.
-
-Stage 7: Direct Founder Examination
-
-Founder dapat menguji Cognis secara langsung melalui antarmuka percakapan.
-
-Founder tidak dibatasi pada kumpulan soal internal.
-
-Founder dapat:
-
-- Mengajukan pertanyaan spontan.
-- Memberikan persoalan baru.
-- Meminta analisis mendalam.
-- Menguji konsistensi jawaban.
-- Meminta penjelasan ulang.
-- Menguji kemampuan mengoreksi kesalahan.
-- Meminta pembuktian atas klaim.
-
-Hasil pengujian dapat dicatat sebagai bagian dari rekam akademik Cognis.
-
-Stage 8: Faculty Approval
-
-Setelah pengujian langsung, Founder menentukan keputusan akademik.
-
-Keputusan tersebut harus dicatat dalam sistem.
-
-Fakultas berikutnya hanya dapat dibuka setelah persetujuan eksplisit diberikan.
-
-6. Faculty Progression Policy
-
-6.1 Sequential Progression
-
-Urutan fakultas:
-
-1. Cognitive Foundations.
-2. Economics & Monetary Systems.
-3. Business & Finance.
-4. Geopolitics & International Relations.
-5. Financial Markets & Quantitative Analysis.
-
-Cognis tidak boleh melewati fakultas tanpa persetujuan Founder.
-
-6.2 Academic Status
-
-Setiap fakultas memiliki salah satu status berikut:
-
-Status| Arti
-LOCKED| Belum boleh dimulai.
-ACTIVE| Sedang menjalani pembelajaran.
-INTERNAL_EVALUATION| Menjalani evaluasi internal.
-REMEDIAL| Memperbaiki kompetensi yang belum memadai.
-CANDIDATE_FOR_APPROVAL| Memenuhi persyaratan internal dan menunggu Founder.
-FOUNDER_REVIEW| Sedang diuji atau ditinjau Founder.
-APPROVED| Kelulusan disetujui Founder.
-REJECTED| Kelulusan belum disetujui.
-ON_HOLD| Pembelajaran atau evaluasi ditahan.
-
-6.3 Approval Requirements
-
-Sebelum masuk ke status CANDIDATE_FOR_APPROVAL, Cognis harus memenuhi persyaratan berikut:
-
-- Materi inti fakultas telah dipelajari.
-- Kompetensi wajib telah dievaluasi.
-- Benchmark internal telah diselesaikan.
-- Kasus penerapan telah dikerjakan.
-- Kelemahan kritis telah ditangani.
-- Laporan akademik telah disiapkan.
-
-Nilai minimum dan ambang kompetensi akan diatur lebih rinci dalam "ASSESSMENT_POLICY.md".
-
-6.4 Explicit Founder Approval
-
-Persetujuan Founder harus diberikan secara jelas dan tercatat.
-
-Pernyataan yang ambigu tidak boleh dianggap sebagai persetujuan.
-
-Persetujuan hanya berlaku untuk fakultas yang sedang menunggu validasi.
-
-Ketika Founder menyetujui kelulusan:
-
-1. Sistem mencatat identitas keputusan dan waktunya.
-2. Status fakultas aktif berubah menjadi APPROVED.
-3. Sistem membuka fakultas berikutnya.
-4. Academic Planner menyiapkan kurikulum fakultas berikutnya.
-5. Student Model mulai mempelajari materi baru sesuai jadwal.
-
-6.5 Rejection and Reassessment
-
-Jika Founder tidak menyetujui kelulusan:
-
-1. Status kenaikan fakultas ditolak.
-2. Cognis tetap berada pada fakultas saat ini.
-3. Alasan penolakan dicatat.
-4. Sistem mengidentifikasi kompetensi yang perlu diperbaiki.
-5. Academic Planner menyusun remedial atau pengujian ulang.
-
-Penolakan bukan berarti seluruh proses pembelajaran harus diulang.
-
-6.6 No Automatic Promotion
-
-Tidak ada kondisi berikut yang boleh otomatis membuka fakultas baru:
-
-- Jadwal belajar telah selesai.
-- Semua dokumen telah dibaca.
-- Nilai internal tinggi.
-- Teacher Model menyatakan Cognis sudah mampu.
-- Evaluator merekomendasikan kelulusan.
-- Student Model mengklaim dirinya telah menguasai materi.
-
-Semua kondisi tersebut hanya menjadi bahan pertimbangan untuk Founder.
-
-7. Learning Schedule Principles
-
-Pembelajaran berjalan berdasarkan jadwal otomatis yang dikelola Academic Planner.
-
-Founder tidak perlu memberikan materi baru setiap pagi agar Cognis dapat memulai pembelajaran.
-
-Academic Planner menentukan aktivitas berdasarkan:
-
-- Fakultas yang sedang aktif.
-- Kurikulum yang berlaku.
-- Kompetensi prioritas.
-- Hasil evaluasi sebelumnya.
-- Ketersediaan sumber.
-- Anggaran komputasi dan API.
-- Batas waktu pekerjaan.
-
-Aktivitas harian dapat mencakup pembelajaran inti, latihan, penelitian, evaluasi, remedial, dan penyusunan laporan.
-
-Jadwal tidak boleh memaksa penggunaan model AI tanpa henti sepanjang hari.
-
-Sistem harus menggunakan antrean pekerjaan, checkpoint, batas token, batas biaya, dan penyimpanan progres agar pembelajaran tetap efisien.
-
-Detail operasional jadwal akan ditentukan dalam "LEARNING_SCHEDULE.md".
-
-8. Knowledge Management
-
-Hasil pembelajaran harus dikelola secara terstruktur.
-
-Sistem setidaknya membedakan empat jenis informasi.
-
-8.1 Learning Notes
-
-Catatan pembelajaran yang belum melalui validasi penuh.
-
-8.2 Verified Knowledge
-
-Pengetahuan yang telah diperiksa berdasarkan sumber, konsistensi, dan bukti yang tersedia.
-
-8.3 Competency Records
-
-Rekaman kemampuan Cognis berdasarkan hasil latihan, ujian, benchmark, dan pengujian langsung.
-
-8.4 Research Records
-
-Dokumen penelitian yang memuat pertanyaan, metode, sumber, analisis, temuan, keterbatasan, dan kesimpulan.
-
-Materi yang belum terverifikasi tidak boleh diperlakukan sebagai fakta permanen.
-
-Sistem juga wajib membedakan pengetahuan yang disimpan melalui database atau retrieval dari perubahan bobot model.
-
-Penyimpanan pengetahuan tidak boleh diklaim sebagai proses training atau peningkatan bobot model.
-
-9. Cross-Faculty Competency Retention
-
-Kemampuan dari fakultas yang telah diselesaikan harus tetap dapat digunakan.
-
-Cognis perlu menjalani evaluasi berkala terhadap kompetensi penting dari fakultas sebelumnya.
-
-Contoh:
-
-Ketika berada di Fakultas 4, Cognis masih dapat diuji menggunakan persoalan ekonomi dari Fakultas 2 dan analisis bisnis dari Fakultas 3.
-
-Jika ditemukan penurunan kemampuan, sistem harus membuat program penguatan kompetensi.
-
-Penurunan kompetensi tidak otomatis membatalkan kelulusan fakultas yang telah disetujui Founder.
-
-Namun, penurunan tersebut harus terlihat dalam laporan dan menjadi prioritas perbaikan.
-
-10. Academic Integrity
-
-Cognis Academy harus menjaga integritas proses pembelajaran.
-
-Aturan wajib:
-
-1. Tidak boleh mengarang sumber atau referensi.
-2. Tidak boleh menyatakan telah membaca sumber yang tidak diakses.
-3. Tidak boleh menyembunyikan kegagalan evaluasi.
-4. Tidak boleh memalsukan hasil benchmark.
-5. Tidak boleh mengubah hasil ujian setelah penilaian tanpa jejak audit.
-6. Tidak boleh menyamakan dugaan dengan fakta.
-7. Harus menyatakan ketidakpastian ketika bukti tidak mencukupi.
-8. Harus membedakan hasil latihan dari kemampuan yang sudah teruji.
-9. Harus mengakui keterbatasan model dan sumber informasi.
-10. Tidak boleh mengubah status akademik tanpa otorisasi.
-
-11. Governance and Audit
-
-Setiap aktivitas akademik penting harus memiliki rekaman audit.
-
-Data yang dicatat minimal:
-
-- Faculty ID.
-- Subject ID.
-- Learning Session ID.
-- Evaluation ID.
-- Benchmark Version.
-- Score and Evaluation Result.
-- Competency Status.
-- Remedial History.
-- Founder Decision.
-- Approval Timestamp.
-- Previous and Next Faculty.
-- Relevant Report References.
-
-Riwayat keputusan akademik tidak boleh dihapus atau ditimpa secara diam-diam.
-
-Perubahan harus menghasilkan catatan audit baru.
-
-Founder approval untuk kenaikan fakultas hanya mengubah status akademik dan akses pembelajaran, bukan izin untuk memodifikasi sistem secara permanen.
-
-Perubahan sistem tetap mengikuti prosedur ALS.
-
-12. Success Criteria
-
-Cognis Academy dianggap berjalan sesuai spesifikasi apabila:
-
-1. Cognis dapat mempelajari materi fakultas aktif secara otomatis.
-2. Sistem dapat mengelola materi dan kompetensi.
-3. Sistem dapat menjalankan evaluasi internal.
-4. Sistem dapat mengidentifikasi kelemahan.
-5. Sistem dapat membuat rencana remedial.
-6. Sistem dapat menyusun laporan akademik.
-7. Founder dapat menguji Cognis melalui percakapan langsung.
-8. Sistem dapat merekam keputusan Founder.
-9. Fakultas berikutnya tetap terkunci tanpa persetujuan eksplisit.
-10. Persetujuan Founder berhasil membuka fakultas berikutnya.
-11. Pengetahuan dan kompetensi dari fakultas sebelumnya tetap tersedia.
-12. Seluruh perpindahan status dapat diaudit.
-
-13. Implementation Boundary
-
-Dokumen ini menentukan filosofi, struktur, aturan akademik, peran, dan proses pendidikan Cognis Academy.
-
-Dokumen ini tidak menentukan detail implementasi teknis seperti:
-
-- Struktur tabel database.
-- Endpoint API.
-- Format payload Telegram.
-- Implementasi scheduler.
-- Sistem antrean pekerjaan.
-- Format penyimpanan benchmark.
-- Detail algoritma penilaian.
-- Mekanisme autentikasi dan otorisasi.
-
-Detail tersebut harus ditentukan dalam dokumen teknis terkait.
-
-Dokumen akademik lain yang saling berhubungan:
-
-- "FACULTY_PROGRESSION_POLICY.md"
-- "LEARNING_SCHEDULE.md"
-- "ASSESSMENT_POLICY.md"
-- "COMPETENCY_CURRICULUM.md"
-- "EVALUATION_FRAMEWORK.md"
-- "AUTONOMOUS_LEARNING_SPEC.md"
-- "SECURITY_GOVERNANCE.md"
-
-14. Final Academic Principle
-
-Cognis Academy bukan sistem yang sekadar menyuruh AI membaca lebih banyak informasi.
-
-Tujuannya adalah membangun kemampuan yang dapat diuji, diukur, dipertanggungjawabkan, dan terus diperbaiki.
-
-Cognis boleh belajar secara mandiri, melakukan penelitian, menemukan kelemahan, mengusulkan remedial, dan mempersiapkan diri untuk tingkat berikutnya.
-
-Namun, Cognis tidak boleh menentukan sendiri bahwa dirinya telah layak naik fakultas.
-
-The system may recommend progression. Only the Founder may approve it.
+Dokumen ini tidak menggantikan spesifikasi pembelajaran, penilaian, atau kebijakan kenaikan tingkat.
 
 ---
 
-End of Document
+2. Academic System Vision
+
+Cognis dirancang memiliki struktur pembelajaran yang menyerupai organisasi akademik terintegrasi.
+
+Sistem dapat mengorganisasi pengetahuan melalui:
+
+- Faculty.
+- Department.
+- Study Program.
+- Course.
+- Module.
+- Learning Unit.
+- Learning Activity.
+
+Setiap struktur memiliki fungsi tersendiri.
+
+Academic System harus memungkinkan Cognis mengembangkan kompetensi dari tingkat dasar hingga analisis lintas domain tanpa kehilangan hubungan antara materi pembelajaran, kurikulum, dan tujuan akademik.
+
+Struktur ini merupakan sistem organisasi internal AI.
+
+Struktur fakultas dan program studi tidak berarti Cognis merupakan institusi pendidikan resmi, universitas terakreditasi, atau lembaga yang berwenang memberikan gelar akademik.
+
+---
+
+3. Academic Principles
+
+3.1 Structured Knowledge Organization
+
+Seluruh bidang pengetahuan harus memiliki struktur organisasi yang jelas.
+
+Informasi tidak boleh dikelompokkan secara sembarangan tanpa memperhatikan hubungan konseptualnya.
+
+3.2 Competency Alignment
+
+Setiap program dan materi pembelajaran harus terhubung dengan kompetensi yang relevan.
+
+Academic System menggunakan kompetensi sebagai fondasi untuk menentukan apa yang harus dipelajari.
+
+3.3 Interdisciplinary Integration
+
+Permasalahan nyata sering melibatkan beberapa bidang keilmuan.
+
+Academic System harus memungkinkan satu topik pembelajaran menggabungkan kompetensi dari beberapa fakultas tanpa memaksakan satu bidang menjadi satu-satunya pemilik topik.
+
+3.4 Progressive Learning Structure
+
+Materi harus dapat diorganisasi berdasarkan tingkat kedalaman:
+
+- Foundation.
+- Applied.
+- Analytical.
+- Strategic.
+
+Tingkat tersebut mengikuti definisi dalam "COMPETENCY_CURRICULUM.md".
+
+Struktur akademik tidak boleh secara otomatis menyatakan bahwa Cognis telah mencapai suatu tingkat hanya karena materi pada tingkat tersebut telah dipelajari.
+
+3.5 Separation of Responsibilities
+
+Academic System bertanggung jawab atas organisasi pembelajaran.
+
+Competency Curriculum bertanggung jawab atas definisi kompetensi.
+
+Assessment System bertanggung jawab atas evaluasi kemampuan.
+
+Faculty Progression Policy bertanggung jawab atas aturan kenaikan tingkat.
+
+Scheduler bertanggung jawab atas waktu eksekusi pembelajaran.
+
+Pemisahan tersebut harus dipertahankan.
+
+---
+
+4. Academic Hierarchy
+
+4.1 Main Structure
+
+Struktur akademik Cognis:
+
+COGNIS ACADEMIC SYSTEM
+          |
+          v
+       FACULTY
+          |
+          v
+      DEPARTMENT
+          |
+          v
+     STUDY PROGRAM
+          |
+          v
+        COURSE
+          |
+          v
+        MODULE
+          |
+          v
+     LEARNING UNIT
+          |
+          v
+   LEARNING ACTIVITY
+
+Tidak semua aktivitas harus menggunakan seluruh tingkat hierarki.
+
+Sebagai contoh, penelitian lintas domain dapat memiliki hubungan dengan beberapa fakultas, program studi, dan kompetensi sekaligus.
+
+4.2 Structure Definitions
+
+Faculty
+
+Fakultas adalah organisasi akademik utama yang mewakili satu domain pengetahuan.
+
+Department
+
+Departemen adalah pengelompokan bidang keilmuan yang lebih spesifik di dalam fakultas.
+
+Study Program
+
+Program studi adalah jalur pembelajaran yang dirancang untuk mengembangkan kelompok kompetensi tertentu.
+
+Course
+
+Course adalah kelompok materi pembelajaran yang memiliki tujuan akademik dan ruang lingkup tertentu.
+
+Module
+
+Module adalah bagian dari course yang mengelompokkan materi berdasarkan topik atau kompetensi.
+
+Learning Unit
+
+Learning Unit adalah satuan materi pembelajaran yang memiliki tujuan dan ruang lingkup yang lebih spesifik.
+
+Learning Activity
+
+Learning Activity adalah aktivitas yang digunakan untuk mempelajari, meneliti, menjelaskan, atau menerapkan suatu materi.
+
+4.3 Optional Relationships
+
+Satu objek akademik boleh terhubung dengan lebih dari satu objek pada tingkat yang sama apabila hubungan tersebut memang diperlukan.
+
+Contoh:
+
+- Satu course dapat mendukung beberapa kompetensi.
+- Satu kompetensi dapat digunakan dalam beberapa course.
+- Satu Learning Unit dapat menjadi bagian dari beberapa program studi.
+- Satu Learning Activity dapat mendukung beberapa Learning Objectives.
+
+Hubungan tersebut harus direpresentasikan secara eksplisit, bukan melalui asumsi berdasarkan kemiripan nama.
+
+---
+
+5. Faculty Structure
+
+Cognis memiliki lima fakultas utama.
+
+Foundational Competencies merupakan kurikulum inti lintas fakultas dan bukan fakultas keenam.
+
+5.1 Faculty of Economics
+
+Faculty ID: FAC-ECO
+Domain ID: ECO
+
+Purpose:
+
+Mengembangkan kemampuan memahami sistem ekonomi, perilaku pelaku ekonomi, kebijakan publik, pertumbuhan, stabilitas, dan hubungan ekonomi internasional.
+
+Primary Competency Areas:
+
+- Economic Foundations.
+- Microeconomics.
+- Industrial Economics.
+- Macroeconomics.
+- Monetary Economics.
+- Fiscal Economics.
+- International Economics.
+- Development Economics.
+- Economic Research.
+- Economic Policy Analysis.
+
+Competency Coverage:
+
+ECO-001 sampai ECO-010.
+
+Academic Objective:
+
+Cognis mampu memahami mekanisme ekonomi dan mengevaluasi kebijakan maupun fenomena ekonomi berdasarkan teori, data, serta bukti yang relevan.
+
+5.2 Faculty of Business
+
+Faculty ID: FAC-BUS
+Domain ID: BUS
+
+Purpose:
+
+Mengembangkan kemampuan memahami perusahaan, model bisnis, strategi, pasar, operasional, manajemen, dan persaingan industri.
+
+Primary Competency Areas:
+
+- Business Foundations.
+- Market Research.
+- Industry Analysis.
+- Business Strategy.
+- Operations Management.
+- Supply Chain Management.
+- Business Financial Analysis.
+- Entrepreneurship.
+- Management.
+- Corporate Governance.
+
+Competency Coverage:
+
+BUS-001 sampai BUS-010.
+
+Academic Objective:
+
+Cognis mampu mengevaluasi keberlanjutan model bisnis, mengidentifikasi peluang dan risiko, serta menganalisis keputusan strategis perusahaan.
+
+5.3 Faculty of Geopolitics
+
+Faculty ID: FAC-GEO
+Domain ID: GEO
+
+Purpose:
+
+Mengembangkan kemampuan memahami hubungan antarnegara, kepentingan strategis, konflik, keamanan, ekonomi politik internasional, dan perubahan distribusi kekuatan global.
+
+Primary Competency Areas:
+
+- International Relations.
+- Strategic Analysis.
+- Security Studies.
+- Global Governance.
+- Geoeconomics.
+- Energy Geopolitics.
+- Strategic Geography.
+- International Political Economy.
+- Geopolitical Research.
+- Strategic Forecasting.
+
+Competency Coverage:
+
+GEO-001 sampai GEO-010.
+
+Academic Objective:
+
+Cognis mampu menganalisis kepentingan negara, dinamika geopolitik, konflik, dan risiko global dengan membedakan fakta, interpretasi, serta hipotesis.
+
+5.4 Faculty of Finance
+
+Faculty ID: FAC-FIN
+Domain ID: FIN
+
+Purpose:
+
+Mengembangkan kemampuan memahami sistem keuangan, lembaga keuangan, instrumen, pembiayaan, manajemen risiko, dan stabilitas keuangan.
+
+Primary Competency Areas:
+
+- Financial System.
+- Financial Mathematics.
+- Financial Accounting.
+- Banking.
+- Financial Instruments.
+- Corporate Finance.
+- Risk Management.
+- Financial Regulation.
+- Financial Technology.
+
+Competency Coverage:
+
+FIN-001 sampai FIN-009.
+
+Academic Objective:
+
+Cognis mampu menganalisis sistem keuangan, kondisi lembaga keuangan, keputusan pembiayaan, serta risiko yang memengaruhi stabilitas keuangan.
+
+5.5 Faculty of Financial Markets
+
+Faculty ID: FAC-MKT
+Domain ID: MKT
+
+Purpose:
+
+Mengembangkan kemampuan memahami pasar finansial, instrumen investasi, pembentukan harga, struktur pasar, likuiditas, perilaku pelaku pasar, dan manajemen risiko.
+
+Primary Competency Areas:
+
+- Market Structure.
+- Asset Knowledge.
+- Fundamental Analysis.
+- Macro Market Analysis.
+- Technical Analysis.
+- Market Microstructure.
+- Volume Analysis.
+- Derivatives and Leverage.
+- Trading and Investment Risk.
+- Behavioral Analysis.
+- Digital Asset Markets.
+- Strategy Research.
+
+Competency Coverage:
+
+MKT-001 sampai MKT-012.
+
+Academic Objective:
+
+Cognis mampu menganalisis pasar finansial berdasarkan data, struktur pasar, kondisi fundamental, perilaku harga, dan risiko dengan mempertimbangkan keterbatasan masing-masing metode.
+
+---
+
+6. Foundational Academic Core
+
+6.1 Purpose
+
+Foundational Academic Core adalah kumpulan kompetensi dasar yang digunakan oleh seluruh fakultas.
+
+Kompetensi ini tidak dimiliki secara eksklusif oleh satu fakultas karena dibutuhkan untuk seluruh proses analisis.
+
+6.2 Core Competencies
+
+Foundational Core mencakup:
+
+- FND-001: Critical Thinking and Logical Reasoning.
+- FND-002: Quantitative and Statistical Literacy.
+- FND-003: Research and Evidence Evaluation.
+- FND-004: Causal and Systems Thinking.
+- FND-005: Data Interpretation and Time-Series Analysis.
+- FND-006: Analytical Communication.
+- FND-007: Decision Analysis and Risk Reasoning.
+- FND-008: Research Ethics and Information Integrity.
+
+6.3 Core Application
+
+Foundational Core dapat diterapkan pada seluruh fakultas.
+
+Contoh:
+
+Dalam analisis geopolitik, FND-001 membantu mengevaluasi argumen dan asumsi.
+
+Dalam analisis ekonomi, FND-002 membantu membaca data statistik.
+
+Dalam penelitian pasar finansial, FND-003 membantu memvalidasi sumber dan bukti.
+
+Dalam analisis bisnis, FND-004 membantu memahami hubungan antarvariabel dan konsekuensi keputusan.
+
+6.4 Administrative Ownership
+
+Foundational Core berada di bawah pengelolaan Academic System sebagai kurikulum lintas fakultas.
+
+Fakultas dapat menggunakan kompetensi tersebut tanpa membuat salinan kompetensi baru.
+
+Identitas FND harus tetap menjadi referensi utama.
+
+---
+
+7. Department Structure
+
+Departemen mengelompokkan kompetensi yang memiliki hubungan konseptual dalam suatu fakultas.
+
+Struktur berikut merupakan baseline organisasi akademik.
+
+7.1 Economics Departments
+
+DEP-ECO-01: Economic Foundations and Markets
+
+Coverage:
+
+- ECO-001.
+- ECO-002.
+- ECO-003.
+
+DEP-ECO-02: Macroeconomics and Policy
+
+Coverage:
+
+- ECO-004.
+- ECO-005.
+- ECO-006.
+- ECO-010.
+
+DEP-ECO-03: International and Development Economics
+
+Coverage:
+
+- ECO-007.
+- ECO-008.
+
+DEP-ECO-04: Economic Research and Data
+
+Coverage:
+
+- ECO-009.
+
+7.2 Business Departments
+
+DEP-BUS-01: Business Strategy and Markets
+
+Coverage:
+
+- BUS-001.
+- BUS-002.
+- BUS-003.
+- BUS-004.
+
+DEP-BUS-02: Operations and Supply Chain
+
+Coverage:
+
+- BUS-005.
+- BUS-006.
+
+DEP-BUS-03: Business Finance and Performance
+
+Coverage:
+
+- BUS-007.
+
+DEP-BUS-04: Entrepreneurship and Organization
+
+Coverage:
+
+- BUS-008.
+- BUS-009.
+- BUS-010.
+
+7.3 Geopolitics Departments
+
+DEP-GEO-01: International Relations and Strategy
+
+Coverage:
+
+- GEO-001.
+- GEO-002.
+- GEO-004.
+
+DEP-GEO-02: Security and Conflict Studies
+
+Coverage:
+
+- GEO-003.
+
+DEP-GEO-03: Geoeconomics and Resources
+
+Coverage:
+
+- GEO-005.
+- GEO-006.
+- GEO-008.
+
+DEP-GEO-04: Strategic Geography and Intelligence
+
+Coverage:
+
+- GEO-007.
+- GEO-009.
+- GEO-010.
+
+7.4 Finance Departments
+
+DEP-FIN-01: Financial Systems and Banking
+
+Coverage:
+
+- FIN-001.
+- FIN-004.
+- FIN-008.
+
+DEP-FIN-02: Financial Analysis and Instruments
+
+Coverage:
+
+- FIN-002.
+- FIN-003.
+- FIN-005.
+
+DEP-FIN-03: Corporate Finance and Risk
+
+Coverage:
+
+- FIN-006.
+- FIN-007.
+
+DEP-FIN-04: Financial Technology
+
+Coverage:
+
+- FIN-009.
+
+7.5 Financial Markets Departments
+
+DEP-MKT-01: Market Foundations and Fundamentals
+
+Coverage:
+
+- MKT-001.
+- MKT-002.
+- MKT-003.
+- MKT-004.
+
+DEP-MKT-02: Market Structure and Analysis
+
+Coverage:
+
+- MKT-005.
+- MKT-006.
+- MKT-007.
+
+DEP-MKT-03: Derivatives and Risk
+
+Coverage:
+
+- MKT-008.
+- MKT-009.
+
+DEP-MKT-04: Market Behavior and Digital Assets
+
+Coverage:
+
+- MKT-010.
+- MKT-011.
+- MKT-012.
+
+7.6 Department Rules
+
+Departemen digunakan untuk mengorganisasi kompetensi.
+
+Satu kompetensi dapat memiliki hubungan tambahan dengan departemen lain jika memang diperlukan.
+
+Hubungan tambahan tidak boleh membuat kepemilikan kompetensi menjadi ambigu.
+
+Satu departemen memiliki satu fakultas induk.
+
+Perubahan struktur departemen harus mengikuti versioning Academic System.
+
+---
+
+8. Study Program Structure
+
+8.1 Definition
+
+Study Program adalah jalur pembelajaran yang menggabungkan beberapa kompetensi untuk mencapai tujuan akademik tertentu.
+
+Program studi tidak harus mencakup seluruh kompetensi dalam satu fakultas.
+
+Program dapat berfokus pada bidang tertentu atau menggabungkan kompetensi lintas departemen.
+
+8.2 Study Program Requirements
+
+Setiap program studi harus memiliki:
+
+- Study Program ID.
+- Study Program Name.
+- Faculty Owner.
+- Description.
+- Academic Objective.
+- Target Competencies.
+- Recommended Learning Pathway.
+- Prerequisite References.
+- Related Courses.
+- Version.
+- Status.
+
+8.3 Recommended Study Programs
+
+Program berikut merupakan katalog awal yang disarankan.
+
+Faculty of Economics
+
+PRG-ECO-01: Macroeconomic Analysis
+
+Fokus:
+
+- ECO-001.
+- ECO-004.
+- ECO-005.
+- ECO-006.
+- ECO-009.
+- ECO-010.
+
+Tujuan:
+
+Membangun kemampuan menganalisis kondisi makroekonomi, kebijakan moneter dan fiskal, serta indikator ekonomi.
+
+PRG-ECO-02: Microeconomics and Market Structure
+
+Fokus:
+
+- ECO-001.
+- ECO-002.
+- ECO-003.
+
+Tujuan:
+
+Memahami perilaku pelaku ekonomi, mekanisme harga, struktur pasar, dan persaingan.
+
+PRG-ECO-03: International and Development Economics
+
+Fokus:
+
+- ECO-007.
+- ECO-008.
+- ECO-009.
+- ECO-010.
+
+Tujuan:
+
+Memahami perdagangan internasional, pembangunan, ketimpangan, dan kebijakan ekonomi global.
+
+Faculty of Business
+
+PRG-BUS-01: Business Strategy and Management
+
+Fokus:
+
+- BUS-001.
+- BUS-002.
+- BUS-003.
+- BUS-004.
+- BUS-009.
+- BUS-010.
+
+Tujuan:
+
+Membangun kemampuan mengevaluasi model bisnis, persaingan, strategi, dan organisasi perusahaan.
+
+PRG-BUS-02: Operations and Supply Chain Management
+
+Fokus:
+
+- BUS-005.
+- BUS-006.
+- BUS-007.
+
+Tujuan:
+
+Menganalisis operasional, persediaan, distribusi, kapasitas, dan efisiensi bisnis.
+
+PRG-BUS-03: Entrepreneurship and Business Development
+
+Fokus:
+
+- BUS-001.
+- BUS-002.
+- BUS-007.
+- BUS-008.
+
+Tujuan:
+
+Mengevaluasi peluang bisnis, validasi pasar, unit economics, dan pengembangan usaha.
+
+Faculty of Geopolitics
+
+PRG-GEO-01: International Relations and Strategic Studies
+
+Fokus:
+
+- GEO-001.
+- GEO-002.
+- GEO-003.
+- GEO-004.
+
+Tujuan:
+
+Memahami hubungan internasional, kepentingan negara, keamanan, dan diplomasi.
+
+PRG-GEO-02: Geoeconomics and Global Resources
+
+Fokus:
+
+- GEO-005.
+- GEO-006.
+- GEO-008.
+
+Tujuan:
+
+Menganalisis hubungan kekuatan geopolitik, sumber daya, dan aktivitas ekonomi global.
+
+PRG-GEO-03: Geopolitical Intelligence and Risk Analysis
+
+Fokus:
+
+- GEO-007.
+- GEO-009.
+- GEO-010.
+
+Tujuan:
+
+Menganalisis informasi strategis, risiko geopolitik, serta skenario alternatif.
+
+Faculty of Finance
+
+PRG-FIN-01: Financial Systems and Banking
+
+Fokus:
+
+- FIN-001.
+- FIN-004.
+- FIN-008.
+- FIN-009.
+
+Tujuan:
+
+Memahami perbankan, lembaga keuangan, regulasi, dan infrastruktur sistem pembayaran.
+
+PRG-FIN-02: Financial Analysis and Corporate Finance
+
+Fokus:
+
+- FIN-002.
+- FIN-003.
+- FIN-005.
+- FIN-006.
+
+Tujuan:
+
+Menganalisis laporan keuangan, valuasi, instrumen, dan keputusan pembiayaan perusahaan.
+
+PRG-FIN-03: Financial Risk Management
+
+Fokus:
+
+- FIN-005.
+- FIN-007.
+- FIN-008.
+
+Tujuan:
+
+Memahami risiko instrumen, portofolio, dan stabilitas keuangan.
+
+Faculty of Financial Markets
+
+PRG-MKT-01: Financial Market Analysis
+
+Fokus:
+
+- MKT-001.
+- MKT-002.
+- MKT-003.
+- MKT-004.
+
+Tujuan:
+
+Membangun kemampuan analisis fundamental dan hubungan kondisi makroekonomi dengan pasar finansial.
+
+PRG-MKT-02: Market Structure and Technical Analysis
+
+Fokus:
+
+- MKT-005.
+- MKT-006.
+- MKT-007.
+
+Tujuan:
+
+Memahami struktur harga, likuiditas, aktivitas transaksi, dan interpretasi teknikal.
+
+PRG-MKT-03: Derivatives and Trading Risk
+
+Fokus:
+
+- MKT-008.
+- MKT-009.
+- MKT-012.
+
+Tujuan:
+
+Memahami instrumen derivatif, leverage, manajemen risiko, dan evaluasi strategi.
+
+PRG-MKT-04: Digital Asset Markets
+
+Fokus:
+
+- MKT-002.
+- MKT-006.
+- MKT-008.
+- MKT-009.
+- MKT-011.
+
+Tujuan:
+
+Memahami infrastruktur, struktur pasar, likuiditas, derivatif, dan risiko aset digital.
+
+---
+
+9. Interdisciplinary Academic Structure
+
+9.1 Purpose
+
+Academic System harus mendukung pembelajaran yang melibatkan lebih dari satu fakultas.
+
+Pembelajaran lintas domain tidak boleh dipaksakan masuk ke satu fakultas hanya demi kesederhanaan administrasi.
+
+9.2 Interdisciplinary Studies
+
+Pembelajaran lintas domain dikelola sebagai kategori akademik tersendiri di tingkat Academic System.
+
+Kategori ini bukan fakultas tambahan.
+
+Setiap pembelajaran lintas domain harus memiliki:
+
+- Interdisciplinary Study ID.
+- Research Topic.
+- Primary Faculty.
+- Supporting Faculties.
+- Related Competencies.
+- Learning Objectives.
+- Scope.
+- Expected Output.
+
+Primary Faculty hanya menunjukkan domain utama untuk kebutuhan organisasi.
+
+Primary Faculty tidak berarti fakultas tersebut memiliki seluruh kompetensi yang digunakan.
+
+9.3 Initial Interdisciplinary Programs
+
+XPRG-001: Global Political Economy
+
+Integrasi:
+
+- Economics.
+- Geopolitics.
+- Finance.
+
+Fokus:
+
+- Perdagangan internasional.
+- Kebijakan ekonomi global.
+- Sanksi.
+- Arus modal.
+- Kekuatan ekonomi negara.
+
+XPRG-002: Energy and Commodity Systems
+
+Integrasi:
+
+- Economics.
+- Geopolitics.
+- Financial Markets.
+
+Fokus:
+
+- Supply and demand energi.
+- Geopolitik sumber daya.
+- Harga komoditas.
+- Gangguan pasokan.
+- Dampak terhadap inflasi.
+
+XPRG-003: Monetary Policy and Financial Markets
+
+Integrasi:
+
+- Economics.
+- Finance.
+- Financial Markets.
+
+Fokus:
+
+- Bank sentral.
+- Suku bunga.
+- Nilai tukar.
+- Obligasi.
+- Emas.
+- Arus modal.
+- Valuasi aset.
+
+XPRG-004: Business and Industrial Transformation
+
+Integrasi:
+
+- Business.
+- Economics.
+- Geopolitics.
+- Finance.
+
+Fokus:
+
+- Perubahan industri.
+- Persaingan perusahaan.
+- Produktivitas.
+- Kebijakan industri.
+- Pembiayaan.
+- Rantai pasok.
+
+XPRG-005: Global Financial Stability
+
+Integrasi:
+
+- Economics.
+- Finance.
+- Geopolitics.
+- Financial Markets.
+
+Fokus:
+
+- Stabilitas sistem keuangan.
+- Risiko perbankan.
+- Likuiditas.
+- Kebijakan moneter.
+- Risiko sistemik.
+- Perubahan kondisi pasar.
+
+9.4 Interdisciplinary Ownership
+
+Setiap program lintas domain harus memiliki satu primary faculty untuk kebutuhan administrasi.
+
+Kompetensi tetap menggunakan pemilik domain aslinya.
+
+Penggabungan program tidak boleh menyebabkan duplikasi Competency ID.
+
+---
+
+10. Course Architecture
+
+10.1 Definition
+
+Course merupakan kelompok materi pembelajaran yang memiliki tujuan dan ruang lingkup tertentu.
+
+Course harus berorientasi pada hasil pembelajaran, bukan hanya daftar topik.
+
+10.2 Course Metadata
+
+Setiap course minimal memiliki:
+
+- Course ID.
+- Course Name.
+- Description.
+- Faculty Reference.
+- Department Reference jika tersedia.
+- Study Program Reference jika tersedia.
+- Competency References.
+- Learning Objectives.
+- Prerequisite References.
+- Course Scope.
+- Recommended Depth Level.
+- Course Version.
+- Status.
+
+10.3 Course Types
+
+Academic System mengenali beberapa jenis course.
+
+Foundation Course
+
+Membangun pemahaman konsep dan dasar pengetahuan.
+
+Applied Course
+
+Mengembangkan kemampuan menggunakan konsep untuk menganalisis kasus dan data.
+
+Analytical Course
+
+Mengembangkan kemampuan mengintegrasikan beberapa konsep dan mengevaluasi masalah kompleks.
+
+Strategic Course
+
+Mengembangkan kemampuan menganalisis skenario, trade-offs, dan masalah lintas domain.
+
+Course Type menunjukkan tujuan dan kompleksitas materi.
+
+Course Type tidak otomatis menyatakan bahwa Cognis telah memenuhi tingkat kompetensi terkait.
+
+10.4 Course Boundaries
+
+Course harus memiliki ruang lingkup yang jelas.
+
+Satu course tidak boleh menggabungkan terlalu banyak topik yang tidak saling berhubungan.
+
+Jika ruang lingkup terlalu luas, course dapat dibagi menjadi beberapa course yang lebih spesifik.
+
+Jika beberapa course terlalu kecil dan saling bergantung, pengelompokan dapat dipertimbangkan.
+
+10.5 Course Completion
+
+Status Course Completion dan aturan kelulusan belum menjadi kebutuhan MVP v1.
+
+Menyelesaikan aktivitas pembelajaran tidak otomatis berarti Cognis telah menguasai seluruh kompetensi course.
+
+Kebijakan tersebut akan ditentukan melalui Assessment Policy dan Faculty Progression Policy.
+
+---
+
+11. Module Architecture
+
+11.1 Definition
+
+Module merupakan bagian dari course yang mengorganisasi materi berdasarkan tema, topik, atau kompetensi tertentu.
+
+11.2 Module Metadata
+
+Setiap module dapat memiliki:
+
+- Module ID.
+- Course ID.
+- Module Name.
+- Description.
+- Competency References.
+- Learning Objectives.
+- Recommended Sequence.
+- Required Knowledge.
+- Related Learning Units.
+- Version.
+- Status.
+
+11.3 Module Design Rules
+
+Module harus:
+
+- Memiliki ruang lingkup yang jelas.
+- Terhubung dengan tujuan pembelajaran.
+- Tidak menduplikasi materi tanpa alasan.
+- Dapat dipelajari sebagai satu kelompok materi.
+- Memiliki hubungan dengan kompetensi yang relevan.
+
+Module tidak harus memiliki jumlah Learning Units yang sama.
+
+Jumlah unit bergantung pada kebutuhan materi.
+
+---
+
+12. Learning Unit Architecture
+
+12.1 Definition
+
+Learning Unit adalah satuan materi paling spesifik dalam katalog akademik.
+
+Learning Unit digunakan untuk mendefinisikan satu bagian pengetahuan atau kemampuan yang dapat dipelajari melalui aktivitas tertentu.
+
+12.2 Learning Unit Metadata
+
+Setiap Learning Unit minimal memiliki:
+
+- Learning Unit ID.
+- Module Reference jika tersedia.
+- Topic.
+- Description.
+- Related Competency IDs.
+- Learning Objectives.
+- Required Context.
+- Recommended Depth.
+- Expected Learning Output.
+- Related Sources jika tersedia.
+- Version.
+- Status.
+
+12.3 Learning Unit Types
+
+Concept Unit
+
+Mempelajari konsep atau teori.
+
+Data Unit
+
+Mempelajari interpretasi data.
+
+Method Unit
+
+Mempelajari metode analisis.
+
+Case Unit
+
+Menganalisis kasus nyata atau historis.
+
+Research Unit
+
+Melakukan penelitian berdasarkan pertanyaan tertentu.
+
+Integration Unit
+
+Menghubungkan beberapa konsep atau domain.
+
+12.4 Learning Unit Requirements
+
+Learning Unit harus memiliki tujuan yang dapat dijelaskan.
+
+Judul materi saja tidak cukup untuk menjadi definisi pembelajaran.
+
+Contoh kurang tepat:
+
+"Interest Rate."
+
+Contoh lebih tepat:
+
+"Mechanism of Interest Rate Transmission: memahami bagaimana perubahan suku bunga kebijakan dapat memengaruhi biaya pinjaman, permintaan agregat, nilai tukar, dan keputusan investasi."
+
+12.5 Learning Unit Completion
+
+Sistem boleh mencatat bahwa aktivitas pada Learning Unit telah selesai dijalankan.
+
+Namun, penyelesaian aktivitas tidak boleh dianggap sebagai bukti penguasaan kompetensi tanpa assessment yang sesuai.
+
+---
+
+13. Learning Activity Architecture
+
+13.1 Definition
+
+Learning Activity merupakan aktivitas operasional yang dilakukan untuk mencapai tujuan pembelajaran.
+
+Satu Learning Unit dapat memiliki beberapa Learning Activities.
+
+13.2 Activity Types
+
+Research Activity
+
+Mengumpulkan informasi untuk menjawab pertanyaan penelitian.
+
+Explanation Activity
+
+Menjelaskan konsep atau mekanisme.
+
+Data Analysis Activity
+
+Menganalisis data dan indikator.
+
+Comparative Activity
+
+Membandingkan teori, kondisi, kebijakan, atau objek.
+
+Case Study Activity
+
+Menerapkan konsep terhadap kasus.
+
+Synthesis Activity
+
+Menggabungkan temuan dari berbagai sumber.
+
+Assessment Activity
+
+Menguji kemampuan melalui kriteria evaluasi yang telah ditetapkan.
+
+Review Activity
+
+Meninjau kembali pengetahuan atau hasil pembelajaran sebelumnya.
+
+13.3 Activity Metadata
+
+Setiap aktivitas dapat memiliki:
+
+- Activity ID.
+- Learning Unit Reference.
+- Activity Type.
+- Learning Objective.
+- Input Requirements.
+- Expected Output.
+- Related Competencies.
+- Time Context jika relevan.
+- Execution Constraints.
+- Status.
+
+13.4 Activity Execution
+
+Aktivitas yang memerlukan pemrosesan sistem dapat dijalankan melalui Learning Job.
+
+Hubungan antara Academic Activity dan Learning Job harus disimpan secara eksplisit.
+
+Satu aktivitas dapat menghasilkan satu atau beberapa job apabila desain proses membutuhkannya.
+
+Satu job tidak harus dianggap sebagai satu course atau satu semester.
+
+---
+
+14. Academic System and Learning Pipeline Integration
+
+14.1 Separation of Academic and Operational Layers
+
+Academic System mengatur struktur pembelajaran.
+
+Learning Pipeline menjalankan aktivitas penelitian dan pengolahan pengetahuan.
+
+Keduanya memiliki fungsi yang berbeda.
+
+Academic System menjawab:
+
+- Bidang apa yang sedang dipelajari?
+- Kompetensi apa yang relevan?
+- Program studi mana yang sesuai?
+- Materi apa yang menjadi ruang lingkup?
+- Tujuan pembelajarannya apa?
+
+Learning Pipeline menjawab:
+
+- Bagaimana penelitian dijalankan?
+- Sumber apa yang diperoleh?
+- Bagaimana sumber divalidasi?
+- Bagaimana bukti dievaluasi?
+- Pengetahuan apa yang disimpan?
+- Laporan apa yang dihasilkan?
+
+14.2 Mapping Requirements
+
+Ketika Learning Job berasal dari aktivitas akademik yang terstruktur, sistem harus menyimpan referensi yang relevan:
+
+- Faculty ID jika tersedia.
+- Department ID jika tersedia.
+- Study Program ID jika tersedia.
+- Course ID jika tersedia.
+- Module ID jika tersedia.
+- Learning Unit ID jika tersedia.
+- Competency IDs jika tersedia.
+
+Field yang tidak relevan atau tidak diketahui tidak boleh diisi dengan identitas buatan.
+
+14.3 Direct Research Requests
+
+Tidak seluruh penelitian harus berasal dari Course atau Learning Unit.
+
+Founder dapat meminta penelitian secara langsung.
+
+Dalam kondisi tersebut, sistem dapat menghubungkan job dengan domain atau kompetensi yang relevan tanpa harus membuat Course baru.
+
+14.4 Academic Provenance
+
+Laporan pembelajaran harus mempertahankan hubungan dengan struktur akademik yang digunakan apabila hubungan tersebut tersedia.
+
+Hal ini memungkinkan operator mengetahui alasan suatu materi dipelajari dan kompetensi apa yang menjadi sasaran.
+
+---
+
+15. Academic Scheduling Boundary
+
+15.1 Purpose
+
+Academic System dapat menyediakan referensi jadwal pembelajaran yang akan digunakan oleh Scheduler.
+
+Namun, pengaturan waktu dan eksekusi job tetap menjadi tanggung jawab Scheduler.
+
+15.2 Academic Schedule Metadata
+
+Konfigurasi jadwal akademik dapat mencakup:
+
+- Schedule ID.
+- Academic Activity Reference.
+- Topic.
+- Domain.
+- Competency References.
+- Preferred Execution Time.
+- Timezone.
+- Recurrence Rule.
+- Resource Constraints.
+- Status.
+
+15.3 Scheduling Constraints
+
+Academic System tidak boleh:
+
+- Menjalankan job secara langsung.
+- Mengelola worker.
+- Mengubah status job.
+- Mengabaikan batas resource.
+- Membuat eksekusi ganda.
+- Menganggap jadwal berarti aktivitas telah berhasil dilakukan.
+
+15.4 MVP Boundary
+
+Pada MVP v1, Scheduler hanya perlu mendukung jadwal dan pemicu pembelajaran yang telah dikonfigurasi.
+
+Sistem tidak memerlukan kalender akademik kompleks, semester, tahun ajaran, atau sistem administrasi mahasiswa.
+
+---
+
+16. Academic Governance
+
+16.1 Academic Ownership
+
+Founder memiliki kewenangan atas arah dan perubahan permanen struktur akademik Cognis.
+
+Perubahan katalog dapat dilakukan melalui proses pengelolaan dokumen dan perubahan sistem yang sesuai.
+
+16.2 Academic Responsibilities
+
+Founder
+
+Bertanggung jawab terhadap:
+
+- Arah pengembangan akademik.
+- Penetapan fakultas.
+- Perubahan ruang lingkup program studi.
+- Persetujuan perubahan kurikulum inti.
+- Keputusan final atas perubahan struktur akademik.
+
+Academic System
+
+Bertanggung jawab terhadap:
+
+- Konsistensi struktur akademik.
+- Hubungan antarobjek akademik.
+- Validasi referensi akademik.
+- Pengelolaan katalog.
+- Pencatatan versi.
+
+Learning Pipeline
+
+Bertanggung jawab terhadap:
+
+- Pelaksanaan aktivitas belajar.
+- Penelitian.
+- Validasi sumber.
+- Evaluasi bukti.
+- Penyimpanan pengetahuan.
+- Pembuatan laporan.
+
+16.3 AI Authority
+
+AI boleh:
+
+- Menggunakan katalog akademik.
+- Memetakan topik ke fakultas.
+- Mengidentifikasi kompetensi yang relevan.
+- Mengusulkan hubungan antar-materi.
+- Menyarankan kebutuhan pembelajaran tambahan.
+- Menemukan kemungkinan duplikasi atau kekosongan materi.
+
+AI tidak boleh secara otomatis:
+
+- Membuat fakultas baru yang langsung aktif.
+- Mengubah pemilik fakultas.
+- Mengubah struktur departemen secara permanen.
+- Menghapus program studi aktif.
+- Mengubah kurikulum inti.
+- Mengubah aturan akademik permanen.
+- Memberikan kelulusan atau gelar.
+- Menaikkan tingkat akademik secara sepihak.
+
+16.4 Catalog Changes
+
+Perubahan struktur akademik harus memiliki:
+
+- Change ID.
+- Object ID.
+- Change Type.
+- Previous Version.
+- New Version.
+- Change Rationale.
+- Change Timestamp.
+- Authorized Owner.
+
+Perubahan harus dapat ditelusuri dan tidak menghilangkan riwayat akademik sebelumnya.
+
+---
+
+17. Academic Identifiers and Versioning
+
+17.1 Identifier Standards
+
+Setiap objek akademik harus memiliki identitas yang unik.
+
+Format identitas baseline:
+
+Entity| Identifier Format| Example
+Faculty| FAC-{DOMAIN}| FAC-ECO
+Department| DEP-{DOMAIN}-{NUMBER}| DEP-ECO-01
+Study Program| PRG-{DOMAIN}-{NUMBER}| PRG-ECO-01
+Interdisciplinary Program| XPRG-{NUMBER}| XPRG-001
+Course| CRS-{DOMAIN}-{NUMBER}| CRS-ECO-001
+Module| MOD-{DOMAIN}-{NUMBER}| MOD-ECO-001
+Learning Unit| LUNIT-{DOMAIN}-{NUMBER}| LUNIT-ECO-001
+Learning Activity| ACT-{DOMAIN}-{NUMBER}| ACT-ECO-001
+
+Competency ID tetap mengikuti standar pada "COMPETENCY_CURRICULUM.md".
+
+Academic ID tidak boleh menggantikan Competency ID.
+
+17.2 Identifier Stability
+
+Identifier yang sudah digunakan tidak boleh diberikan kepada objek berbeda.
+
+Jika suatu objek sudah tidak aktif, identitasnya harus dipertahankan sebagai referensi historis.
+
+17.3 Versioning
+
+Setiap objek akademik yang mengalami perubahan bermakna harus memiliki versi.
+
+Perubahan deskripsi minor dapat dicatat tanpa membuat identitas baru.
+
+Perubahan tujuan atau ruang lingkup yang mendasar harus menghasilkan versi baru atau objek baru sesuai kebijakan.
+
+17.4 Referential Integrity
+
+Sistem harus memvalidasi referensi antarobjek.
+
+Contoh:
+
+- Department harus memiliki Faculty yang valid.
+- Study Program harus memiliki Faculty Owner.
+- Module harus terhubung dengan Course apabila memang menjadi bagian dari suatu Course.
+- Learning Unit harus memiliki tujuan pembelajaran.
+- Learning Activity harus memiliki referensi yang valid.
+- Competency Reference harus sesuai dengan katalog kurikulum.
+
+Referensi yang tidak ditemukan tidak boleh diabaikan secara diam-diam.
+
+---
+
+18. Academic Catalog Status
+
+Setiap objek akademik harus memiliki status katalog.
+
+Status baseline:
+
+Status| Meaning
+Draft| Belum siap digunakan
+Active| Tersedia untuk aktivitas akademik
+Deprecated| Tidak direkomendasikan untuk aktivitas baru
+Archived| Disimpan untuk riwayat dan referensi
+
+18.1 Status Rules
+
+Draft tidak boleh diperlakukan sebagai katalog aktif.
+
+Active dapat digunakan untuk pemetaan aktivitas baru.
+
+Deprecated masih dapat digunakan untuk referensi historis atau proses yang sudah berjalan, tetapi tidak disarankan untuk aktivitas baru.
+
+Archived dipertahankan untuk menjaga provenance dan riwayat.
+
+18.2 Status and Competency
+
+Status katalog tidak menunjukkan tingkat penguasaan kompetensi.
+
+Objek akademik yang Active tidak berarti Cognis telah menyelesaikan atau menguasai seluruh materi di dalamnya.
+
+---
+
+19. Academic System Interface Requirements
+
+Academic System pada MVP harus menyediakan kemampuan minimum untuk:
+
+1. Membaca daftar fakultas.
+2. Membaca daftar departemen.
+3. Membaca daftar program studi.
+4. Membaca daftar course dan module jika tersedia.
+5. Membaca Learning Units.
+6. Membaca kompetensi terkait.
+7. Memetakan topik penelitian ke struktur akademik.
+8. Mengakses hubungan antarobjek akademik.
+9. Memeriksa status dan versi katalog.
+
+Interface tidak harus berupa aplikasi administrasi akademik yang kompleks.
+
+Katalog dapat disediakan melalui database, API, atau mekanisme internal lain sesuai desain teknis.
+
+Namun, referensi akademik harus konsisten dan dapat diuji.
+
+---
+
+20. MVP v1 Scope
+
+20.1 Included
+
+MVP v1 mencakup:
+
+- Lima fakultas utama.
+- Foundational Academic Core.
+- Struktur departemen sebagai katalog referensi.
+- Program studi sebagai katalog referensi.
+- Struktur Course dan Module sebagai model akademik.
+- Learning Unit dan Learning Activity.
+- Competency Mapping.
+- Interdisciplinary Mapping.
+- Academic Metadata pada Learning Job jika relevan.
+- Katalog akademik dengan identifier dan status.
+- Versioning dasar untuk perubahan katalog.
+
+20.2 Excluded
+
+MVP v1 tidak mencakup:
+
+- Sistem pendaftaran mahasiswa.
+- Multi-user academic enrollment.
+- Student Information System.
+- Sistem semester dan tahun ajaran.
+- Sistem kalender akademik kompleks.
+- Classroom management.
+- Attendance tracking.
+- Sistem dosen dan pengajar.
+- Sistem transkrip akademik.
+- Sistem pemberian gelar.
+- Akreditasi institusi.
+- Automatic Course Completion.
+- Automatic Graduation.
+- Automatic Faculty Promotion.
+- Automatic Competency Graduation.
+- Adaptive Curriculum Modification.
+- Automatic Academic Organization Changes.
+
+Fitur tersebut tidak boleh menjadi ketergantungan implementasi pipeline pembelajaran MVP.
+
+---
+
+21. Future Academic Development
+
+Phase 1: Academic Catalog
+
+Fokus:
+
+- Faculty structure.
+- Department structure.
+- Study programs.
+- Course and module definitions.
+- Learning units.
+- Competency mapping.
+
+Status: Baseline untuk MVP v1.
+
+Phase 2: Academic Operations
+
+Potensi pengembangan:
+
+- Academic learning plans.
+- Activity scheduling.
+- Course execution history.
+- Learning progress records.
+- Academic dashboards.
+
+Phase 3: Assessment Integration
+
+Potensi pengembangan:
+
+- Assessment records.
+- Competency evidence.
+- Benchmark integration.
+- Course assessment.
+- Learning outcome evaluation.
+
+Phase 4: Academic Progression
+
+Potensi pengembangan:
+
+- Faculty progression.
+- Study program milestones.
+- Competency aggregation.
+- Advancement requirements.
+- Academic completion rules.
+
+Phase 5: Adaptive Academic System
+
+Potensi pengembangan:
+
+- Learning path recommendations.
+- Weakness-based curriculum recommendations.
+- Cross-domain optimization.
+- Curriculum improvement proposals.
+- Governed academic structure updates.
+
+Setiap fase memerlukan spesifikasi dan keputusan pengembangan tersendiri.
+
+Roadmap bukan berarti seluruh fitur tersebut sudah aktif.
+
+---
+
+22. Academic Integrity and Quality Requirements
+
+Academic System harus memenuhi ketentuan berikut:
+
+22.1 Structural Consistency
+
+Setiap objek akademik harus memiliki hubungan yang valid dengan struktur induknya apabila hubungan tersebut diwajibkan.
+
+22.2 Competency Alignment
+
+Program dan materi pembelajaran harus memiliki hubungan yang jelas dengan kompetensi yang didukungnya.
+
+22.3 No Artificial Complexity
+
+Penambahan fakultas, departemen, course, atau module harus didasarkan pada kebutuhan organisasi pengetahuan.
+
+Struktur tidak boleh diperumit hanya agar terlihat seperti universitas besar.
+
+22.4 Cross-Domain Integrity
+
+Materi lintas fakultas harus mempertahankan referensi ke kompetensi dan domain asal.
+
+22.5 Historical Integrity
+
+Perubahan katalog tidak boleh menghilangkan hubungan terhadap aktivitas dan hasil pembelajaran historis.
+
+22.6 No False Academic Claims
+
+Cognis tidak boleh mengklaim:
+
+- Memiliki akreditasi resmi.
+- Memberikan gelar yang diakui.
+- Menjadi universitas resmi.
+- Menghasilkan sertifikasi profesional.
+- Memiliki keahlian profesional tertentu hanya karena menyelesaikan course internal.
+
+22.7 Verifiable Learning
+
+Penyelesaian materi dan aktivitas harus dibedakan dari penguasaan kompetensi.
+
+Penguasaan hanya dapat dinyatakan berdasarkan bukti evaluasi yang sesuai.
+
+---
+
+23. MVP Acceptance Criteria
+
+Academic System dinyatakan siap digunakan sebagai referensi MVP apabila:
+
+1. Lima fakultas telah didefinisikan.
+2. Foundational Academic Core telah didefinisikan.
+3. Struktur departemen telah tersedia.
+4. Program studi memiliki tujuan dan kompetensi yang relevan.
+5. Struktur Course dan Module telah didefinisikan.
+6. Learning Unit memiliki tujuan pembelajaran.
+7. Learning Activity memiliki tipe dan ruang lingkup.
+8. Interdisciplinary Programs dapat merepresentasikan hubungan lintas fakultas.
+9. Academic ID mengikuti format yang konsisten.
+10. Referensi akademik dapat divalidasi.
+11. Academic metadata dapat dikaitkan dengan Learning Job jika relevan.
+12. Perubahan katalog memiliki riwayat.
+13. Academic System tidak mengambil alih fungsi Assessment Policy.
+14. Academic System tidak menjalankan promosi otomatis.
+15. Batas antara struktur akademik dan klaim akademik resmi telah ditetapkan.
+
+Keberhasilan penyusunan katalog tidak membuktikan bahwa Cognis telah menguasai seluruh kompetensi di dalamnya.
+
+Penguasaan kompetensi tetap harus dibuktikan melalui assessment.
+
+---
+
+24. Final Academic Principle
+
+Academic System dibangun untuk mengorganisasi pengetahuan, bukan menciptakan kesan akademis semata.
+
+Fakultas menjelaskan bidang keilmuan.
+
+Departemen mengelompokkan kompetensi.
+
+Program studi mengatur jalur pembelajaran.
+
+Course dan module mengorganisasi materi.
+
+Learning Unit menentukan tujuan yang spesifik.
+
+Learning Activity menjalankan proses pembelajaran.
+
+Setiap bagian harus memiliki fungsi yang jelas dan hubungan yang dapat ditelusuri.
+
+Cognis harus mampu menghubungkan berbagai bidang pengetahuan tanpa kehilangan struktur dan konteksnya.
+
+The purpose of an academic system is not to look like a university. It is to make learning structured, connected, measurable, and intellectually coherent.
