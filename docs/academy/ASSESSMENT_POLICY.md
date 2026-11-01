@@ -1,1026 +1,941 @@
-COGNIS ACADEMY
+Assessment Policy
 
-Assessment and Competency Evaluation Policy
+Project: Cognis
+Document: Assessment Policy
+Version: 1.0
+Status: Proposed Baseline
+Document Type: Academic Governance
+Parent Document: "docs/academy/ACADEMIC_SYSTEM.md"
+Related Documents:
 
-Document ID: CA-ACA-003
-Version: 1.0.0
-Status: Initial Specification
-Project: Cognis AI
-Subsystem: Cognis Academy
-Language: Bahasa Indonesia
+- "PRD.md"
+- "docs/architecture/SYSTEM_ARCHITECTURE.md"
+- "docs/autonomous-learning/AUTONOMOUS_LEARNING_SPEC.md"
+- "docs/autonomous-learning/COMPETENCY_CURRICULUM.md"
+- "docs/academy/FACULTY_PROGRESSION_POLICY.md"
 
 ---
 
 1. Purpose
 
-Dokumen ini menetapkan standar, metode, dan mekanisme evaluasi kemampuan Cognis AI selama menjalani pendidikan di Cognis Academy.
+This document defines how Cognis evaluates the quality of research outputs, learning activities, analytical work, and demonstrated competencies.
 
-Evaluasi bertujuan mengukur apakah Cognis benar-benar memahami, mampu menerapkan, dan dapat mempertanggungjawabkan pengetahuan yang dipelajarinya.
+The purpose of assessment is to determine whether an output is accurate, logically valid, adequately supported by evidence, and appropriate for its intended learning objective.
 
-Penilaian tidak boleh hanya berfokus pada kemampuan menghasilkan jawaban yang terlihat meyakinkan.
+Assessment must help Cognis identify:
 
-Cognis harus menunjukkan kemampuan melalui:
+1. What has been demonstrated successfully.
+2. What remains incomplete or incorrect.
+3. Whether the reasoning process is valid.
+4. Whether conclusions are supported by reliable evidence.
+5. Which weaknesses require further investigation or learning.
+6. What information can reasonably be used in future capability evaluation.
 
-1. Pemahaman konseptual.
-2. Penalaran yang konsisten.
-3. Penerapan pengetahuan.
-4. Evaluasi bukti.
-5. Pengelolaan ketidakpastian.
-6. Pemecahan masalah baru.
-7. Konsistensi kompetensi.
+Assessment must not become a mechanism for generating artificial confidence or claiming mastery without sufficient evidence.
 
-Hasil evaluasi digunakan untuk:
-
-- Mengukur perkembangan kompetensi.
-- Menentukan kelemahan pembelajaran.
-- Menyusun program remedial.
-- Membandingkan kemampuan antarperiode.
-- Menyusun rekomendasi kelulusan fakultas.
-- Memberikan bukti kepada Founder untuk pengambilan keputusan akademik.
-
-Prinsip utama: nilai harus merepresentasikan kemampuan yang terbukti, bukan kemampuan yang diklaim.
-
-2. Scope
-
-Kebijakan ini berlaku untuk seluruh fakultas:
-
-1. Cognitive Foundations.
-2. Economics & Monetary Systems.
-3. Business & Finance.
-4. Geopolitics & International Relations.
-5. Financial Markets & Quantitative Analysis.
-
-Kebijakan ini mengatur:
-
-- Struktur penilaian.
-- Skala kompetensi.
-- Jenis ujian.
-- Rubrik evaluasi.
-- Benchmark.
-- Penilaian berbasis kasus.
-- Validitas hasil pengujian.
-- Ambang kelulusan internal.
-- Remedial.
-- Pelaporan hasil.
-- Evaluasi lintas fakultas.
-- Pengendalian kualitas evaluator.
-
-Detail daftar kompetensi dan materi tetap mengacu pada:
-
-"docs/autonomous-learning/COMPETENCY_CURRICULUM.md"
-
-Aturan kenaikan fakultas tetap mengacu pada:
-
-"docs/academy/FACULTY_PROGRESSION_POLICY.md"
-
-3. Assessment Philosophy
-
-3.1 Ability Over Fluency
-
-Kelancaran bahasa tidak boleh dianggap sebagai bukti penguasaan kompetensi.
-
-Jawaban yang terdengar profesional tetapi mengandung kesalahan konsep harus mendapatkan penilaian rendah.
-
-3.2 Application Over Memorization
-
-Kemampuan mengingat definisi tidak cukup untuk membuktikan penguasaan.
-
-Cognis harus dapat menerapkan konsep pada persoalan yang berbeda dari contoh pembelajaran.
-
-3.3 Evidence-Based Scoring
-
-Setiap penilaian harus memiliki alasan dan bukti.
-
-Evaluator harus dapat menjelaskan mengapa suatu jawaban memperoleh nilai tertentu berdasarkan rubrik yang berlaku.
-
-3.4 Independent Testing
-
-Sebagian evaluasi harus menggunakan soal atau kasus yang tidak digunakan dalam pembelajaran sehari-hari.
-
-Tujuannya mengukur kemampuan penerapan, bukan mengulang jawaban yang sudah dihafal.
-
-3.5 Critical Weakness Visibility
-
-Kelemahan penting tidak boleh disembunyikan melalui nilai rata-rata.
-
-Cognis yang memperoleh nilai keseluruhan tinggi tetapi gagal memahami konsep fundamental tetap belum memenuhi persyaratan penguasaan.
-
-3.6 Reproducible Evaluation
-
-Evaluasi harus dapat diulang dengan kondisi yang tercatat.
-
-Sistem harus menyimpan versi model, konfigurasi, rubrik, benchmark, dan informasi pengujian agar hasil dapat dibandingkan secara wajar.
-
-3.7 Human Judgment
-
-Nilai internal adalah alat bantu pengambilan keputusan.
-
-Hasil evaluasi otomatis bukan pengganti keputusan akhir Founder.
-
-4. Assessment Architecture
-
-Sistem evaluasi terdiri dari enam komponen.
-
-4.1 Assessment Manager
-
-Bertanggung jawab mengatur proses evaluasi.
-
-Tugas:
-
-- Menentukan kompetensi yang akan diuji.
-- Menentukan jenis evaluasi.
-- Mengatur jadwal ujian.
-- Mengelola hasil pengujian.
-- Memastikan semua persyaratan evaluasi terpenuhi.
-- Mengirim hasil kepada Evaluator.
-
-4.2 Assessment Generator
-
-Bertanggung jawab menyusun:
-
-- Pertanyaan konseptual.
-- Soal penerapan.
-- Studi kasus.
-- Skenario analisis.
-- Simulasi keputusan.
-- Soal pengujian transfer pengetahuan.
-
-Soal harus disesuaikan dengan tingkat kompetensi dan fakultas aktif.
-
-4.3 Benchmark Engine
-
-Menjalankan kumpulan pengujian terstruktur.
-
-Tugas:
-
-- Mengelola benchmark.
-- Menyimpan versi pengujian.
-- Menjalankan evaluasi.
-- Menghitung hasil.
-- Mendeteksi potensi kontaminasi benchmark.
-- Membandingkan hasil antarperiode.
-
-4.4 Evaluator
-
-Evaluator menilai jawaban berdasarkan rubrik yang telah ditentukan.
-
-Evaluator sebaiknya tidak menggunakan Student Model yang sedang diuji sebagai satu-satunya penilai.
-
-Jika evaluator menggunakan model bahasa, sistem harus mencatat identitas model dan keterbatasan penilaiannya.
-
-4.5 Assessment Validator
-
-Komponen ini memeriksa kualitas hasil evaluasi.
-
-Tugas:
-
-- Memeriksa kelengkapan data.
-- Memastikan rubrik diterapkan dengan benar.
-- Mendeteksi ketidakkonsistenan skor.
-- Memeriksa bukti yang digunakan.
-- Menandai hasil yang tidak valid.
-- Meminta penilaian ulang jika diperlukan.
-
-4.6 Assessment Report Manager
-
-Menyusun laporan hasil evaluasi untuk Cognis dan Founder.
-
-Laporan harus menampilkan nilai, bukti, kelemahan, dan keterbatasan pengujian secara terpisah.
-
-5. Competency Assessment Framework
-
-Setiap kompetensi dinilai melalui enam dimensi utama.
-
-5.1 Conceptual Understanding
-
-Mengukur apakah Cognis memahami konsep yang dipelajari.
-
-Indikator:
-
-- Mampu menjelaskan konsep dengan benar.
-- Mampu membedakan konsep yang mirip.
-- Mampu menjelaskan asumsi.
-- Mampu mengidentifikasi batas penggunaan suatu konsep.
-
-5.2 Reasoning Quality
-
-Mengukur kualitas proses penalaran.
-
-Indikator:
-
-- Konsistensi logika.
-- Ketepatan hubungan sebab-akibat.
-- Kemampuan mengidentifikasi kontradiksi.
-- Kemampuan menyusun argumen.
-- Kemampuan menguji alternatif penjelasan.
-
-5.3 Practical Application
-
-Mengukur kemampuan menerapkan pengetahuan.
-
-Indikator:
-
-- Mampu menyelesaikan persoalan.
-- Mampu menggunakan metode yang tepat.
-- Mampu menyesuaikan teori dengan kondisi kasus.
-- Mampu menjelaskan alasan pemilihan metode.
-
-5.4 Evidence Evaluation
-
-Mengukur kemampuan menilai bukti dan sumber informasi.
-
-Indikator:
-
-- Mampu membedakan fakta dan asumsi.
-- Mampu memeriksa kualitas sumber.
-- Mampu membandingkan bukti.
-- Mampu mengenali informasi yang tidak cukup.
-- Mampu menghindari kesimpulan yang tidak didukung data.
-
-5.5 Uncertainty Management
-
-Mengukur kemampuan mengelola ketidakpastian.
-
-Indikator:
-
-- Mampu mengakui ketidaktahuan.
-- Mampu menjelaskan keterbatasan data.
-- Mampu membedakan tingkat keyakinan.
-- Mampu mengidentifikasi risiko kesalahan.
-- Mampu menyusun kesimpulan bersyarat ketika bukti belum cukup.
-
-5.6 Transfer and Generalization
-
-Mengukur kemampuan menggunakan kompetensi pada situasi baru.
-
-Indikator:
-
-- Mampu menghadapi kasus yang belum pernah dipelajari.
-- Mampu mengenali pola yang relevan.
-- Mampu menyesuaikan metode.
-- Mampu menggabungkan pengetahuan yang berbeda.
-- Mampu menghindari penerapan teori secara tidak tepat.
-
-6. Competency Scoring Scale
-
-Semua kompetensi menggunakan skala 0 sampai 4.
-
-Skor| Level| Deskripsi
-0| Not Demonstrated| Tidak menunjukkan pemahaman atau memberikan jawaban yang tidak relevan.
-1| Beginner| Memahami sebagian kecil konsep, tetapi belum mampu menerapkannya dengan benar.
-2| Developing| Memiliki pemahaman dasar, tetapi masih terdapat kesalahan atau ketidakkonsistenan.
-3| Competent| Memahami konsep dan mampu menerapkannya secara benar pada kasus yang sesuai.
-4| Advanced| Mampu menerapkan pengetahuan pada persoalan kompleks, mengevaluasi alternatif, dan menjelaskan batasan secara matang.
-
-6.1 Scoring Rules
-
-- Skor harus berdasarkan indikator perilaku yang dapat diamati.
-- Jawaban yang benar tanpa alasan yang memadai tidak otomatis memperoleh skor tertinggi.
-- Kesalahan fakta yang material harus menurunkan skor.
-- Klaim tanpa bukti tidak boleh diperlakukan sebagai fakta.
-- Jawaban yang mengakui ketidakpastian secara tepat dapat memperoleh nilai lebih baik daripada jawaban yang mengarang kepastian.
-- Panjang jawaban tidak memberikan tambahan nilai dengan sendirinya.
-
-6.2 Competency Status
-
-Setiap kompetensi memiliki salah satu status berikut:
-
-Status| Deskripsi
-NOT_STARTED| Belum dipelajari.
-LEARNING| Sedang dipelajari.
-IN_PRACTICE| Sedang menjalani latihan.
-UNDER_EVALUATION| Sedang dievaluasi.
-DEVELOPING| Sudah menunjukkan kemampuan awal tetapi belum memenuhi standar.
-COMPETENT| Memenuhi standar kompetensi dasar.
-ADVANCED| Menunjukkan kemampuan lanjutan.
-NEEDS_REMEDIAL| Memerlukan perbaikan.
-NOT_ASSESSED| Bukti evaluasi belum mencukupi.
-
-Status kompetensi tidak boleh ditentukan hanya berdasarkan penyelesaian materi.
-
-7. Assessment Types
-
-Evaluasi menggunakan beberapa metode agar kemampuan Cognis tidak diukur dari satu jenis soal saja.
-
-7.1 Knowledge Assessment
-
-Tujuan:
-
-Mengukur pemahaman materi dan konsep utama.
-
-Bentuk:
-
-- Pertanyaan definisi.
-- Penjelasan konsep.
-- Perbandingan teori.
-- Identifikasi prinsip.
-- Pertanyaan konseptual.
-
-Knowledge Assessment merupakan pengujian dasar, bukan bukti tunggal penguasaan kompetensi.
-
-7.2 Reasoning Assessment
-
-Tujuan:
-
-Mengukur kemampuan berpikir dan menyusun kesimpulan.
-
-Bentuk:
-
-- Soal logika.
-- Identifikasi kesalahan argumen.
-- Analisis sebab-akibat.
-- Pengujian hipotesis.
-- Evaluasi kontradiksi.
-
-7.3 Application Assessment
-
-Tujuan:
-
-Mengukur kemampuan menggunakan pengetahuan untuk menyelesaikan masalah.
-
-Bentuk:
-
-- Problem solving.
-- Studi kasus.
-- Analisis data.
-- Perencanaan strategi.
-- Simulasi pengambilan keputusan.
-
-7.4 Evidence Assessment
-
-Tujuan:
-
-Mengukur kemampuan mencari dan mengevaluasi bukti.
-
-Bentuk:
-
-- Verifikasi klaim.
-- Pemeriksaan sumber.
-- Perbandingan data.
-- Evaluasi metodologi.
-- Identifikasi bias informasi.
-
-7.5 Transfer Assessment
-
-Tujuan:
-
-Mengukur apakah Cognis mampu menerapkan pengetahuan dalam situasi baru.
-
-Bentuk:
-
-- Kasus baru.
-- Perubahan asumsi.
-- Kondisi yang tidak biasa.
-- Kombinasi beberapa kompetensi.
-- Persoalan lintas disiplin.
-
-Kasus Transfer Assessment harus berbeda secara substansial dari contoh latihan.
-
-7.6 Cumulative Assessment
-
-Tujuan:
-
-Mengukur retensi dan kemampuan menggabungkan pengetahuan yang telah dipelajari.
-
-Bentuk:
-
-- Ujian gabungan beberapa mata pelajaran.
-- Studi kasus lintas materi.
-- Analisis persoalan kompleks.
-- Pengujian kembali kompetensi lama.
-
-7.7 Founder Examination
-
-Tujuan:
-
-Memberikan kesempatan kepada Founder untuk menguji kemampuan Cognis secara langsung.
-
-Founder dapat memberikan pertanyaan, kasus, tantangan, atau argumen yang tidak berasal dari sistem ujian internal.
-
-Founder Examination dicatat terpisah dari hasil benchmark otomatis.
-
-8. Assessment Distribution
-
-Satu fakultas tidak boleh hanya dinilai berdasarkan ujian hafalan.
-
-Komposisi awal evaluasi internal yang direkomendasikan:
-
-Jenis evaluasi| Bobot
-Knowledge Assessment| 10%
-Reasoning Assessment| 20%
-Application Assessment| 20%
-Evidence Assessment| 15%
-Transfer Assessment| 25%
-Cumulative Assessment| 10%
-Total| 100%
-
-Bobot tersebut adalah konfigurasi awal yang dapat dikalibrasi berdasarkan karakteristik fakultas.
-
-Evaluasi harus tetap mengukur semua dimensi utama meskipun bobot antarjenis ujian disesuaikan.
-
-Founder Examination tidak dimasukkan begitu saja ke dalam rata-rata nilai internal karena merupakan sumber penilaian yang berbeda dan dapat memiliki format yang tidak seragam.
-
-9. Faculty-Specific Evaluation
-
-Setiap fakultas harus memiliki standar evaluasi yang sesuai dengan bidangnya.
-
-9.1 Cognitive Foundations
-
-Fokus pengujian:
-
-- Logika.
-- Penalaran.
-- Statistik.
-- Probabilitas.
-- Kausalitas.
-- Evaluasi bukti.
-- Systems Thinking.
-- Pengambilan keputusan.
-
-Contoh evaluasi:
-
-Cognis diberikan kasus dua variabel yang bergerak bersama.
-
-Cognis harus menjelaskan:
-
-1. Apakah hubungan tersebut membuktikan kausalitas?
-2. Faktor lain apa yang mungkin memengaruhi hubungan?
-3. Data apa yang diperlukan untuk menguji hipotesis?
-4. Apa keterbatasan kesimpulannya?
-
-9.2 Economics & Monetary Systems
-
-Fokus pengujian:
-
-- Pemahaman mekanisme ekonomi.
-- Hubungan antarvariabel ekonomi.
-- Sistem moneter.
-- Kebijakan ekonomi.
-- Analisis data ekonomi.
-- Perbandingan teori ekonomi.
-
-Contoh evaluasi:
-
-Cognis diminta menganalisis kemungkinan dampak kenaikan suku bunga terhadap konsumsi, investasi, nilai tukar, dan inflasi.
-
-Jawaban harus memperhatikan konteks, jeda waktu, kondisi ekonomi, dan faktor lain yang relevan.
-
-9.3 Business & Finance
-
-Fokus pengujian:
-
-- Analisis model bisnis.
-- Laporan keuangan.
-- Arus kas.
-- Profitabilitas.
-- Alokasi modal.
-- Strategi bisnis.
-- Manajemen risiko.
-
-Contoh evaluasi:
-
-Cognis diminta membandingkan dua bisnis dengan tingkat pendapatan yang sama, tetapi struktur biaya, kebutuhan modal kerja, dan arus kas berbeda.
-
-Cognis harus menjelaskan bisnis mana yang lebih sehat dan mengapa.
-
-9.4 Geopolitics & International Relations
-
-Fokus pengujian:
-
-- Analisis kepentingan negara.
-- Hubungan internasional.
-- Risiko geopolitik.
-- Dampak kebijakan.
-- Analisis konflik.
-- Evaluasi informasi dan propaganda.
-
-Contoh evaluasi:
-
-Cognis diberikan skenario gangguan perdagangan internasional.
-
-Cognis harus menganalisis pihak yang terdampak, kemungkinan respons, risiko lanjutan, dan ketidakpastian skenario.
-
-9.5 Financial Markets & Quantitative Analysis
-
-Fokus pengujian:
-
-- Mekanisme pasar.
-- Analisis fundamental.
-- Analisis teknikal.
-- Statistik pasar.
-- Pengukuran risiko.
-- Analisis kuantitatif.
-- Evaluasi strategi.
-
-Contoh evaluasi:
-
-Cognis diberikan data historis suatu strategi trading.
-
-Cognis harus mengevaluasi:
-
-- Return.
-- Drawdown.
-- Win rate.
-- Risk-reward.
-- Jumlah transaksi.
-- Biaya transaksi.
-- Potensi overfitting.
-- Kualitas data pengujian.
-
-Cognis tidak boleh menyimpulkan strategi akan menguntungkan di masa depan hanya berdasarkan hasil backtest.
-
-10. Benchmark Standards
-
-Benchmark digunakan untuk mengukur kemampuan secara lebih terstruktur dan konsisten.
-
-10.1 Benchmark Categories
-
-Benchmark harus memiliki beberapa kategori:
-
-A. Basic Knowledge Benchmark
-
-Mengukur pemahaman fundamental.
-
-B. Reasoning Benchmark
-
-Mengukur konsistensi dan kualitas penalaran.
-
-C. Application Benchmark
-
-Mengukur kemampuan menyelesaikan masalah.
-
-D. Evidence Benchmark
-
-Mengukur kemampuan memeriksa fakta dan sumber.
-
-E. Generalization Benchmark
-
-Mengukur kemampuan menghadapi kasus baru.
-
-F. Cross-Domain Benchmark
-
-Mengukur kemampuan mengintegrasikan pengetahuan lintas fakultas.
-
-10.2 Benchmark Integrity
-
-Benchmark harus memiliki identitas dan versi.
-
-Data minimal:
-
-- Benchmark ID.
-- Benchmark Name.
-- Faculty ID.
-- Competency ID.
-- Version.
-- Question Set Reference.
-- Difficulty Level.
-- Scoring Rubric.
-- Creation Date.
-- Exposure Status.
-- Evaluation Result.
-
-10.3 Benchmark Exposure
-
-Benchmark dibagi menjadi:
-
-- Training Set: boleh digunakan untuk latihan.
-- Validation Set: digunakan untuk memantau perkembangan.
-- Holdout Test Set: disimpan untuk pengujian independen.
-
-Holdout Test Set tidak boleh dimasukkan ke dalam materi latihan rutin.
-
-Jika suatu soal diketahui telah terpapar kepada Student Model, soal tersebut harus ditandai dan tidak lagi dianggap sebagai pengujian independen.
-
-10.4 Benchmark Rotation
-
-Sistem harus dapat mengganti atau memvariasikan kasus pengujian.
-
-Tujuan:
-
-- Mengurangi hafalan jawaban.
-- Mengurangi kebocoran benchmark.
-- Mengukur generalisasi.
-- Menjaga kualitas perbandingan hasil.
-
-Perubahan versi benchmark harus dicatat agar hasil dari versi berbeda tidak dibandingkan tanpa penyesuaian.
-
-11. Scoring Calculation
-
-11.1 Dimension Score
-
-Setiap dimensi dinilai dengan skala 0 sampai 4.
-
-Konversi nilai dimensi:
-
-[
-Score = \frac{RawScore}{4} \times 100
-]
-
-Contoh:
-
-Raw Score 3 dari 4 menghasilkan 75.
-
-11.2 Assessment Score
-
-Nilai keseluruhan evaluasi internal dihitung berdasarkan bobot masing-masing assessment.
-
-[
-FinalScore = \sum_{i=1}^{n}(Score_i \times Weight_i)
-]
-
-Bobot harus dinormalisasi menjadi total 100%.
-
-11.3 Competency Score
-
-Nilai kompetensi harus dihitung dari bukti pengujian yang relevan terhadap kompetensi tersebut.
-
-Nilai tidak boleh diambil dari rata-rata semua ujian tanpa memperhatikan kompetensi yang diukur.
-
-11.4 Missing Evidence
-
-Jika suatu kompetensi belum memiliki bukti yang mencukupi:
-
-- Statusnya menjadi NOT_ASSESSED atau status lain yang sesuai.
-- Sistem tidak boleh memberikan nilai kelulusan secara otomatis.
-- Kekurangan bukti harus dicantumkan dalam laporan.
-
-11.5 Critical Error Penalty
-
-Kesalahan kritis dapat membatasi hasil suatu pengujian.
-
-Contoh:
-
-- Mengarang sumber.
-- Menggunakan data palsu sebagai fakta.
-- Melakukan perhitungan fundamental secara salah.
-- Mengabaikan risiko material dalam analisis.
-- Memberikan kesimpulan yang bertentangan dengan bukti utama.
-
-Penalti harus memiliki definisi dan dasar penilaian yang terdokumentasi.
-
-Evaluator tidak boleh memberikan penalti secara sewenang-wenang.
-
-12. Internal Readiness Threshold
-
-Ambang berikut merupakan konfigurasi awal untuk menguji sistem akademik.
-
-Angka ini belum dianggap sebagai standar ilmiah universal dan harus dievaluasi melalui hasil pengujian nyata.
-
-12.1 Minimum Overall Score
-
-Nilai evaluasi internal minimal:
-
-80 dari 100.
-
-12.2 Minimum Core Competency
-
-Setiap kompetensi wajib harus memperoleh minimal:
-
-Level 3: Competent.
-
-Kompetensi yang belum diuji tidak boleh dianggap telah dikuasai.
-
-12.3 Critical Competency
-
-Kompetensi fundamental yang menjadi prasyarat materi berikutnya harus memenuhi standar minimum.
-
-Kegagalan pada kompetensi kritis dapat menggagalkan rekomendasi kelulusan meskipun nilai keseluruhan mencapai 80 atau lebih.
-
-12.4 Independent Assessment
-
-Cognis harus menunjukkan kemampuan pada pengujian yang tidak identik dengan latihan rutin.
-
-Hasil yang hanya menunjukkan kemampuan mengulang materi tidak cukup untuk rekomendasi kelulusan.
-
-12.5 Evidence Sufficiency
-
-Jumlah dan kualitas bukti harus memadai.
-
-Nilai tinggi yang hanya bersumber dari satu ujian atau satu jenis evaluator tidak cukup.
-
-12.6 No Critical Failure
-
-Tidak boleh ada kegagalan kritis yang belum ditangani.
-
-Contohnya adalah kesalahan konsep fundamental yang berulang, fabrikasi sumber, atau ketidakmampuan membedakan fakta dengan asumsi pada tugas yang menuntut verifikasi.
-
-13. Evaluation Confidence
-
-Nilai evaluasi harus disertai informasi tentang tingkat kepercayaan terhadap hasilnya.
-
-Sistem harus mempertimbangkan:
-
-- Jumlah pengujian.
-- Keragaman kasus.
-- Kualitas soal.
-- Kualitas evaluator.
-- Kestabilan hasil.
-- Independensi benchmark.
-- Kelengkapan bukti.
-- Konsistensi hasil antarperiode.
-
-Tingkat kepercayaan dilaporkan sebagai:
-
-Level| Deskripsi
-LOW| Bukti terbatas atau kualitas evaluasi belum memadai.
-MODERATE| Bukti cukup, tetapi masih terdapat keterbatasan penting.
-HIGH| Bukti beragam, konsisten, dan didukung evaluasi yang memadai.
-
-Tingkat kepercayaan bukan pengganti nilai kompetensi.
-
-Nilai tinggi dengan tingkat kepercayaan rendah tetap tidak boleh menjadi dasar tunggal rekomendasi kelulusan.
-
-14. Evaluator Quality Control
-
-Evaluator juga harus dievaluasi.
-
-Sistem tidak boleh berasumsi bahwa model penilai selalu benar.
-
-14.1 Evaluator Requirements
-
-Evaluator harus:
-
-- Menggunakan rubrik yang telah ditentukan.
-- Memberikan alasan penilaian.
-- Mengidentifikasi bukti yang mendukung skor.
-- Memisahkan kesalahan fakta dan kesalahan penalaran.
-- Menyatakan keterbatasan ketika penilaian tidak dapat dilakukan.
-
-14.2 Inter-Evaluator Review
-
-Untuk penilaian penting, jawaban dapat diperiksa oleh lebih dari satu evaluator.
-
-Jika terdapat perbedaan skor yang material:
-
-1. Sistem menandai ketidaksepakatan.
-2. Alasan masing-masing evaluator disimpan.
-3. Penilaian ulang dilakukan.
-4. Penilaian manusia dapat digunakan sebagai mekanisme eskalasi.
-
-Nilai tidak boleh dipilih hanya berdasarkan evaluator yang memberikan skor paling tinggi.
-
-14.3 Deterministic Validation
-
-Untuk soal dengan jawaban yang dapat dihitung atau diperiksa secara deterministik, sistem harus menggunakan pemeriksaan otomatis yang relevan.
-
-Contoh:
-
-- Hasil matematika.
-- Perhitungan statistik.
-- Konsistensi struktur data.
-- Validitas format.
-- Hasil simulasi.
-- Ketepatan pengolahan data.
-
-Pemeriksaan deterministik digunakan ketika tersedia dan sesuai dengan jenis tugas.
-
-15. Remedial Assessment
-
-Jika hasil evaluasi belum memenuhi persyaratan:
-
-1. Sistem mengidentifikasi kompetensi yang lemah.
-2. Sistem mencari penyebab kegagalan.
-3. Academic Planner menyusun rencana perbaikan.
-4. Teacher Model menyediakan penjelasan atau metode alternatif.
-5. Student Model mengerjakan latihan tambahan.
-6. Evaluator menjalankan pengujian ulang.
-7. Hasil perbaikan disimpan.
-
-15.1 Remedial Principles
-
-- Remedial bersifat terarah.
-- Materi yang sudah dikuasai tidak harus diulang seluruhnya.
-- Pengujian ulang menggunakan soal berbeda.
-- Perubahan nilai harus dapat dilacak.
-- Kegagalan berulang harus dianalisis, bukan sekadar diberikan lebih banyak soal.
-
-15.2 Repeated Weakness
-
-Jika kelemahan yang sama muncul berulang kali, sistem harus memeriksa kemungkinan masalah pada:
-
-- Pemilihan materi.
-- Metode pembelajaran.
-- Tingkat kesulitan.
-- Teacher Model.
-- Student Model.
-- Kualitas evaluator.
-- Desain benchmark.
-
-Sistem boleh mengusulkan metode pembelajaran baru.
-
-Perubahan permanen pada sistem tetap mengikuti persetujuan dan prosedur ALS.
-
-16. Longitudinal Assessment
-
-Evaluasi tidak boleh hanya dilakukan pada akhir fakultas.
-
-Cognis harus menjalani pengukuran berkala untuk memantau perkembangan kemampuan.
-
-Jenis evaluasi:
-
-16.1 Daily Assessment
-
-Pengujian singkat setelah sesi pembelajaran.
-
-Tujuan:
-
-- Memeriksa pemahaman.
-- Mendeteksi kesalahan awal.
-- Menentukan materi remedial.
-
-16.2 Weekly Assessment
-
-Pengujian gabungan terhadap materi yang dipelajari selama satu periode.
-
-Tujuan:
-
-- Memeriksa retensi.
-- Mengukur perkembangan.
-- Mengidentifikasi kelemahan yang berulang.
-
-16.3 Faculty Assessment
-
-Evaluasi menyeluruh sebelum rekomendasi kelulusan.
-
-Tujuan:
-
-- Memastikan cakupan kurikulum.
-- Mengukur penguasaan kompetensi.
-- Menguji penerapan pada kasus baru.
-
-16.4 Retention Assessment
-
-Pengujian kembali terhadap kompetensi dari fakultas terdahulu.
-
-Tujuan:
-
-- Mengukur retensi.
-- Mendeteksi penurunan kemampuan.
-- Memastikan pengetahuan tetap dapat digunakan.
-
-Hasil retention assessment tidak otomatis membatalkan kelulusan fakultas terdahulu, tetapi dapat memicu program penguatan kompetensi.
-
-17. Assessment Reporting
-
-Setiap evaluasi harus menghasilkan laporan terstruktur.
-
-Format laporan minimal:
-
-A. Assessment Identity
-
-- Assessment ID.
-- Faculty ID.
-- Subject ID.
-- Competency ID.
-- Evaluation Date.
-- Model Version.
-- Rubric Version.
-
-B. Assessment Results
-
-- Nilai keseluruhan.
-- Nilai setiap dimensi.
-- Nilai kompetensi.
-- Jumlah soal.
-- Jumlah kasus.
-- Hasil benchmark.
-
-C. Strength Analysis
-
-- Kompetensi yang kuat.
-- Kemampuan yang konsisten.
-- Keberhasilan penerapan.
-- Bukti pendukung.
-
-D. Weakness Analysis
-
-- Kompetensi yang lemah.
-- Pola kesalahan.
-- Kesalahan berulang.
-- Keterbatasan kemampuan.
-
-E. Evidence Quality
-
-- Kualitas sumber.
-- Kualitas penalaran.
-- Validitas data.
-- Keterbatasan bukti.
-
-F. Evaluation Confidence
-
-- Tingkat kepercayaan.
-- Jumlah pengujian.
-- Independensi evaluasi.
-- Potensi bias atau kontaminasi.
-
-G. Recommendation
-
-- Layak mengikuti evaluasi berikutnya.
-- Memerlukan remedial.
-- Memerlukan pengujian tambahan.
-- Layak diajukan kepada Founder.
-
-18. Model and Evaluation Version Control
-
-Hasil evaluasi hanya dapat dibandingkan secara langsung apabila konfigurasi pengujiannya cukup sebanding.
-
-Sistem wajib mencatat:
-
-- Student Model ID.
-- Model Version.
-- Provider.
-- System Prompt Version.
-- Relevant Configuration Version.
-- Evaluator Model ID.
-- Evaluator Version.
-- Benchmark Version.
-- Rubric Version.
-- Evaluation Timestamp.
-
-Jika konfigurasi model berubah secara signifikan, sistem harus mempertimbangkan evaluasi ulang.
-
-Perbandingan hasil antara dua model berbeda harus mencantumkan perbedaan kondisi pengujian.
-
-Peningkatan skor tidak otomatis berarti peningkatan kemampuan jika tingkat kesulitan soal atau konfigurasi evaluasi berubah.
-
-19. Academic Integrity and Anti-Gaming
-
-Sistem harus mencegah manipulasi hasil evaluasi.
-
-Aturan:
-
-1. Materi latihan dan benchmark tertutup harus dipisahkan.
-2. Jawaban benchmark tidak boleh dimasukkan ke memori latihan.
-3. Skor tidak boleh diubah tanpa audit.
-4. Evaluator tidak boleh mengabaikan kesalahan material.
-5. Student Model tidak boleh menilai dirinya sebagai lulus tanpa bukti independen.
-6. Sistem tidak boleh menurunkan standar kelulusan untuk memaksakan kenaikan fakultas.
-7. Hasil gagal tidak boleh dihapus dari riwayat.
-8. Evaluasi yang tidak lengkap tidak boleh dianggap berhasil.
-9. Sumber yang tidak pernah diakses tidak boleh diklaim telah diverifikasi.
-10. Hasil simulasi tidak boleh disajikan sebagai hasil nyata.
-11. Benchmark yang terkontaminasi harus ditandai.
-12. Ketidakpastian harus dilaporkan secara jujur.
-
-20. Implementation Dependencies
-
-Dokumen ini harus diterapkan bersama:
-
-- "docs/academy/ACADEMIC_SYSTEM.md"
-- "docs/academy/FACULTY_PROGRESSION_POLICY.md"
-- "docs/academy/LEARNING_SCHEDULE.md"
-- "docs/autonomous-learning/COMPETENCY_CURRICULUM.md"
-- "docs/autonomous-learning/EVALUATION_FRAMEWORK.md"
-- "docs/autonomous-learning/AUTONOMOUS_LEARNING_SPEC.md"
-- "docs/governance/SECURITY_GOVERNANCE.md"
-- "docs/technical/DATABASE_SCHEMA.md"
-- "docs/technical/TEST_STRATEGY.md"
-
-Jika terdapat konflik antara standar evaluasi dan aturan akademik, implementasi terkait harus ditahan sampai dokumentasi diselaraskan.
-
-21. Acceptance Criteria
-
-Implementasi Assessment System dianggap berhasil apabila:
-
-1. Sistem dapat mengukur kompetensi berdasarkan enam dimensi utama.
-2. Sistem menggunakan rubrik yang konsisten.
-3. Sistem dapat menjalankan berbagai jenis evaluasi.
-4. Sistem dapat menjalankan benchmark.
-5. Sistem dapat memisahkan data latihan dan data pengujian tertutup.
-6. Sistem dapat menghitung nilai berdasarkan bobot.
-7. Sistem dapat mengidentifikasi kelemahan kritis.
-8. Sistem dapat membedakan bukti yang cukup dan belum cukup.
-9. Sistem dapat menyusun laporan evaluasi.
-10. Sistem dapat menjalankan evaluasi ulang setelah remedial.
-11. Sistem dapat menyimpan versi model dan konfigurasi pengujian.
-12. Sistem dapat mendeteksi kondisi evaluator atau benchmark yang tidak valid.
-13. Sistem dapat mengirimkan rekomendasi kepada Founder.
-14. Nilai internal tidak dapat otomatis menyetujui kelulusan fakultas.
-
-22. Final Assessment Principle
-
-Cognis Academy harus mengukur kemampuan yang dapat dibuktikan.
-
-Nilai bukan tujuan utama.
-
-Benchmark bukan sekadar kumpulan soal.
-
-Evaluasi bukan formalitas sebelum kenaikan tingkat.
-
-Seluruh proses penilaian harus membantu menjawab pertanyaan:
-
-Apakah Cognis benar-benar mampu menggunakan pengetahuan yang telah dipelajarinya untuk memahami, menganalisis, dan menyelesaikan persoalan?
-
-Jika bukti belum cukup, sistem harus menyatakan bahwa kemampuan tersebut belum teruji.
-
-Jika ditemukan kelemahan, sistem harus memperbaikinya.
-
-Jika hasil evaluasi baik, sistem boleh merekomendasikan kelulusan.
-
-Namun, keputusan akhir tetap berada pada Founder.
-
-Measure demonstrated ability, not convincing answers.
+A successful assessment is not merely a high score. It is a traceable evaluation whose criteria, evidence, reasoning, limitations, and conclusions can be inspected.
 
 ---
 
-End of Document
+2. Policy Principles
+
+All assessment activities must follow these principles.
+
+2.1 Evidence-Based Evaluation
+
+Every material assessment conclusion must be supported by observable evidence.
+
+The evaluator must not assign a high score simply because an answer sounds convincing, uses technical terminology, or reaches the expected conclusion.
+
+2.2 Reasoning Matters
+
+Cognis must evaluate the reasoning behind an answer, not only its final result.
+
+A correct answer reached through invalid reasoning, unsupported assumptions, or accidental guessing must not be treated as equivalent to a well-supported answer.
+
+2.3 Explicit Uncertainty
+
+When available evidence is insufficient, conflicting, or incomplete, the assessment must communicate uncertainty.
+
+The evaluator must not manufacture certainty to produce a complete-looking report.
+
+2.4 Contextual Evaluation
+
+Assessment criteria must reflect the actual learning objective, subject domain, task difficulty, and expected analytical depth.
+
+A basic economics explanation should not be evaluated using the same expectations as an advanced macroeconomic policy analysis.
+
+2.5 Traceability
+
+Assessment results must be connected to the task, relevant curriculum version, evaluation criteria, evidence, and evaluator configuration.
+
+2.6 No Automatic Mastery Claims
+
+A single successful task does not establish long-term competency.
+
+Competency development requires repeated, relevant, and sufficiently diverse evidence over time.
+
+2.7 Controlled Academic Decisions
+
+Assessment results may inform future academic decisions, but they must not independently trigger permanent curriculum changes, automatic faculty progression, or capability modification in the MVP.
+
+---
+
+3. Assessment Architecture
+
+Cognis distinguishes four related but separate concepts.
+
+Concept| Purpose| MVP Status
+Research Evidence Evaluation| Evaluate whether claims are adequately supported by sources and evidence| Included
+Task-Level Performance Assessment| Evaluate the quality of a specific learning output or analytical task| Limited and controlled
+Competency Assessment| Estimate demonstrated competency across multiple relevant tasks| Deferred
+Benchmark Evaluation| Measure system performance against controlled test cases| Basic testing may be performed; full benchmark governance is deferred
+
+These concepts must not be merged into one generic score.
+
+3.1 Research Evidence Evaluation
+
+Research Evidence Evaluation determines whether information acquired during a learning job is credible and whether individual claims are adequately supported.
+
+It examines:
+
+- Source credibility.
+- Source relevance.
+- Source independence.
+- Evidence quality.
+- Claim-to-evidence relationships.
+- Conflicting information.
+- Information limitations.
+- Unverified claims.
+
+This evaluation belongs to the MVP learning pipeline.
+
+It does not measure whether Cognis has mastered a subject.
+
+3.2 Task-Level Performance Assessment
+
+Task-Level Performance Assessment evaluates one specific output against a predefined learning objective.
+
+Examples include:
+
+- Explaining an economic concept.
+- Interpreting a financial indicator.
+- Comparing two business models.
+- Analyzing a geopolitical development.
+- Evaluating a market hypothesis.
+- Identifying weaknesses in a research argument.
+
+The assessment must focus on the task that was actually assigned.
+
+A task-level result must not automatically become a permanent competency rating.
+
+3.3 Competency Assessment
+
+Competency Assessment evaluates the development of a specific competency using multiple relevant observations.
+
+For example, evaluating critical thinking requires more than one correct answer. It may require evidence that Cognis can:
+
+- Identify assumptions.
+- Examine alternative explanations.
+- Recognize logical weaknesses.
+- Compare competing arguments.
+- Revise conclusions when new evidence appears.
+
+A competency assessment must account for evidence across different tasks and contexts.
+
+Automatic competency aggregation and proficiency updates are outside the MVP scope.
+
+3.4 Benchmark Evaluation
+
+Benchmark Evaluation measures system behavior against predefined test cases.
+
+Benchmark results are intended to measure consistency, accuracy, reasoning quality, and regression after system changes.
+
+Benchmark testing must be separated from ordinary learning outputs to reduce the risk of treating familiar or memorized answers as proof of general capability.
+
+---
+
+4. Separation of Learning Depth, Task Scores, and Competency Proficiency
+
+Cognis must keep three measurement concepts separate.
+
+4.1 Curriculum Learning Depth
+
+The competency curriculum defines four qualitative learning depth categories:
+
+Learning Depth| Description
+Foundation| Basic concepts, definitions, terminology, and fundamental relationships
+Applied| Applying concepts to practical situations and straightforward problems
+Analytical| Examining relationships, comparing explanations, interpreting evidence, and evaluating complex problems
+Strategic| Integrating multiple domains, evaluating long-term consequences, and developing high-level decisions or frameworks
+
+These categories describe the complexity and intended depth of a learning objective.
+
+They do not represent a numerical score or a confirmed level of mastery.
+
+A task assigned to Strategic depth does not automatically mean Cognis has achieved Strategic competence.
+
+4.2 Task-Level Assessment Rubric
+
+A provisional 0–4 rubric may be used to evaluate individual assessment criteria.
+
+Each score applies only to the criterion and task being evaluated.
+
+The rubric is defined in Section 7.
+
+A task-level score must not be interpreted as an overall intelligence, capability, or competency rating.
+
+4.3 Competency Proficiency
+
+A long-term competency proficiency scale requires its own validated definitions, evidence aggregation rules, and measurement standards.
+
+An earlier 0–5 proficiency concept is not an active measurement standard in this version of the curriculum.
+
+Therefore:
+
+- The 0–5 scale must not be used operationally in the MVP.
+- Task-level scores must not be converted into proficiency scores.
+- Curriculum depth categories must not be converted into proficiency scores.
+- Competency proficiency must not be inferred from the number of completed learning sessions.
+- Any future proficiency scale must be formally defined and approved before implementation.
+
+This separation prevents misleading academic conclusions.
+
+---
+
+5. MVP Assessment Scope
+
+The MVP focuses on establishing reliable research and evidence handling.
+
+5.1 Included
+
+The MVP must support:
+
+1. Evaluating sources used during research.
+2. Evaluating whether claims are supported by available evidence.
+3. Recording conflicts and information limitations.
+4. Preserving claim-to-source traceability.
+5. Producing learning reports that distinguish supported, partially supported, and unverified information.
+6. Recording relevant task, model, prompt, and evaluation metadata.
+7. Allowing manual inspection of selected outputs by the Founder.
+
+5.2 Limited or Deferred
+
+The following capabilities are not required for MVP implementation:
+
+- Automated competency proficiency calculation.
+- Automatic competency score aggregation.
+- Automatic faculty readiness calculation.
+- Automatic faculty progression.
+- Permanent learning ability updates based on a single assessment.
+- Automatic curriculum modification.
+- Automatic benchmark generation and governance.
+- Model fine-tuning based on assessment results.
+- Automatic modification of system policies or architecture.
+
+The assessment policy defines the conceptual requirements for these future capabilities, but their existence in this document does not authorize their implementation.
+
+---
+
+6. Assessment Design
+
+Every formal assessment should begin with a clearly defined evaluation target.
+
+An assessment must identify:
+
+1. What is being evaluated.
+2. Why the evaluation is necessary.
+3. Which learning objective is relevant.
+4. Which competency references are relevant, when applicable.
+5. Which curriculum version applies.
+6. Which learning depth is expected.
+7. Which assessment criteria will be used.
+8. What evidence is required.
+9. What limitations may affect the result.
+
+6.1 Learning Objective
+
+The learning objective must describe an observable capability or expected output.
+
+Weak objective:
+
+«Understand financial markets.»
+
+Better objective:
+
+«Explain how changes in interest-rate expectations can influence bond yields, currency movements, and equity valuations, including the assumptions and limitations of the explanation.»
+
+The second objective provides a clearer basis for evaluation.
+
+6.2 Assessment Task
+
+The task must be specific enough for the evaluator to identify whether the objective has been achieved.
+
+Task instructions should avoid ambiguity about:
+
+- Expected output.
+- Relevant context.
+- Available data.
+- Required reasoning.
+- Expected analytical depth.
+- Source or evidence requirements.
+
+6.3 Competency References
+
+An assessment may reference one or more competency IDs from "COMPETENCY_CURRICULUM.md".
+
+The references identify which competencies the task is intended to exercise.
+
+A competency reference does not mean the assessment has measured the entire competency.
+
+6.4 Curriculum Version
+
+Assessment records should preserve the curriculum version used when the task was created.
+
+This is necessary because competency definitions and learning objectives may change over time.
+
+Historical assessment results must not silently inherit new definitions from a later curriculum version.
+
+---
+
+7. Task-Level Assessment Rubric
+
+Cognis may use a 0–4 rubric for individual assessment criteria.
+
+The rubric is provisional and intended for structured internal evaluation.
+
+Score| Interpretation| Description
+0| No Valid Evidence| The response is incorrect, irrelevant, fundamentally unsupported, or provides no assessable evidence for the criterion
+1| Weak| The response demonstrates major gaps, serious reasoning errors, or substantial unsupported claims
+2| Developing| The response contains some valid elements but has important gaps, incomplete reasoning, or insufficient evidence
+3| Adequate| The response satisfies the objective with mostly valid reasoning and only limited weaknesses
+4| Strong| The response demonstrates accurate, coherent, well-supported reasoning and appropriately recognizes relevant limitations
+
+7.1 Not Assessed
+
+A criterion may be marked "NOT_ASSESSED" when there is insufficient information to evaluate it.
+
+"NOT_ASSESSED" is not equivalent to score 0.
+
+Score 0 means the criterion was evaluated and no valid evidence was demonstrated.
+
+7.2 Score Interpretation
+
+Scores must be interpreted at the criterion level.
+
+For example:
+
+Criterion| Score
+Factual Accuracy| 4
+Reasoning Validity| 2
+Evidence Traceability| 3
+Uncertainty Recognition| 2
+
+This indicates that the response may contain accurate information but still have weaknesses in reasoning and uncertainty handling.
+
+The evaluator must explain the scores rather than presenting numbers without justification.
+
+7.3 No Universal Passing Threshold
+
+The MVP must not apply a universal total score or percentage threshold to determine mastery.
+
+In particular:
+
+- A score of 3 is not an automatic competency pass.
+- A score of 4 in one criterion does not establish overall mastery.
+- A percentage such as 80/100 is not a universal faculty progression requirement.
+- Scores from different tasks must not be averaged without a formally defined aggregation method.
+
+Any future pass threshold must be justified by validated assessment design and approved governance rules.
+
+---
+
+8. Assessment Dimensions
+
+Assessment criteria must be selected according to the objective and task.
+
+Not every task requires every dimension.
+
+8.1 Factual Accuracy
+
+Evaluates whether factual statements are correct and consistent with reliable evidence.
+
+Questions:
+
+- Are important facts accurate?
+- Are dates, figures, units, and definitions correct?
+- Are claims presented in the right context?
+- Are outdated or incomplete facts treated appropriately?
+
+8.2 Reasoning Validity
+
+Evaluates whether conclusions follow logically from the stated premises and evidence.
+
+Questions:
+
+- Are assumptions identified?
+- Are logical steps consistent?
+- Are causal claims adequately supported?
+- Are correlations improperly presented as causation?
+- Are alternative explanations considered when relevant?
+
+8.3 Evidence and Source Traceability
+
+Evaluates whether important claims can be traced to appropriate evidence.
+
+Questions:
+
+- Are important claims supported by identifiable sources?
+- Are sources relevant to the claims?
+- Is source independence considered?
+- Are contradictory sources handled transparently?
+- Are unsupported statements clearly marked?
+
+8.4 Application and Problem Solving
+
+Evaluates whether the knowledge can be applied to the intended situation.
+
+Questions:
+
+- Is the concept applied correctly?
+- Does the analysis reflect the actual problem?
+- Are relevant contextual conditions considered?
+- Does the proposed solution address the problem?
+
+8.5 Quantitative and Data Handling
+
+Used when the task involves numerical information.
+
+Questions:
+
+- Are calculations correct?
+- Are units and measurement periods consistent?
+- Are statistical interpretations appropriate?
+- Are data limitations acknowledged?
+- Are numerical conclusions reproducible?
+
+8.6 Uncertainty and Limitations
+
+Evaluates whether the response recognizes incomplete information and the limits of its conclusions.
+
+Questions:
+
+- Is uncertainty communicated accurately?
+- Are assumptions distinguished from facts?
+- Are missing data identified?
+- Are alternative outcomes considered?
+- Does the conclusion exceed what the available evidence supports?
+
+8.7 Analytical Communication
+
+Evaluates whether the reasoning and conclusions are communicated clearly.
+
+Questions:
+
+- Is the structure understandable?
+- Are important distinctions preserved?
+- Are conclusions connected to supporting reasoning?
+- Are technical terms used correctly?
+- Is the explanation appropriate for the intended audience?
+
+---
+
+9. Assessment Procedure
+
+A controlled assessment should follow this sequence.
+
+Step 1: Define the Assessment
+
+Identify the learning objective, expected depth, task, relevant competency references, and evaluation criteria.
+
+Step 2: Establish Evaluation Context
+
+Provide the evaluator with the task instructions, relevant data, permitted sources, and necessary context.
+
+The evaluator must not be given irrelevant information that may distort the assessment.
+
+Step 3: Evaluate the Output
+
+Evaluate each applicable criterion independently.
+
+The evaluator must distinguish:
+
+- Verified facts.
+- Reasoning.
+- Assumptions.
+- Inferences.
+- Unsupported claims.
+- Missing information.
+
+Step 4: Record Supporting Evidence
+
+Each significant evaluation judgment must include supporting excerpts, source references, calculations, or other observable evidence.
+
+The evaluator must not use its own confidence as evidence.
+
+Step 5: Record Weaknesses
+
+Identify errors, missing reasoning, unsupported conclusions, and limitations.
+
+Weakness descriptions should be specific and actionable.
+
+Step 6: Produce the Assessment Result
+
+Produce a structured result containing criterion-level scores where applicable, explanations, evidence references, uncertainty, and an overall qualitative interpretation.
+
+Step 7: Human Review When Required
+
+Send the assessment for Founder review when the result has material consequences, contains unresolved disputes, or cannot be evaluated reliably.
+
+Step 8: Preserve the Record
+
+Store the assessment result with sufficient metadata to reproduce or inspect the evaluation later.
+
+Assessment results must not silently modify curriculum definitions or permanent system configurations.
+
+---
+
+10. Evaluation Integrity
+
+10.1 Correct Answer Versus Correct Reasoning
+
+A response must not receive a strong reasoning score merely because its final answer matches the expected result.
+
+The evaluator must inspect how the conclusion was obtained.
+
+For example, an economic forecast may happen to be correct while relying on an invalid causal assumption.
+
+The factual result and reasoning quality must therefore be evaluated separately.
+
+10.2 Unsupported Confidence
+
+Confidence statements such as "I am 95% certain" do not establish correctness.
+
+The evaluator must identify the evidence and reasoning supporting its judgment.
+
+10.3 Fabricated Evidence
+
+The evaluator must not invent:
+
+- Source references.
+- Quotations.
+- Data points.
+- Calculations.
+- Research findings.
+- Benchmark results.
+- Assessment observations.
+
+When supporting evidence is unavailable, the result must state that limitation.
+
+10.4 Contradictory Evidence
+
+When evidence conflicts, the evaluator must not selectively present only the evidence supporting its preferred conclusion.
+
+It must describe:
+
+- Which claims conflict.
+- Which sources support each position.
+- Differences in methodology or context.
+- Whether the conflict can be reasonably resolved.
+- What remains uncertain.
+
+10.5 Evaluation Reproducibility
+
+Where practical, assessment records must retain the task, criteria, relevant input, evaluator identity, model version, prompt configuration, and supporting evidence.
+
+This allows later review of how an assessment result was produced.
+
+---
+
+11. Evaluator Requirements
+
+The evaluator is responsible for applying the assessment criteria consistently and transparently.
+
+11.1 Role Separation
+
+Where practical, the model that produces an answer and the model or evaluation process that assesses it should have distinct evaluation roles.
+
+The evaluator should receive:
+
+- The original task.
+- The expected objective.
+- The response being evaluated.
+- The assessment rubric.
+- Relevant supporting evidence.
+
+The evaluator must not simply repeat or endorse the original model's conclusions.
+
+11.2 Independence Limitations
+
+Using a separate prompt or evaluation role does not guarantee independent judgment.
+
+Using the same model provider does not establish independent verification.
+
+Using different models also does not automatically eliminate shared blind spots or systematic errors.
+
+Cognis must describe the actual evaluation arrangement instead of claiming independence that has not been demonstrated.
+
+11.3 Evaluation Explanation
+
+For each assessed criterion, the evaluator should provide:
+
+- Assigned score or "NOT_ASSESSED".
+- Reason for the result.
+- Supporting evidence.
+- Identified weaknesses.
+- Relevant uncertainty.
+
+11.4 Evaluator Limitations
+
+The evaluator must be allowed to return an inconclusive result.
+
+It must not be forced to assign a score when the task, rubric, or available evidence is insufficient.
+
+---
+
+12. Human Review and Founder Oversight
+
+The Founder retains authority over permanent academic and system governance decisions.
+
+Human review is particularly important when:
+
+- Assessment results are contradictory.
+- Evidence is insufficient for a reliable judgment.
+- The evaluation contains a potentially serious factual error.
+- A proposed change may affect curriculum or academic policy.
+- A result may influence future faculty activation decisions.
+- A high-impact benchmark shows unexpected regression.
+
+Founder review may result in:
+
+1. Accepting the assessment result.
+2. Rejecting the assessment result.
+3. Requesting additional evidence.
+4. Requesting a new evaluation.
+5. Revising the assessment criteria.
+6. Marking the result as inconclusive.
+7. Invalidating the assessment.
+
+Human review must preserve the original assessment record.
+
+A reviewed assessment must not overwrite its previous version without an audit trail.
+
+During the MVP, Founder review may be conducted manually. A complete approval workflow is not required.
+
+---
+
+13. Assessment Outcomes and Status
+
+Assessment workflow status must be separated from assessment conclusions.
+
+13.1 Assessment Status
+
+The following status definitions are proposed:
+
+Status| Meaning
+DRAFT| Assessment definition is being prepared
+IN_REVIEW| Evaluation is being performed
+EVALUATED| An evaluation result has been produced
+HUMAN_REVIEW_REQUIRED| Human inspection is required before the result is treated as reviewed
+REVIEWED| Human review has been completed
+INVALIDATED| The assessment result has been declared invalid
+
+These are assessment lifecycle states.
+
+They must not be confused with Learning Job, Learning Session, or Faculty statuses.
+
+13.2 Assessment Conclusion
+
+An assessment may use a qualitative conclusion appropriate to its objective.
+
+Suggested categories:
+
+Conclusion| Meaning
+STRONG| The available evidence demonstrates strong fulfillment of the objective
+ADEQUATE| The objective is fulfilled with limited weaknesses
+LIMITED| Some relevant capability is demonstrated, but important weaknesses remain
+INSUFFICIENT| The available output does not adequately demonstrate the objective
+INCONCLUSIVE| The available information is insufficient for a reliable conclusion
+
+The conclusion is a task-level interpretation.
+
+It does not establish long-term competency proficiency or authorize faculty progression.
+
+---
+
+14. Benchmark Assessment
+
+Benchmark evaluation is intended to measure system performance across controlled test cases.
+
+A benchmark may evaluate:
+
+- Factual accuracy.
+- Reasoning validity.
+- Source handling.
+- Evidence traceability.
+- Quantitative correctness.
+- Uncertainty recognition.
+- Analytical consistency.
+- Domain-specific task performance.
+
+14.1 Benchmark Design
+
+A benchmark should define:
+
+1. Test case ID.
+2. Test case version.
+3. Evaluation objective.
+4. Input and expected evaluation criteria.
+5. Applicable competency references.
+6. Scoring rubric.
+7. Required evidence.
+8. Known limitations.
+9. Evaluation procedure.
+
+14.2 Benchmark Integrity
+
+Benchmark cases must not be silently modified to make system performance appear better.
+
+Changes to benchmark definitions must be versioned.
+
+When a benchmark result is compared across system versions, the comparison must account for changes in:
+
+- Model version.
+- Prompt configuration.
+- Retrieval configuration.
+- Available evidence.
+- Evaluation criteria.
+- Test case version.
+
+14.3 Data Leakage
+
+Benchmark cases should be separated from ordinary learning material when practical.
+
+Repeated exposure to a test case must not be treated as proof of generalization.
+
+Where possible, future evaluations should include new or held-out cases to test whether Cognis can apply knowledge beyond familiar examples.
+
+14.4 MVP Boundary
+
+The MVP may use basic controlled tests during development and verification.
+
+A comprehensive benchmark management system, automatic benchmark generation, and long-term capability scoring remain deferred.
+
+---
+
+15. Assessment Records
+
+Assessment records should preserve enough information to inspect and reproduce the evaluation.
+
+A future structured assessment record should support the following fields.
+
+Field| Purpose
+assessment_id| Unique assessment identifier
+assessment_version| Version of the assessment record
+session_id| Related academic learning session, when applicable
+learning_job_id| Related technical learning job, when applicable
+task_id| Identifier of the evaluated task
+task_definition| Original task and evaluation objective
+competency_refs| Related competency IDs
+curriculum_version| Curriculum version used
+learning_depth| Expected learning depth
+rubric_version| Version of the assessment rubric
+criterion_results| Scores and explanations for individual criteria
+evidence_refs| References to supporting evidence
+conclusion| Qualitative task-level conclusion
+uncertainty| Known limitations and unresolved issues
+evaluator_model| Evaluator model identity and version
+evaluator_prompt_version| Evaluation prompt version
+evaluation_metadata| Relevant configuration and execution metadata
+status| Assessment lifecycle status
+reviewed_by| Human reviewer, when applicable
+reviewed_at| Review timestamp, when applicable
+created_at| Record creation timestamp
+updated_at| Last record update timestamp
+
+These are conceptual record requirements, not a mandatory database schema for MVP implementation.
+
+The actual implementation must follow the system architecture and avoid duplicating data already stored in related entities.
+
+---
+
+16. Assessment History and Versioning
+
+Assessment records must be historically traceable.
+
+When an assessment is repeated or revised:
+
+- Preserve the original result.
+- Create a new version or linked assessment record.
+- Record why the reassessment occurred.
+- Identify any changed task or rubric definitions.
+- Preserve the evaluator configuration.
+- Keep human review decisions traceable.
+
+Historical results must not be silently recalculated using new rubrics.
+
+If a previous result is invalidated, the reason must be recorded.
+
+Invalidation does not mean the original event never happened. It means the result is no longer considered valid for its intended use.
+
+---
+
+17. Assessment and Learning Improvement
+
+Assessment findings may identify weaknesses that should influence future learning.
+
+Examples include:
+
+- Repeated misunderstanding of an economic concept.
+- Inconsistent interpretation of statistical evidence.
+- Weak causal reasoning.
+- Poor source verification.
+- Incorrect quantitative analysis.
+- Inadequate uncertainty handling.
+
+During the MVP, these findings may be included in learning reports or recorded as research and improvement recommendations where supported by the implementation.
+
+They must not automatically trigger:
+
+- Permanent competency score changes.
+- Curriculum restructuring.
+- Faculty progression.
+- System prompt modification.
+- Model fine-tuning.
+- Permanent architecture or policy changes.
+
+Future Autonomous Learning System capabilities may use validated assessment evidence to propose improvements.
+
+Any permanent change must follow the governance process defined by the applicable future ALS specification, including Founder approval, controlled implementation, testing, and rollback where necessary.
+
+---
+
+18. Security and Assessment Integrity
+
+Assessment inputs and retrieved material must be treated as untrusted data.
+
+Instructions embedded in research sources, benchmark cases, or evaluated responses must not override Cognis system policies.
+
+The evaluator must distinguish task content from trusted system instructions.
+
+Assessment records must also follow the project's data protection and access-control policies.
+
+Sensitive or unnecessary personal information must not be collected as assessment evidence.
+
+Assessment history must not be modified by untrusted source content or by the output being evaluated.
+
+---
+
+19. Implementation Roadmap
+
+Assessment capabilities are introduced progressively.
+
+Phase 1: MVP
+
+Focus:
+
+- Research source evaluation.
+- Claim and evidence evaluation.
+- Evidence traceability.
+- Structured learning reports.
+- Basic task-level output inspection where needed.
+- Recording relevant evaluation metadata.
+
+Explicit exclusions:
+
+- Automatic competency proficiency calculation.
+- Automatic faculty readiness scoring.
+- Automatic academic progression.
+- Permanent self-improvement based on assessment results.
+
+Phase 2: Structured Task Assessment
+
+Potential capabilities:
+
+- Formal task definitions.
+- Versioned assessment rubrics.
+- Structured criterion-level evaluation.
+- Human review interface.
+- Assessment history and comparison.
+
+Implementation requires an approved scope and a validated assessment process.
+
+Phase 3: Competency Evidence Management
+
+Potential capabilities:
+
+- Collecting relevant evidence across multiple tasks.
+- Identifying recurring strengths and weaknesses.
+- Measuring evidence coverage and diversity.
+- Evaluating consistency across different contexts.
+- Proposing competency-level observations.
+
+A proficiency scale and aggregation methodology must be formally defined before automated competency measurement is activated.
+
+Phase 4: Governed Capability Improvement
+
+Potential capabilities:
+
+- Benchmark-driven weakness detection.
+- Improvement proposals based on assessment history.
+- Founder approval.
+- Controlled curriculum or system changes.
+- Regression testing.
+- Rollback after failed changes.
+
+This phase belongs to the future governed ALS roadmap, not the MVP.
+
+---
+
+20. Acceptance Criteria
+
+This policy is considered correctly implemented at the MVP level when:
+
+1. Research claims can be linked to identifiable supporting evidence.
+2. Source quality and claim support are evaluated as separate concerns.
+3. Unsupported or uncertain claims are not presented as verified facts.
+4. Important conflicting evidence is preserved and communicated.
+5. Learning reports distinguish evidence quality from competency mastery.
+6. Evaluation metadata is recorded where required by the architecture.
+7. Task-level scores, when used, are not treated as permanent competency ratings.
+8. Learning depth categories are not confused with mastery scores.
+9. The system does not automatically calculate or update competency proficiency.
+10. The system does not automatically promote faculties based on assessment results.
+11. Assessment conclusions can be inspected and reviewed.
+12. Historical assessment results remain traceable after revisions.
+
+---
+
+21. Governance and Change Control
+
+This document is the authoritative reference for Cognis assessment principles and boundaries.
+
+Any implementation or proposed change must:
+
+1. Preserve the separation between research evidence evaluation and competency assessment.
+2. Preserve the distinction between learning depth and task-level scores.
+3. Avoid unsupported claims of mastery.
+4. Maintain traceability of evaluation evidence.
+5. Respect MVP scope and autonomy boundaries.
+6. Be consistent with the competency curriculum and faculty progression policy.
+7. Receive appropriate Founder approval when it changes permanent academic governance.
+
+Conflicts between assessment rules and other documents must be reported rather than silently resolved through implementation.
+
+Changes to this policy must be versioned and documented.
+
+---
+
+22. Final Policy Statement
+
+Cognis must evaluate what it can demonstrate, not what it claims to know.
+
+Research evidence, task performance, competency development, and benchmark performance are separate forms of evaluation.
+
+A successful research result does not prove mastery. A high task score does not establish permanent capability. A completed learning session does not demonstrate competency by itself.
+
+During the MVP, Cognis must prioritize reliable evidence evaluation, transparent learning reports, and traceable execution.
+
+More advanced assessment and competency measurement may be introduced only after the system has accumulated sufficient evidence and the measurement methodology has been formally defined.
+
+The governing principle is simple: no capability claim without evidence, no mastery claim without repeated demonstration, and no permanent academic change without controlled approval.
