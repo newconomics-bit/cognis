@@ -1,1235 +1,1599 @@
-COGNIS AI
-
 SYSTEM ARCHITECTURE
 
-Project: Cognis AI
-Repository: "cognis"
+COGNIS
+
 Document Version: 1.0
-Status: Proposed Architecture
-Architecture Style: Modular Monolith with Asynchronous Workers
-Primary Interface: Telegram
-Primary Language: Bahasa Indonesia
+Product Version: MVP v1
+Status: Proposed Architecture Baseline
+Document Owner: Founder
+Architecture Style: Modular Monolith with Asynchronous Job Processing
+Primary Timezone: Asia/Jakarta
 
 ---
 
-1. Tujuan Dokumen
+1. Purpose
 
-Dokumen ini menjelaskan arsitektur teknis Cognis AI, termasuk komponen utama, tanggung jawab setiap komponen, alur komunikasi, pengelolaan data, integrasi AI, proses penelitian, dan Autonomous Learning System (ALS).
+Dokumen ini mendefinisikan arsitektur sistem Cognis untuk MVP v1.
 
-Tujuannya adalah menyediakan rancangan teknis yang:
+Tujuannya adalah menerjemahkan kebutuhan produk dalam PRD menjadi struktur teknis yang memiliki:
 
-1. Dapat dijalankan menggunakan infrastruktur terbatas.
-2. Dapat dikembangkan secara bertahap.
-3. Tidak bergantung pada satu penyedia AI.
-4. Mendukung proses riset dan pembelajaran jangka panjang.
-5. Mendukung banyak pengguna dengan isolasi data.
-6. Menyediakan kontrol manusia terhadap perubahan permanen.
-7. Memungkinkan pengembangan model dan kemampuan AI di masa depan tanpa membangun ulang seluruh aplikasi.
+- Komponen dan tanggung jawab yang jelas.
+- Aliran data yang konsisten.
+- Batas kewenangan setiap komponen.
+- Mekanisme pemrosesan job yang dapat dipantau.
+- Penyimpanan pengetahuan yang memiliki provenance.
+- Penanganan kegagalan yang dapat dipulihkan.
+- Fondasi pengembangan yang tidak menghambat versi berikutnya.
 
-Arsitektur ini merupakan rancangan awal. Keputusan teknologi yang belum diuji harus tetap dianggap sebagai keputusan sementara sampai divalidasi melalui implementasi dan pengujian.
+Dokumen ini mendefinisikan arsitektur logis dan kontrak antarkomponen. Pilihan bahasa pemrograman, framework, database, provider model, serta infrastruktur deployment ditentukan melalui keputusan teknis dan dokumen implementasi terkait.
 
-2. Prinsip Arsitektur
+Arsitektur harus mengikuti batasan dan tujuan yang telah ditetapkan dalam "AGENTS.md" dan "PRD.md".
+
+---
+
+2. Architectural Principles
 
 2.1 Modular Monolith First
 
-Cognis menggunakan satu aplikasi utama dengan modul-modul yang memiliki tanggung jawab jelas.
+MVP menggunakan satu aplikasi utama dengan modul-modul yang memiliki tanggung jawab terpisah.
 
-Pada tahap awal, modul-modul tersebut tidak perlu dijalankan sebagai layanan terpisah.
+Modul boleh dijalankan melalui proses yang berbeda apabila diperlukan, tetapi tidak perlu dipecah menjadi microservices pada tahap awal.
 
-Keuntungan pendekatan ini:
+Tujuan:
 
-- Lebih mudah dikembangkan.
-- Lebih hemat resource.
-- Lebih sederhana untuk debugging.
-- Tidak memerlukan infrastruktur microservices.
-- Memudahkan pengujian integrasi.
-- Memungkinkan ekstraksi modul menjadi layanan terpisah ketika memang dibutuhkan.
+- Mengurangi kompleksitas operasional.
+- Mempermudah pengujian integrasi.
+- Mengurangi kebutuhan komunikasi antarlayanan.
+- Mempertahankan batas tanggung jawab komponen.
+- Memungkinkan pemisahan layanan pada masa mendatang berdasarkan kebutuhan nyata.
 
-Pemisahan tanggung jawab harus dilakukan sejak awal pada level kode, meskipun deployment masih berupa satu aplikasi.
+2.2 Pipeline-Based Processing
 
-2.2 Asynchronous by Design
+Proses pembelajaran harus berjalan melalui tahapan yang eksplisit:
 
-Pekerjaan yang membutuhkan waktu panjang harus dijalankan melalui background jobs.
+Scheduler → Research → Source Validation → Evidence Evaluation → Knowledge Storage → Learning Report
 
-Contohnya:
+Setiap tahap memiliki input, output, status, dan hasil eksekusi yang dapat diperiksa.
 
-- Penelitian multi-sumber.
-- Analisis dokumen panjang.
-- Pembelajaran kompetensi.
-- Evaluasi benchmark.
-- Penyusunan laporan harian.
-- Pemrosesan dataset.
+2.3 Persistent State
 
-Jangan menjalankan seluruh pekerjaan panjang dalam satu request yang membuat aplikasi menunggu hingga selesai.
+Status job dan hasil setiap tahap yang dibutuhkan untuk pemulihan harus disimpan secara persisten.
 
-2.3 Provider Independence
+Sistem tidak boleh hanya mengandalkan state sementara di memori untuk mengetahui progres pembelajaran.
 
-Semua penyedia AI dan layanan eksternal harus diakses melalui adapter atau interface yang terdefinisi.
+2.4 Provenance by Design
 
-Logika bisnis Cognis tidak boleh terikat langsung pada SDK atau format khusus satu provider.
+Setiap hasil penelitian dan pengetahuan harus memiliki hubungan yang dapat ditelusuri terhadap:
 
-2.4 Human-Governed Evolution
+- Job asal.
+- Topik penelitian.
+- Sumber informasi.
+- Klaim.
+- Bukti.
+- Hasil evaluasi.
+- Versi konfigurasi yang digunakan.
 
-ALS boleh mengidentifikasi kelemahan dan mengusulkan peningkatan secara mandiri.
+Provenance harus menjadi bagian dari desain data, bukan sekadar fitur tambahan.
 
-Namun, perubahan permanen terhadap kurikulum, kebijakan pembelajaran, standar evaluasi, konfigurasi produksi yang kritis, dan model harus mengikuti mekanisme persetujuan.
+2.5 Explicit Responsibility Boundaries
 
-2.5 Data Provenance
+Setiap modul hanya boleh menjalankan tanggung jawab yang ditentukan.
 
-Setiap informasi penting harus memiliki asal-usul yang dapat ditelusuri.
+Sebagai contoh:
 
-Cognis harus mampu membedakan:
+- Research tidak menentukan perubahan policy sistem.
+- Source Validation tidak mengubah isi sumber.
+- Evidence Evaluation tidak menciptakan bukti.
+- Knowledge Storage tidak menganggap semua informasi sebagai fakta terverifikasi.
+- Learning Report tidak boleh menghilangkan ketidakpastian hasil evaluasi.
+- Scheduler tidak boleh mengubah kurikulum inti secara otomatis.
 
-- Informasi yang ditemukan.
-- Informasi yang sudah diverifikasi.
-- Interpretasi hasil analisis.
-- Hipotesis.
-- Kesimpulan yang masih memiliki ketidakpastian.
+2.6 Human-Controlled System Changes
 
-2.6 Resource-Aware Engineering
+MVP boleh melakukan penelitian dan menyimpan pengetahuan secara otomatis.
 
-Arsitektur harus mempertimbangkan:
-
-- RAM.
-- CPU.
-- Kapasitas penyimpanan.
-- API rate limits.
-- Token consumption.
-- Biaya model.
-- Waktu eksekusi.
-- Kapasitas background worker.
-
-Jangan menambahkan infrastruktur atau dependency yang belum memiliki manfaat terukur.
-
-3. High-Level System Architecture
-
-Cognis terdiri dari beberapa lapisan logis.
-
-1. Presentation Layer.
-2. Application and Orchestration Layer.
-3. Intelligence Layer.
-4. Research Layer.
-5. Autonomous Learning and Competency Layer.
-6. Knowledge and Memory Layer.
-7. Data and Infrastructure Layer.
-8. Governance and Security Layer.
-
-3.1 Architecture Diagram
-
-flowchart TB
-    USER["Authorized Users"]
-
-    subgraph PRESENTATION["Presentation Layer"]
-        TG["Telegram Adapter"]
-        FUTURE["Future Web Interface"]
-    end
-
-    subgraph APPLICATION["Application and Orchestration"]
-        API["Application Services"]
-        JOB["Job Manager"]
-        SCHED["Scheduler"]
-        ROUTER["Task Router"]
-    end
-
-    subgraph INTELLIGENCE["Intelligence Layer"]
-        MG["Model Gateway"]
-        PROMPT["Prompt and Context Manager"]
-        MODEL1["AI Provider A"]
-        MODEL2["AI Provider B"]
-    end
-
-    subgraph RESEARCH["Research Layer"]
-        RE["Research Engine"]
-        SOURCE["Source Evaluator"]
-        EVIDENCE["Evidence Manager"]
-        EXT["External Search and Data Sources"]
-    end
-
-    subgraph LEARNING["Learning and Competency"]
-        ALS["Autonomous Learning System"]
-        CE["Competency Engine"]
-        EVAL["Evaluation Engine"]
-    end
-
-    subgraph KNOWLEDGE["Knowledge and Memory"]
-        KM["Knowledge Manager"]
-        RM["Retrieval and Memory"]
-    end
-
-    subgraph GOVERNANCE["Governance and Security"]
-        APPROVAL["Approval Manager"]
-        AUDIT["Audit Logger"]
-        ACCESS["Access Control"]
-    end
-
-    subgraph DATA["Data Layer"]
-        DB[("PostgreSQL")]
-        FILES[("Document Storage")]
-    end
-
-    USER --> TG
-    USER --> FUTURE
-    TG --> API
-    FUTURE --> API
-
-    API --> ACCESS
-    API --> JOB
-    API --> ROUTER
-
-    SCHED --> JOB
-    JOB --> ROUTER
-
-    ROUTER --> MG
-    MG --> PROMPT
-    MG --> MODEL1
-    MG --> MODEL2
-
-    ROUTER --> RE
-    RE --> EXT
-    RE --> SOURCE
-    SOURCE --> EVIDENCE
-
-    ROUTER --> ALS
-    ALS --> CE
-    ALS --> EVAL
-    EVAL --> MG
-    ALS --> APPROVAL
-
-    RE --> KM
-    EVAL --> KM
-    ALS --> KM
-    KM --> RM
-
-    APPROVAL --> AUDIT
-    API --> AUDIT
-    ACCESS --> AUDIT
-
-    API --> DB
-    JOB --> DB
-    RE --> DB
-    ALS --> DB
-    CE --> DB
-    EVAL --> DB
-    KM --> DB
-    AUDIT --> DB
-
-    RE --> FILES
-    KM --> FILES
-
-Diagram ini menggambarkan hubungan logis. Diagram ini bukan berarti setiap kotak harus menjadi server atau proses yang berdiri sendiri.
-
-4. Presentation Layer
-
-Presentation Layer mengatur bagaimana pengguna berkomunikasi dengan Cognis.
-
-4.1 Telegram Adapter
-
-Telegram merupakan antarmuka interaksi pertama.
-
-Tanggung jawab:
-
-- Menerima pesan pengguna.
-- Memeriksa identitas dan hak akses.
-- Mengubah pesan menjadi perintah aplikasi.
-- Mengirim perintah ke Application Layer.
-- Menampilkan status pekerjaan.
-- Mengirim hasil penelitian.
-- Menampilkan notifikasi dan laporan.
-- Menerima keputusan persetujuan.
-
-Telegram Adapter tidak boleh memuat logika penelitian atau pembelajaran.
-
-Contoh:
-
-Pesan:
-
-"Analisis hubungan kebijakan suku bunga The Fed dengan harga emas."
-
-Telegram Adapter meneruskan permintaan tersebut ke Application Layer sebagai Research Request.
-
-Application Layer yang menentukan proses selanjutnya.
-
-4.2 Future Interfaces
-
-Arsitektur harus memungkinkan penambahan antarmuka lain, seperti:
-
-- Web application.
-- Mobile application.
-- Dashboard administrasi.
-- API untuk integrasi eksternal.
-
-Penambahan antarmuka baru tidak boleh mengharuskan penulisan ulang seluruh logika bisnis.
-
-5. Application and Orchestration Layer
-
-Lapisan ini menjadi penghubung antarbagian sistem.
-
-5.1 Application Services
-
-Mengatur use cases utama Cognis.
-
-Contoh layanan:
-
-- SubmitResearchRequest.
-- CreateLearningTask.
-- GetTaskStatus.
-- SubmitApprovalDecision.
-- GetDailyLearningReport.
-- SearchKnowledge.
-
-Application Services tidak bertanggung jawab melakukan penalaran AI secara langsung.
-
-Tugasnya adalah mengatur alur eksekusi dan memanggil komponen yang sesuai.
-
-5.2 Task Router
-
-Task Router mengidentifikasi jenis pekerjaan dan menentukan alur pemrosesan.
-
-Contoh kategori:
-
-Task Type| Tujuan
-Research| Penelitian dan analisis
-Learning| Proses pembelajaran ALS
-Evaluation| Pengujian kompetensi
-Summarization| Ringkasan informasi
-Knowledge Retrieval| Pencarian memori
-Reporting| Penyusunan laporan
-Governance| Persetujuan perubahan
-
-Task Router dapat menentukan model yang sesuai berdasarkan jenis pekerjaan, tetapi tidak boleh mengubah kebijakan keamanan atau persetujuan.
-
-5.3 Job Manager
-
-Job Manager mengelola pekerjaan asynchronous.
-
-Setiap pekerjaan harus memiliki:
-
-- Job ID.
-- User ID atau tenant ID.
-- Job type.
-- Input reference.
-- Execution status.
-- Priority.
-- Resource budget.
-- Retry count.
-- Checkpoint reference.
-- Creation timestamp.
-- Start timestamp.
-- Completion timestamp.
-- Error information.
-
-Status pekerjaan yang didukung:
-
-- PENDING.
-- QUEUED.
-- RUNNING.
-- WAITING_APPROVAL.
-- RETRY_WAIT.
-- SUCCEEDED.
-- FAILED.
-- CANCELLED.
-
-Job Manager harus mendukung:
-
-1. Persistent job storage.
-2. Retry dengan batas yang jelas.
-3. Exponential backoff.
-4. Checkpointing.
-5. Recovery setelah aplikasi restart.
-6. Idempotency untuk mencegah pemrosesan ganda.
-7. Pembatalan pekerjaan yang masih aman untuk dibatalkan.
-
-Pada tahap awal, gunakan database-backed job queue sebelum mempertimbangkan message broker tambahan.
-
-5.4 Scheduler
-
-Scheduler menjalankan pekerjaan berdasarkan jadwal atau kondisi tertentu.
-
-Jadwal awal:
-
-Schedule| Action
-07:00 WIB| Meminta daily brief ketika belum tersedia
-18:00 WIB| Mengirim daily learning report
-Configurable| Menjalankan pekerjaan pembelajaran terjadwal
-
-Scheduler harus:
-
-- Menggunakan timezone Asia/Jakarta sebagai konfigurasi awal.
-- Menyimpan identitas eksekusi jadwal.
-- Mencegah job terbuat berulang akibat restart.
-- Mendukung perubahan jadwal.
-- Memastikan pekerjaan terlewat dapat dideteksi.
-- Memisahkan waktu eksekusi dari logika pembelajaran.
-
-Simpan timestamp sistem dalam UTC. Gunakan timezone pengguna untuk perhitungan jadwal dan tampilan.
-
-6. Intelligence Layer
-
-Intelligence Layer mengatur interaksi Cognis dengan model AI.
-
-6.1 Model Gateway
-
-Seluruh permintaan model harus melewati Model Gateway.
-
-Tanggung jawab:
-
-- Memilih provider dan model.
-- Mengirim request.
-- Mengelola timeout.
-- Mengelola retry yang aman.
-- Memproses response.
-- Menghitung penggunaan token jika tersedia.
-- Mencatat biaya jika tersedia.
-- Menangani provider errors.
-- Menerapkan batas penggunaan.
-- Menyediakan fallback sesuai kebijakan.
-
-Jangan menanamkan API call provider secara langsung ke dalam Research Engine atau ALS.
-
-6.2 Provider Adapter
-
-Setiap provider memiliki adapter sendiri.
-
-Contoh struktur konseptual:
-
-ModelGateway
-    |
-    ├── ProviderAdapterA
-    |
-    ├── ProviderAdapterB
-    |
-    └── ProviderAdapterC
-
-Adapter bertanggung jawab menerjemahkan format internal Cognis ke format provider dan mengembalikan response dalam format internal yang konsisten.
-
-Provider tertentu mungkin mendukung fitur yang berbeda. Perbedaan tersebut harus dinyatakan secara eksplisit.
-
-6.3 Model Routing
-
-Pemilihan model harus mempertimbangkan:
-
-- Kompleksitas tugas.
-- Kualitas penalaran.
-- Kualitas ekstraksi.
-- Kemampuan mengikuti instruksi.
-- Context window.
-- Latency.
-- Cost.
-- Ketersediaan provider.
-- Batas penggunaan.
-- Kebutuhan privasi.
-
-Contoh pembagian pekerjaan:
-
-Task| Model Requirement
-Data extraction| Model yang efisien dan akurat
-Classification| Model ringan jika hasilnya tervalidasi
-Research analysis| Model dengan kemampuan reasoning memadai
-Complex synthesis| Model dengan kemampuan analisis lebih tinggi
-Evaluation| Model evaluator yang dikontrol dan diuji
-User response| Model yang sesuai dengan kompleksitas jawaban
-
-Model routing tidak boleh menganggap model mahal selalu benar atau model murah selalu buruk.
-
-6.4 Prompt and Context Manager
-
-Komponen ini mengelola konteks yang dikirim ke model.
-
-Tanggung jawab:
-
-- Mengambil instruksi yang relevan.
-- Mengambil informasi terkait dari memory.
-- Menggabungkan evidence.
-- Mengatur panjang konteks.
-- Menghindari konteks yang tidak relevan.
-- Menyediakan identitas sumber.
-- Memisahkan system instructions dari external content.
-
-Retrieved documents dan hasil pencarian tidak boleh diperlakukan sebagai instruksi sistem.
-
-6.5 Teacher and Worker Model Strategy
-
-Cognis dapat menggunakan model dengan kemampuan berbeda untuk pekerjaan berbeda.
-
-Konsep awal:
-
-- Teacher Model: membantu analisis yang lebih kompleks, riset, dan evaluasi tertentu.
-- Worker Model: mengerjakan tugas yang lebih terstruktur dan berulang.
-- Evaluator Model: membantu penilaian berdasarkan rubric.
-- Embedding Model: digunakan untuk representasi semantik apabila diperlukan.
-
-Pembagian tersebut adalah peran fungsional, bukan asumsi bahwa sebuah model otomatis memiliki kemampuan tertentu.
-
-Setiap model harus diuji sebelum diberikan tugas produksi.
-
-7. Research Layer
-
-Research Layer bertanggung jawab mengumpulkan, menilai, dan mengolah informasi eksternal.
-
-7.1 Research Engine
-
-Alur penelitian:
-
-1. Menerima pertanyaan.
-2. Menentukan tujuan dan batas penelitian.
-3. Mengidentifikasi subpertanyaan.
-4. Menentukan sumber yang diperlukan.
-5. Mengambil informasi.
-6. Mengekstraksi evidence.
-7. Memeriksa relevansi dan kredibilitas.
-8. Membandingkan sumber.
-9. Menyusun analisis.
-10. Menghasilkan laporan dengan referensi.
-
-Research Engine harus mendukung pekerjaan bertahap dan dapat melanjutkan pekerjaan dari checkpoint.
-
-7.2 Source Evaluator
-
-Setiap sumber dievaluasi berdasarkan:
-
-- Kredibilitas penerbit.
-- Kredibilitas penulis.
-- Kedekatan dengan sumber primer.
-- Kualitas metodologi.
-- Tanggal publikasi.
-- Relevansi terhadap pertanyaan.
-- Potensi konflik kepentingan.
-- Keterbatasan data.
-
-Source Evaluator tidak boleh menghasilkan klaim bahwa sebuah sumber benar hanya karena domainnya terkenal.
-
-7.3 Evidence Manager
-
-Evidence Manager menyimpan bukti yang digunakan dalam analisis.
-
-Setiap evidence sebaiknya memiliki:
-
-- Evidence ID.
-- Source ID.
-- Kutipan atau ringkasan yang relevan.
-- Lokasi informasi dalam sumber.
-- Tanggal publikasi jika tersedia.
-- Tanggal pengambilan.
-- Jenis sumber.
-- Status verifikasi.
-- Research Task ID.
-
-Evidence harus dapat ditelusuri kembali ke sumber aslinya.
-
-7.4 Research Output
-
-Output penelitian harus memiliki struktur yang konsisten:
-
-1. Pertanyaan dan ruang lingkup.
-2. Ringkasan temuan.
-3. Fakta dan evidence.
-4. Analisis.
-5. Interpretasi.
-6. Bukti yang bertentangan.
-7. Ketidakpastian dan keterbatasan.
-8. Kesimpulan.
-9. Referensi.
-
-Sumber yang tidak dapat diverifikasi tidak boleh diberi label sebagai sumber terverifikasi.
-
-8. Autonomous Learning and Competency Layer
-
-Lapisan ini merupakan inti diferensiasi Cognis.
-
-8.1 Autonomous Learning System
-
-ALS mengelola seluruh siklus pembelajaran.
-
-Siklus utama:
-
-flowchart TD
-    A["Inspect Competency State"]
-    B["Identify Knowledge Gap"]
-    C["Create Learning Objective"]
-    D["Research and Study"]
-    E["Create Learning Output"]
-    F["Run Evaluation"]
-    G{"Evaluation Passed?"}
-    H["Record Competency Result"]
-    I["Identify Weaknesses"]
-    J["Generate Improvement Proposal"]
-    K{"Permanent Change?"}
-    L["Request Human Approval"]
-    M{"Approved?"}
-    N["Apply Approved Change"]
-    O["Post-change Evaluation"]
-    P{"Regression Detected?"}
-    Q["Keep Verified Change"]
-    R["Rollback or Revise"]
-    S["Update Learning History"]
-
-    A --> B --> C --> D --> E --> F --> G
-    G -->|Yes| H
-    G -->|No| I
-    H --> I
-    I --> J --> K
-    K -->|No| S
-    K -->|Yes| L --> M
-    M -->|No| S
-    M -->|Yes| N --> O --> P
-    P -->|No| Q --> S
-    P -->|Yes| R --> S
-
-ALS tidak boleh mengubah sistem permanen hanya berdasarkan satu hasil evaluasi.
-
-8.2 Competency Engine
-
-Competency Engine mengatur struktur kemampuan yang harus dikembangkan.
-
-Tanggung jawab:
-
-- Menyimpan competency definitions.
-- Mengatur competency levels.
-- Menghubungkan kompetensi dengan learning objectives.
-- Menentukan prerequisites.
-- Mengelola mastery criteria.
-- Menyimpan assessment history.
-
-Kompetensi tidak boleh didefinisikan hanya berdasarkan daftar topik yang telah dibaca.
-
-Setiap kompetensi harus dapat dihubungkan dengan aktivitas atau tugas yang menunjukkan kemampuan nyata.
-
-8.3 Evaluation Engine
-
-Evaluation Engine menguji hasil pembelajaran.
-
-Jenis evaluasi dapat mencakup:
-
-- Factual recall.
-- Conceptual understanding.
-- Quantitative reasoning.
-- Causal analysis.
-- Critical analysis.
-- Case study.
-- Research synthesis.
-- Decision-making under uncertainty.
-
-Evaluasi harus menggunakan scoring rubric yang terdefinisi.
-
-Untuk mengurangi bias, gunakan test set independen dan held-out evaluation cases.
-
-8.4 Change Proposal System
-
-Semua usulan perubahan permanen harus masuk melalui Change Proposal System.
-
-Proposal minimal memiliki:
-
-- Proposal ID.
-- Target component.
-- Existing condition.
-- Identified weakness.
-- Proposed change.
-- Supporting evidence.
-- Expected benefit.
-- Risk assessment.
-- Implementation plan.
-- Evaluation plan.
-- Rollback plan.
-- Approval status.
-
-Status proposal:
-
-- DRAFT.
-- PENDING_REVIEW.
-- APPROVED.
-- REJECTED.
-- IMPLEMENTING.
-- VERIFIED.
-- ROLLED_BACK.
-- CLOSED.
-
-ALS tidak boleh mengubah status approval berdasarkan keputusan internal model.
-
-9. Knowledge and Memory Layer
-
-Knowledge Layer mengelola informasi yang digunakan dalam proses reasoning dan pembelajaran.
-
-9.1 Knowledge Categories
-
-Pisahkan knowledge menjadi beberapa kategori.
-
-General Knowledge
-
-Pengetahuan umum yang relatif stabil.
-
-Contoh:
-
-- Teori ekonomi.
-- Prinsip akuntansi.
-- Konsep mikroekonomi.
-- Dasar statistik.
-
-Contextual Knowledge
-
-Informasi yang berkaitan dengan pengguna, proyek, atau aktivitas tertentu.
-
-Akses harus mengikuti batasan kepemilikan dan izin.
-
-Time-Sensitive Knowledge
-
-Informasi yang dapat berubah sewaktu-waktu.
-
-Contoh:
-
-- Harga emas.
-- Data inflasi terbaru.
-- Suku bunga.
-- Perubahan regulasi.
-- Perkembangan geopolitik.
-
-Informasi ini harus diverifikasi menggunakan sumber terkini sebelum digunakan untuk menjawab pertanyaan yang membutuhkan kondisi terbaru.
-
-Evaluated Knowledge
-
-Pengetahuan yang telah melalui proses validasi dengan standar yang ditentukan.
-
-Status evaluated tidak berarti informasi tersebut benar untuk semua konteks atau tidak akan pernah kedaluwarsa.
-
-9.2 Knowledge Lifecycle
-
-flowchart LR
-    A["Raw Information"]
-    B["Extracted Knowledge"]
-    C["Source Assessment"]
-    D{"Validation Result"}
-    E["Accepted Knowledge"]
-    F["Rejected or Quarantined"]
-    G["Periodic Review"]
-    H["Updated or Deprecated"]
-
-    A --> B --> C --> D
-    D -->|Pass| E
-    D -->|Fail| F
-    E --> G --> H
-
-9.3 Retrieval System
-
-Tahap awal dapat menggunakan pencarian database dan full-text search.
-
-Vector search tidak wajib diterapkan sejak awal.
-
-Pertimbangkan vector search hanya setelah pengujian menunjukkan bahwa pencarian biasa tidak cukup memenuhi kebutuhan retrieval.
-
-Setiap hasil retrieval harus membawa metadata sumber dan status validasinya.
-
-9.4 Memory Boundaries
-
-Memory tidak boleh menjadi tempat penyimpanan semua informasi tanpa klasifikasi.
-
-Pisahkan:
-
-- User preferences.
-- Conversation context.
-- Research records.
-- Knowledge records.
-- Competency state.
-- Evaluation records.
-- Governance records.
-
-Penghapusan atau perubahan memory harus mengikuti aturan kepemilikan data, retensi, dan audit.
-
-10. Governance and Security Layer
-
-10.1 Access Control
-
-Setiap request yang mengakses data terlindungi harus melalui pemeriksaan authorization.
-
-Sistem harus membedakan minimal:
-
-- User.
-- Administrator.
-- System worker.
-
-Hak akses tidak boleh bergantung pada klaim model.
-
-10.2 Multi-User Isolation
-
-Arsitektur harus mendukung banyak pengguna sejak awal.
-
-Data yang bersifat privat harus memiliki keterkaitan kepemilikan atau tenant yang jelas.
-
-Setiap query yang membaca atau mengubah data privat harus memeriksa hak akses.
-
-Tidak boleh mengandalkan Telegram user ID sebagai satu-satunya mekanisme authorization untuk seluruh sistem.
-
-10.3 Human Approval Enforcement
-
-Approval Manager harus menjadi kontrol aplikasi yang independen dari model AI.
-
-Model dapat mengusulkan perubahan.
-
-Model tidak dapat menyetujui usulannya sendiri.
-
-Perubahan permanen harus melewati:
-
-1. Proposal creation.
-2. Authorization check.
-3. Human decision.
-4. Approval record.
-5. Controlled execution.
-6. Verification.
-7. Audit recording.
-
-10.4 Audit Logging
-
-Catat aktivitas penting:
-
-- Login atau authorization events.
-- Research task creation.
-- Learning task execution.
-- Model calls.
-- Approval decisions.
-- Permanent configuration changes.
-- Knowledge promotion.
-- Rollback.
-- Administrative operations.
-
-Jangan menyimpan API key, password, atau token sensitif ke dalam audit log.
-
-10.5 Prompt Injection Protection
-
-Semua informasi eksternal dianggap sebagai data tidak tepercaya.
-
-Termasuk:
-
-- Website.
-- Dokumen PDF.
-- Email.
-- File yang diunggah.
-- Hasil pencarian.
-- Tool outputs.
-
-Informasi eksternal tidak boleh mengubah instruksi sistem, mengakses secret, atau memperluas hak akses.
-
-10.6 Tool Permission Model
-
-Tool yang digunakan AI harus melalui allowlist.
-
-Setiap tool harus mempunyai:
-
-- Identitas.
-- Tujuan.
-- Input schema.
-- Permission requirement.
-- Execution limits.
-- Timeout.
-- Output validation.
-- Audit trail.
-
-Eksekusi command atau kode yang tidak dibatasi tidak diperbolehkan dalam MVP.
-
-11. Data Architecture
-
-11.1 Primary Database
-
-PostgreSQL menjadi pilihan database utama yang diusulkan.
-
-Alasan:
-
-- Mendukung transaksi.
-- Mendukung banyak pengguna.
-- Mendukung relational data.
-- Cocok untuk job management awal.
-- Mendukung pencarian terstruktur.
-- Dapat dikembangkan untuk kebutuhan lebih besar.
-
-Konfigurasi PostgreSQL harus disesuaikan dengan kapasitas VPS.
-
-11.2 Data Ownership
-
-Tabel yang berisi data pengguna harus memiliki mekanisme kepemilikan atau tenant association yang jelas.
-
-Entitas global dan entitas privat harus dipisahkan secara logis.
-
-Jangan menganggap seluruh knowledge otomatis boleh dibagikan ke semua pengguna.
-
-11.3 Main Data Entities
-
-Detail schema ditetapkan dalam "docs/technical/DATABASE_SCHEMA.md".
-
-Entitas utama yang perlu dipertimbangkan:
-
-Entity| Responsibility
-users| Identitas pengguna
-tenants| Batas organisasi atau ruang data
-memberships| Hubungan pengguna dan tenant
-conversations| Riwayat interaksi
-jobs| Status pekerjaan asynchronous
-job_checkpoints| Progress pekerjaan
-model_providers| Konfigurasi provider
-model_usage| Penggunaan dan biaya model
-research_tasks| Permintaan dan proses riset
-sources| Metadata sumber
-evidence| Bukti penelitian
-knowledge_items| Informasi yang disimpan
-competencies| Definisi kompetensi
-learning_objectives| Tujuan pembelajaran
-learning_sessions| Aktivitas pembelajaran
-evaluations| Hasil penilaian
-benchmarks| Definisi benchmark
-change_proposals| Usulan perubahan
-approval_records| Keputusan persetujuan
-audit_logs| Riwayat aktivitas kritis
-
-Nama dan struktur tabel final harus mengikuti kebutuhan implementasi, bukan dipaksakan hanya karena tercantum dalam daftar ini.
-
-11.4 Document Storage
-
-Dokumen atau file berukuran besar tidak harus disimpan langsung sebagai database records.
-
-Gunakan storage terpisah ketika kebutuhan sudah muncul.
-
-Metadata dokumen tetap disimpan dalam database.
-
-File storage harus memiliki:
-
-- Ownership metadata.
-- Access controls.
-- Integrity checks.
-- Retention policy.
-- Backup strategy.
-
-11.5 Vector Database
-
-Vector database bukan dependency wajib MVP.
-
-Urutan keputusan:
-
-1. Implementasikan relational database.
-2. Implementasikan full-text search.
-3. Ukur retrieval quality.
-4. Identifikasi kegagalan retrieval.
-5. Uji embedding dan vector search jika diperlukan.
-6. Adopsi hanya jika manfaatnya terbukti.
-
-12. Deployment Architecture
-
-12.1 Initial Deployment
-
-Deployment awal menggunakan satu VPS dengan komponen yang terkontrol.
-
-Konsep deployment:
-
-COGNIS VPS
-|
-├── Application
-|   ├── Telegram Adapter
-|   ├── Application Services
-|   ├── Model Gateway
-|   └── API
-|
-├── Background Worker
-|   ├── Research Jobs
-|   ├── Learning Jobs
-|   └── Evaluation Jobs
-|
-├── Scheduler
-|
-├── PostgreSQL
-|
-└── Persistent Storage
-
-Komponen tersebut dapat berjalan dari satu repository dan satu deployment environment.
-
-Pemisahan process dilakukan untuk menghindari pekerjaan berat menghambat interaksi pengguna.
-
-12.2 Infrastructure Strategy
-
-Pada tahap awal:
-
-- Gunakan VPS untuk application runtime.
-- Gunakan database lokal pada VPS atau layanan database yang sesuai dengan anggaran dan kebutuhan backup.
-- Gunakan API provider untuk inference.
-- Hindari menjalankan model besar secara lokal.
-- Hindari GPU rental sebelum kebutuhan dan utilisasinya terbukti.
-- Gunakan storage eksternal hanya jika dibutuhkan.
-
-Kapasitas infrastruktur aktual harus diuji sebelum menetapkan jumlah worker dan concurrency.
-
-12.3 Communication
-
-Komunikasi internal antar-modul dilakukan melalui interface aplikasi.
-
-Komunikasi ke layanan eksternal dilakukan melalui adapter.
-
-Hindari menambahkan jaringan komunikasi internal antar-microservices sebelum pemisahan layanan benar-benar diperlukan.
-
-13. Main Data Flows
-
-13.1 Research Request Flow
-
-sequenceDiagram
-    participant U as User
-    participant T as Telegram Adapter
-    participant A as Application Layer
-    participant J as Job Manager
-    participant R as Research Engine
-    participant M as Model Gateway
-    participant D as Database
-
-    U->>T: Submit research request
-    T->>A: Forward request
-    A->>A: Authorization and validation
-    A->>J: Create research job
-    J->>D: Persist job
-    A-->>T: Job accepted
-    T-->>U: Return job ID
-
-    J->>R: Execute research
-    R->>M: Analyze evidence
-    M-->>R: Analysis result
-    R->>D: Store sources and report
-    R->>J: Mark job completed
-    J->>T: Notify completion
-    T-->>U: Deliver research report
-
-13.2 Learning Flow
-
-sequenceDiagram
-    participant S as Scheduler
-    participant ALS as ALS
-    participant CE as Competency Engine
-    participant R as Research Engine
-    participant E as Evaluation Engine
-    participant G as Governance Manager
-    participant U as User
-    participant D as Database
-
-    S->>ALS: Start learning cycle
-    ALS->>CE: Read competency state
-    CE-->>ALS: Competency gaps
-    ALS->>R: Create learning task
-    R-->>ALS: Research results
-    ALS->>E: Submit learning output
-    E-->>ALS: Evaluation result
-    ALS->>D: Save learning history
-    ALS->>G: Create improvement proposal
-    G->>D: Save proposal
-    G-->>U: Request approval
-    U->>G: Approve or reject
-    G->>D: Record decision
-    G-->>ALS: Return authorized decision
-
-13.3 Approval Boundary
-
-Approval must happen outside the model's own reasoning process.
-
-A model response stating that a change has been approved is not a valid approval record.
-
-Only an authenticated action accepted by Approval Manager can authorize the change.
-
-14. Reliability and Failure Handling
-
-The system must anticipate failure from:
-
-- AI provider downtime.
-- API rate limits.
-- Network interruptions.
-- Telegram API errors.
-- Database failures.
-- Worker crashes.
-- Incomplete research.
-- Invalid model output.
-- Insufficient resource budget.
-
-14.1 Job Recovery
-
-Long-running jobs must persist state.
-
-When a worker fails:
-
-1. Identify the last successful checkpoint.
-2. Inspect job status.
-3. Verify that the previous operation was not already committed.
-4. Resume from a safe checkpoint.
-5. Prevent duplicate side effects.
-6. Record recovery events.
-
-14.2 Retry Policy
-
-Retries must be bounded.
-
-Use exponential backoff with jitter for retryable failures.
-
-Do not retry indefinitely.
-
-Do not retry permanent validation failures as though they were network problems.
-
-14.3 Failure Classification
-
-Separate:
-
-- Transient failures.
-- Provider errors.
-- Rate-limit failures.
-- Validation failures.
-- Authorization failures.
-- Resource budget exhaustion.
-- Permanent application failures.
-
-Every failed job must retain enough information for diagnosis without leaking secrets.
-
-15. Resource and Cost Management
-
-Every expensive operation should have a resource budget.
-
-Budget dimensions may include:
-
-- Maximum model calls.
-- Maximum token usage.
-- Maximum execution time.
-- Maximum retries.
-- Maximum external requests.
-- Maximum file size.
-- Maximum concurrent jobs.
-- Maximum cost per job.
-
-The system must support:
-
-1. Task-level budget.
-2. User-level budget.
-3. Daily usage budget.
-4. Global operational budget.
-
-Budgets must be checked before expensive operations.
-
-When the budget is exhausted, the job must stop or enter a controlled waiting state.
-
-Do not silently continue using more expensive models.
-
-Record usage and estimated cost where provider information is available.
-
-16. Observability
-
-Cognis must produce structured logs and operational metrics.
-
-Minimum observability requirements:
-
-- Application startup and shutdown.
-- Job creation and completion.
-- Job failure.
-- Worker execution.
-- Model provider response.
-- API latency.
-- Token usage.
-- Estimated API cost.
-- Research source counts.
-- Learning cycle status.
-- Evaluation results.
-- Approval events.
-- Database errors.
-
-Never log credentials or sensitive personal information unnecessarily.
-
-Logs must support diagnosis without exposing private user data to unauthorized users.
-
-17. Backup and Recovery
-
-Database backups must be implemented before Cognis becomes dependent on persistent learning history.
-
-Initial requirements:
-
-- Automated database backup.
-- Backup integrity verification.
-- Retention policy.
-- Secure storage.
-- Document storage backup where applicable.
-- Recovery procedure.
-- Periodic restoration test.
-
-A backup that has never been restored successfully must not be treated as a verified recovery strategy.
-
-Detailed instructions belong in "docs/operations/BACKUP_RECOVERY.md".
-
-18. Scalability and Future Evolution
-
-The architecture must support gradual evolution.
-
-Potential future capabilities:
-
-- Multiple AI providers.
-- More specialized model roles.
-- Advanced retrieval systems.
-- Dedicated research agents.
-- Specialized competency agents.
-- Fine-tuning pipelines.
-- Evaluation datasets.
-- Model version comparison.
-- Web application.
-- Multi-tenant subscription system.
-- Dedicated worker infrastructure.
-- GPU-based model experimentation.
-
-These are future possibilities, not MVP commitments.
-
-Extract a module into a separate service only when there is a measurable reason, such as:
-
-- Independent scaling requirements.
-- Different resource requirements.
-- Reliability isolation.
-- Deployment independence.
-- Clear operational benefits.
-
-19. Initial Architecture Decisions
-
-Decision| Proposed Direction| Status
-Architecture style| Modular monolith| Proposed
-Background execution| Database-backed jobs| Proposed
-Primary database| PostgreSQL| Proposed
-AI integration| Provider abstraction| Required principle
-Initial interface| Telegram| Required
-Scheduling| Configurable scheduler| Proposed
-Memory storage| Relational and file storage| Proposed
-Retrieval| Full-text first, vector later if justified| Proposed
-Deployment| Single VPS initially| Proposed
-Model training| Not part of MVP| Agreed scope
-Multi-user support| Architecturally supported from the beginning| Required principle
-Tool execution| Allowlisted and restricted| Required principle
-
-Any change to these decisions must be documented through an Architecture Decision Record (ADR).
-
-20. Architecture Validation Requirements
-
-Before considering the architecture ready for full implementation, verify:
-
-1. Application modules have clear responsibilities.
-2. Telegram logic is separated from business logic.
-3. AI providers can be replaced through adapters.
-4. Long-running work uses persistent jobs.
-5. Failed jobs can recover safely.
-6. Research sources are traceable.
-7. Knowledge categories are separated.
-8. Competency evaluation has independent records.
-9. Permanent changes require authenticated approval.
-10. User data is isolated.
-11. API usage and resource budgets are enforceable.
-12. Backups and recovery are feasible within the infrastructure budget.
-
-These requirements must be tested, not merely acknowledged in documentation.
-
-21. Related Documents
-
-This document is connected to:
-
-- "AGENTS.md"
-- "PRD.md"
-- "docs/autonomous-learning/AUTONOMOUS_LEARNING_SPEC.md"
-- "docs/autonomous-learning/COMPETENCY_CURRICULUM.md"
-- "docs/autonomous-learning/EVALUATION_FRAMEWORK.md"
-- "docs/intelligence/MODEL_STRATEGY.md"
-- "docs/intelligence/DATA_MEMORY_SPEC.md"
-- "docs/governance/SECURITY_GOVERNANCE.md"
-- "docs/technical/DATABASE_SCHEMA.md"
-- "docs/technical/API_CONTRACTS.md"
-- "docs/technical/TEST_STRATEGY.md"
-- "docs/operations/DEPLOYMENT_RUNBOOK.md"
-- "docs/operations/BACKUP_RECOVERY.md"
+MVP tidak boleh mengubah prompt inti, policy, arsitektur, konfigurasi keamanan, atau aturan sistem secara permanen tanpa proses pengembangan dan otorisasi yang sesuai.
 
 ---
 
-End of Document
+3. High-Level Architecture
+
+3.1 Logical Architecture
+
+Cognis dibagi menjadi enam lapisan utama.
+
+1. Interface Layer
+
+Menyediakan akses pengguna dan sistem eksternal terhadap fungsi operasional Cognis.
+
+Tanggung jawab:
+
+- Menerima permintaan pembelajaran manual.
+- Menampilkan status job.
+- Menampilkan riwayat pembelajaran.
+- Menyajikan laporan.
+- Menyediakan akses terhadap detail penelitian.
+
+2. Application Layer
+
+Mengendalikan alur kerja dan koordinasi antarmodul.
+
+Tanggung jawab:
+
+- Menerima perintah.
+- Membuat job.
+- Memulai pipeline.
+- Mengatur transisi status.
+- Mengkoordinasikan setiap tahap pembelajaran.
+- Memastikan batas proses dipatuhi.
+
+3. Learning Pipeline Layer
+
+Berisi enam komponen inti:
+
+- Scheduler.
+- Research Engine.
+- Source Validator.
+- Evidence Evaluator.
+- Knowledge Manager.
+- Learning Report Generator.
+
+4. Intelligence Integration Layer
+
+Menghubungkan Cognis dengan layanan eksternal.
+
+Tanggung jawab:
+
+- Model provider adapter.
+- Research provider adapter.
+- External source retrieval.
+- Model invocation tracking.
+- Provider error handling.
+
+5. Data Layer
+
+Menyimpan data operasional dan hasil pembelajaran.
+
+Tanggung jawab:
+
+- Job records.
+- Stage execution records.
+- Research records.
+- Source records.
+- Claim and evidence records.
+- Knowledge records.
+- Learning reports.
+- Model invocation metadata.
+
+6. Infrastructure Layer
+
+Menyediakan lingkungan operasional.
+
+Tanggung jawab:
+
+- Application runtime.
+- Scheduler runtime.
+- Worker runtime.
+- Database.
+- Logging.
+- Configuration management.
+- Backup dan recovery.
+
+3.2 Architecture Diagram
+
+                   FOUNDER / OPERATOR
+                           |
+                           v
+                  +------------------+
+                  |  Interface Layer |
+                  |  UI / API        |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  | Application Layer|
+                  | Job Coordinator  |
+                  +--------+---------+
+                           |
+             +-------------+-------------+
+             |                           |
+             v                           v
+     +---------------+           +---------------+
+     |   Scheduler   |           | Manual Trigger|
+     +-------+-------+           +-------+-------+
+             |                           |
+             +-------------+-------------+
+                           |
+                           v
+                  +------------------+
+                  | Persistent Job   |
+                  | Queue / Database |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  |   Worker /       |
+                  | Pipeline Runner  |
+                  +--------+---------+
+                           |
+                           v
+                +-----------------------+
+                |    LEARNING PIPELINE  |
+                +-----------------------+
+                           |
+                           v
+                  +------------------+
+                  | 1. Research      |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  | 2. Source        |
+                  |    Validation    |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  | 3. Evidence      |
+                  |    Evaluation    |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  | 4. Knowledge     |
+                  |    Storage       |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  | 5. Learning      |
+                  |    Report        |
+                  +--------+---------+
+                           |
+                           v
+                  +------------------+
+                  | Job Completion   |
+                  +------------------+
+
+          EXTERNAL PROVIDERS
+        +------------------------+
+        | Research Provider      |
+        | Model Provider         |
+        | External Information   |
+        +-----------+------------+
+                    |
+                    v
+        +------------------------+
+        | Intelligence Adapters  |
+        +------------------------+
+                    |
+                    v
+             Pipeline Modules
+
+        +------------------------+
+        | Persistent Data Layer  |
+        | Jobs / Sources / Claims|
+        | Evidence / Knowledge   |
+        | Reports / Metadata     |
+        +------------------------+
+
+Diagram menunjukkan hubungan logis. Diagram tidak mengharuskan setiap kotak menjadi layanan atau proses deployment tersendiri.
+
+---
+
+4. Component Architecture
+
+4.1 Interface Module
+
+Purpose:
+
+Menjadi pintu akses operasional bagi Founder atau operator.
+
+Responsibilities:
+
+- Menerima permintaan pembelajaran manual.
+- Menampilkan daftar job.
+- Menampilkan status dan progres job.
+- Menampilkan laporan pembelajaran.
+- Menampilkan detail sumber.
+- Menampilkan informasi kegagalan.
+- Menyediakan akses terhadap riwayat pembelajaran.
+
+Constraints:
+
+- Tidak menjalankan proses penelitian secara langsung di dalam request pengguna.
+- Tidak mengakses database dengan melewati application layer.
+- Tidak memiliki kewenangan untuk mengubah aturan inti sistem.
+
+4.2 Application Coordinator
+
+Purpose:
+
+Mengatur siklus hidup job dan koordinasi pipeline.
+
+Responsibilities:
+
+- Memvalidasi permintaan pembelajaran.
+- Membuat job.
+- Mengelola status job.
+- Memulai eksekusi pipeline.
+- Memastikan urutan tahapan.
+- Menyimpan hasil eksekusi.
+- Mengatur retry dan penanganan kegagalan.
+- Mengakhiri job sesuai hasil proses.
+
+Application Coordinator menjadi pemilik logika orkestrasi.
+
+Komponen pipeline tidak boleh membuat transisi status job secara sepihak tanpa melalui mekanisme yang ditentukan Application Coordinator.
+
+4.3 Scheduler Module
+
+Purpose:
+
+Memulai job secara otomatis berdasarkan jadwal.
+
+Responsibilities:
+
+- Membaca konfigurasi jadwal.
+- Mengidentifikasi waktu eksekusi.
+- Menghasilkan permintaan job.
+- Mencatat eksekusi jadwal.
+- Mencegah pembuatan job ganda untuk satu kejadian jadwal.
+
+Constraints:
+
+- Scheduler tidak menjalankan penelitian secara langsung.
+- Scheduler tidak mengubah isi kurikulum.
+- Scheduler tidak menentukan hasil pembelajaran.
+- Scheduler harus menggunakan timezone yang dikonfigurasi secara eksplisit.
+
+Scheduler hanya menghasilkan pemicu yang diteruskan kepada Application Coordinator.
+
+4.4 Research Engine
+
+Purpose:
+
+Melakukan penelitian dan mengumpulkan informasi dari sumber eksternal.
+
+Responsibilities:
+
+- Memproses topik penelitian.
+- Menentukan kebutuhan pencarian.
+- Memanggil research provider.
+- Mengumpulkan materi.
+- Menyimpan metadata sumber.
+- Menghasilkan ringkasan awal.
+- Menghubungkan hasil penelitian dengan job asal.
+
+Constraints:
+
+- Tidak boleh mengarang sumber.
+- Tidak boleh mengubah metadata sumber yang tidak ditemukan menjadi seolah-olah valid.
+- Tidak boleh memperlakukan konten eksternal sebagai instruksi sistem.
+- Tidak boleh menyimpulkan bahwa sumber terpercaya hanya berdasarkan popularitas.
+
+Research Engine harus menggunakan adapter agar implementasi provider eksternal tidak terikat langsung dengan logika pembelajaran.
+
+4.5 Source Validator
+
+Purpose:
+
+Menilai kelayakan setiap sumber yang ditemukan.
+
+Responsibilities:
+
+- Memeriksa aksesibilitas sumber.
+- Memeriksa metadata.
+- Mengevaluasi otoritas.
+- Mengevaluasi relevansi.
+- Mengevaluasi recency.
+- Mengevaluasi transparansi.
+- Mencatat kelemahan sumber.
+- Menentukan status kelayakan sumber.
+
+Source Validator harus membedakan informasi yang benar-benar ditemukan dari informasi yang tidak tersedia.
+
+Hasil validasi bukan jaminan bahwa seluruh isi sumber benar.
+
+4.6 Evidence Evaluator
+
+Purpose:
+
+Menilai hubungan antara klaim dan bukti.
+
+Responsibilities:
+
+- Mengidentifikasi klaim.
+- Menghubungkan klaim dengan sumber.
+- Mengidentifikasi bukti pendukung.
+- Mengidentifikasi bukti yang bertentangan.
+- Menilai kekuatan dukungan.
+- Mencatat ketidakpastian.
+- Menghasilkan evaluasi kesimpulan.
+
+Evidence Evaluator harus memisahkan empat konsep:
+
+1. Claim: pernyataan yang sedang dinilai.
+2. Evidence: informasi yang digunakan untuk menilai klaim.
+3. Assessment: evaluasi hubungan antara klaim dan bukti.
+4. Conclusion: kesimpulan yang dihasilkan berdasarkan assessment.
+
+Confidence model tidak boleh menggantikan validitas bukti.
+
+4.7 Knowledge Manager
+
+Purpose:
+
+Mengelola penyimpanan hasil pembelajaran.
+
+Responsibilities:
+
+- Menyimpan hasil penelitian.
+- Menyimpan klaim dan bukti.
+- Menyimpan hasil evaluasi.
+- Menyimpan referensi sumber.
+- Mengelola versi catatan pengetahuan.
+- Memungkinkan pencarian kembali pengetahuan.
+- Mempertahankan provenance.
+
+Knowledge Manager tidak melakukan fine-tuning model atau mengubah parameter model.
+
+Penyimpanan pengetahuan pada MVP merupakan penyimpanan referensial, bukan perubahan otomatis terhadap kemampuan dasar model.
+
+4.8 Learning Report Generator
+
+Purpose:
+
+Mengubah hasil pipeline menjadi laporan yang dapat dibaca dan diperiksa manusia.
+
+Responsibilities:
+
+- Mengambil hasil penelitian.
+- Mengambil hasil validasi sumber.
+- Mengambil hasil evaluasi bukti.
+- Menghasilkan ringkasan.
+- Menyajikan temuan.
+- Menampilkan keterbatasan.
+- Menampilkan referensi.
+- Menyimpan laporan.
+
+Report Generator tidak boleh menambahkan klaim baru yang tidak terdapat dalam data hasil penelitian dan evaluasi tanpa menandainya sebagai interpretasi tambahan.
+
+4.9 Intelligence Adapter Layer
+
+Purpose:
+
+Memisahkan logika Cognis dari ketergantungan provider eksternal.
+
+Subcomponents:
+
+Research Provider Adapter
+
+Menangani integrasi pencarian dan pengambilan informasi.
+
+Model Provider Adapter
+
+Menangani pemanggilan model AI.
+
+External Content Adapter
+
+Menangani normalisasi konten dan metadata dari sumber eksternal.
+
+Responsibilities:
+
+- Menormalisasi request dan response.
+- Menangani error provider.
+- Mencatat metadata pemanggilan.
+- Menjaga format output internal tetap konsisten.
+- Memisahkan konfigurasi provider dari logika pipeline.
+
+Provider eksternal tidak boleh memperoleh kewenangan langsung untuk mengubah database atau policy sistem.
+
+---
+
+5. Core Data Flow
+
+5.1 Job Creation
+
+1. Scheduler atau Interface mengirim permintaan pembelajaran.
+2. Application Coordinator memvalidasi input.
+3. Sistem menghasilkan Job ID.
+4. Sistem memeriksa idempotency key.
+5. Sistem menyimpan job dengan status Queued.
+6. Job tersedia untuk diambil oleh worker.
+
+5.2 Job Execution
+
+1. Worker mengambil job yang tersedia.
+2. Worker memperoleh hak eksekusi job secara atomik.
+3. Job berubah menjadi Running.
+4. Pipeline Runner memeriksa tahapan berikutnya.
+5. Tahap Research dijalankan.
+6. Hasil Research disimpan.
+7. Tahap Source Validation dijalankan.
+8. Hasil validasi disimpan.
+9. Tahap Evidence Evaluation dijalankan.
+10. Hasil evaluasi disimpan.
+11. Tahap Knowledge Storage dijalankan.
+12. Hasil pengetahuan disimpan.
+13. Tahap Learning Report dijalankan.
+14. Laporan disimpan.
+15. Job berubah menjadi Completed.
+
+Setiap tahap harus menghasilkan checkpoint persisten sebelum sistem melanjutkan ke tahap berikutnya.
+
+5.3 Data Flow Diagram
+
+Job Request
+    |
+    v
+Input Validation
+    |
+    v
+Job Creation
+    |
+    v
+Persistent Queue
+    |
+    v
+Worker Claim
+    |
+    v
+Research
+    |
+    v
+Research Records
+    |
+    v
+Source Validation
+    |
+    v
+Validated Source Records
+    |
+    v
+Evidence Evaluation
+    |
+    v
+Claims and Evidence Records
+    |
+    v
+Knowledge Storage
+    |
+    v
+Knowledge Records
+    |
+    v
+Learning Report Generation
+    |
+    v
+Report Storage
+    |
+    v
+Completed Job
+
+5.4 Data Persistence Principle
+
+Hasil tahap yang sudah selesai harus tetap tersedia ketika tahap berikutnya gagal.
+
+Contoh:
+
+Jika Research dan Source Validation berhasil, tetapi Evidence Evaluation gagal, sistem harus mempertahankan hasil kedua tahap sebelumnya.
+
+Ketika job dicoba kembali, sistem harus melanjutkan dari checkpoint terakhir yang valid sesuai kebijakan retry.
+
+Sistem tidak boleh menganggap seluruh data sebelum kegagalan otomatis tidak valid.
+
+---
+
+6. Job Processing Architecture
+
+6.1 Job Entity
+
+Setiap job memiliki identitas unik.
+
+Informasi minimum:
+
+- Job ID.
+- Idempotency Key.
+- Trigger Type.
+- Domain.
+- Learning Topic.
+- Job Status.
+- Current Stage.
+- Created At.
+- Scheduled At.
+- Started At.
+- Completed At.
+- Available At.
+- Last Error.
+- Model Configuration Reference.
+- Prompt Configuration Reference.
+
+Job ID merupakan identitas satu record job.
+
+Idempotency Key merupakan identitas permintaan logis yang digunakan untuk mencegah pembuatan job ganda.
+
+Keduanya memiliki fungsi berbeda dan tidak boleh diperlakukan sebagai satu konsep.
+
+6.2 Idempotency
+
+Idempotency harus didasarkan pada identitas permintaan yang stabil.
+
+Aturan:
+
+- Request manual menggunakan request identifier yang stabil.
+- Eksekusi jadwal menggunakan identitas schedule dan waktu occurrence yang telah dinormalisasi.
+- Retry terhadap job menggunakan Job ID yang sama.
+- Timestamp saat retry tidak boleh menghasilkan identitas permintaan baru.
+- Idempotency Key harus memiliki mekanisme unique constraint atau perlindungan atomik yang setara.
+
+Jangan menggunakan kombinasi topik, model, dan timestamp saat ini sebagai satu-satunya identitas idempotency.
+
+Permintaan topik yang sama pada dua sesi pembelajaran berbeda tetap boleh menghasilkan dua job berbeda.
+
+6.3 Worker Execution
+
+Worker bertanggung jawab mengambil job dan menjalankan pipeline.
+
+Requirements:
+
+- Worker hanya boleh mengambil job yang tersedia.
+- Pengambilan job harus dilakukan secara atomik.
+- Worker harus memverifikasi status job sebelum memulai eksekusi.
+- Worker harus mencatat heartbeat atau lease sesuai mekanisme yang digunakan.
+- Worker tidak boleh menjalankan satu job yang sama secara bersamaan pada beberapa eksekusi aktif.
+- Worker harus melepaskan hak eksekusi setelah selesai atau gagal.
+
+6.4 Job Status Model
+
+Status job MVP:
+
+Status| Meaning| Terminal
+Queued| Menunggu eksekusi atau waktu retry| No
+Running| Sedang diproses oleh worker| No
+Completed| Seluruh pipeline berhasil| Yes
+Failed| Eksekusi gagal dan tidak dapat dilanjutkan| Yes
+Cancelled| Job dihentikan secara eksplisit| Yes
+
+Retry tidak perlu menjadi status job terpisah.
+
+Ketika job menunggu retry, status job adalah Queued, sementara status tahap dan "Available At" menjelaskan waktu serta proses retry.
+
+6.5 Allowed Job Transitions
+
+Queued
+  |
+  v
+Running
+  |
+  +---------> Completed
+  |
+  +---------> Failed
+  |
+  +---------> Queued (Retry)
+  |
+  +---------> Cancelled
+
+Running
+  |
+  +---------> Queued (Recoverable Failure)
+  |
+  +---------> Failed
+  |
+  +---------> Cancelled
+
+Transisi harus divalidasi oleh Application Coordinator.
+
+Status terminal tidak boleh berubah kembali menjadi status aktif melalui proses normal.
+
+Jika job terminal perlu diulang, sistem membuat job baru dengan identitas baru dan referensi terhadap job sebelumnya apabila diperlukan.
+
+6.6 Stage Execution State
+
+Status tahap pipeline dikelola secara terpisah dari status job.
+
+Status tahap:
+
+Status| Meaning
+Pending| Belum dijalankan
+Running| Sedang dijalankan
+Retry Wait| Menunggu retry
+Completed| Berhasil diselesaikan
+Failed| Gagal secara permanen
+Skipped| Dilewati karena kondisi yang diizinkan
+
+Setiap tahap memiliki:
+
+- Stage Run ID.
+- Job ID.
+- Stage Name.
+- Attempt Number.
+- Stage Status.
+- Started At.
+- Completed At.
+- Input Reference.
+- Output Reference.
+- Error Information.
+
+Status tahap tidak boleh digunakan untuk menggantikan status job.
+
+6.7 Retry and Recovery
+
+Retry hanya boleh diterapkan pada kegagalan yang dapat dipulihkan.
+
+Contoh kegagalan yang mungkin dapat dipulihkan:
+
+- Timeout provider.
+- Gangguan jaringan sementara.
+- Rate limit yang memungkinkan retry.
+- Gangguan layanan eksternal sementara.
+
+Contoh kegagalan yang umumnya tidak boleh di-retry tanpa perubahan:
+
+- Input tidak valid.
+- Konfigurasi wajib tidak tersedia.
+- Format data tidak sesuai kontrak.
+- Akses ditolak secara permanen.
+- Pelanggaran aturan governance.
+
+Retry policy harus memiliki:
+
+- Maximum attempts.
+- Delay sebelum retry.
+- Backoff strategy.
+- Klasifikasi error.
+- Catatan setiap attempt.
+
+Nilai konfigurasi final ditentukan dalam Technical Design.
+
+6.8 Worker Crash Recovery
+
+Apabila worker berhenti ketika job masih Running:
+
+1. Sistem harus dapat mendeteksi worker yang sudah tidak aktif.
+2. Hak eksekusi yang kedaluwarsa dapat dipulihkan melalui mekanisme lease.
+3. Sistem memeriksa checkpoint tahap terakhir.
+4. Tahap yang belum selesai diproses ulang sesuai retry policy.
+5. Data hasil tahap yang telah selesai tidak boleh ditimpa tanpa validasi.
+6. Job yang sudah mencapai batas retry harus ditangani sesuai kebijakan kegagalan.
+
+Recovery tidak boleh bergantung hanya pada ingatan proses worker.
+
+---
+
+7. Persistence Architecture
+
+7.1 Data Storage Requirements
+
+Data utama Cognis harus disimpan dalam penyimpanan persisten yang mendukung:
+
+- Konsistensi relasi data.
+- Pencatatan identitas unik.
+- Validasi constraint.
+- Transaksi yang dibutuhkan untuk perubahan status.
+- Penyimpanan metadata.
+- Pencarian data.
+- Backup dan recovery.
+
+Pemilihan teknologi database menjadi keputusan tersendiri.
+
+7.2 Core Data Entities
+
+Model data konseptual MVP terdiri dari:
+
+LearningJob
+
+Menyimpan identitas, pemicu, topik, status, dan metadata job.
+
+JobStageRun
+
+Menyimpan riwayat eksekusi setiap tahap.
+
+ResearchRun
+
+Menyimpan identitas dan metadata proses penelitian.
+
+SourceRecord
+
+Menyimpan identitas, metadata, dan hasil validasi sumber.
+
+ClaimRecord
+
+Menyimpan klaim yang ditemukan atau dirumuskan dari materi penelitian.
+
+EvidenceRecord
+
+Menyimpan bukti yang digunakan dalam evaluasi klaim.
+
+ClaimEvidenceLink
+
+Menyimpan hubungan antara klaim dan bukti.
+
+EvidenceAssessment
+
+Menyimpan hasil penilaian dukungan bukti, kontradiksi, dan ketidakpastian.
+
+KnowledgeRecord
+
+Menyimpan hasil pembelajaran yang dapat ditelusuri ke sumber dan evaluasi.
+
+LearningReport
+
+Menyimpan laporan akhir yang terkait dengan job.
+
+ModelInvocation
+
+Menyimpan metadata pemanggilan model.
+
+ConfigurationVersion
+
+Menyimpan referensi versi konfigurasi prompt dan konfigurasi operasional yang digunakan.
+
+7.3 Logical Relationship
+
+LearningJob
+    |
+    +---- JobStageRun
+    |
+    +---- ResearchRun
+    |         |
+    |         +---- SourceRecord
+    |         |
+    |         +---- ClaimRecord
+    |                    |
+    |                    +---- ClaimEvidenceLink
+    |                    |          |
+    |                    |          +---- EvidenceRecord
+    |                    |
+    |                    +---- EvidenceAssessment
+    |
+    +---- KnowledgeRecord
+    |
+    +---- LearningReport
+    |
+    +---- ModelInvocation
+    |
+    +---- ConfigurationVersion
+
+Hubungan tersebut merupakan model logis. Struktur tabel, collection, index, dan foreign key ditentukan pada dokumen data design atau technical design.
+
+7.4 Knowledge Record Integrity
+
+Setiap KnowledgeRecord harus memiliki informasi yang cukup untuk:
+
+- Menentukan asal job.
+- Menentukan domain dan topik.
+- Mengidentifikasi sumber pendukung.
+- Menemukan klaim terkait.
+- Menemukan hasil evaluasi.
+- Mengetahui waktu penyimpanan.
+- Memeriksa versi atau riwayat.
+
+KnowledgeRecord tidak boleh menjadi salinan teks yang kehilangan hubungan terhadap asal informasinya.
+
+7.5 Knowledge Status and Validity
+
+Status penyimpanan tidak boleh dicampur dengan penilaian kebenaran informasi.
+
+Sistem harus membedakan:
+
+Storage State
+
+Menjelaskan kondisi record dalam penyimpanan, misalnya aktif, superseded, atau archived.
+
+Evidence Assessment
+
+Menjelaskan kekuatan dukungan bukti terhadap suatu klaim.
+
+Temporal Validity
+
+Menjelaskan kapan informasi berlaku, kapan diterbitkan, dan apakah informasi berpotensi kedaluwarsa.
+
+Record yang aktif di database tidak otomatis berarti isinya benar atau masih berlaku.
+
+Informasi lama tidak boleh dihapus hanya karena ditemukan informasi baru. Perubahan relevansi harus dicatat tanpa menghilangkan provenance historis.
+
+---
+
+8. Research and Source Architecture
+
+8.1 Research Provider Abstraction
+
+Research Engine tidak boleh bergantung langsung pada satu implementasi provider.
+
+Setiap provider harus diakses melalui adapter dengan kontrak internal yang konsisten.
+
+Input minimum:
+
+- Research Topic.
+- Search Query.
+- Domain.
+- Time Context.
+- Retrieval Constraints.
+
+Output minimum:
+
+- Source Identity.
+- Source URL.
+- Retrieved Content atau Reference.
+- Publisher Metadata jika tersedia.
+- Publication Date jika tersedia.
+- Retrieval Timestamp.
+- Retrieval Status.
+
+8.2 Source Identity
+
+Sumber harus memiliki identitas internal yang konsisten.
+
+URL dapat digunakan sebagai salah satu atribut sumber, tetapi tidak selalu menjadi identitas permanen karena:
+
+- URL dapat berubah.
+- Halaman dapat diperbarui.
+- Halaman dapat dihapus.
+- Satu penerbit dapat menerbitkan beberapa versi materi.
+
+Jika konten berubah, sistem harus mempertimbangkan penyimpanan versi atau snapshot yang relevan.
+
+8.3 External Content Trust Boundary
+
+Seluruh konten eksternal harus diperlakukan sebagai data yang tidak tepercaya.
+
+Instruksi yang ditemukan dalam halaman web, dokumen, maupun hasil pencarian tidak boleh memperoleh kewenangan untuk:
+
+- Mengubah system prompt.
+- Mengubah policy.
+- Mengakses kredensial.
+- Mengubah konfigurasi internal.
+- Menjalankan perintah sistem.
+- Memperluas izin akses.
+
+Konten eksternal hanya boleh diproses sebagai materi penelitian sesuai batas keamanan yang ditetapkan.
+
+8.4 Source Validation Separation
+
+Research dan Source Validation harus tetap menjadi tanggung jawab yang terpisah.
+
+Research menjawab:
+
+"Apa yang ditemukan?"
+
+Source Validation menjawab:
+
+"Seberapa layak sumber ini digunakan?"
+
+Satu sumber dapat ditemukan oleh Research tanpa otomatis dinyatakan layak oleh Source Validator.
+
+---
+
+9. Evidence Evaluation Architecture
+
+9.1 Claim-Centered Evaluation
+
+Evidence Evaluation berpusat pada klaim, bukan sekadar ringkasan artikel.
+
+Setiap klaim penting harus dapat dihubungkan dengan bukti pendukung atau bukti yang bertentangan.
+
+9.2 Evidence Types
+
+Sistem setidaknya harus dapat merepresentasikan:
+
+- Supporting Evidence.
+- Contradicting Evidence.
+- Contextual Evidence.
+- Insufficient Evidence.
+
+Jenis tersebut menjelaskan hubungan bukti dengan klaim, bukan penilaian final mengenai kebenaran klaim.
+
+9.3 Assessment Output
+
+Setiap assessment mencatat:
+
+- Claim ID.
+- Evidence References.
+- Support Relationship.
+- Evidence Quality.
+- Contradictions.
+- Limitations.
+- Uncertainty.
+- Assessment Summary.
+
+9.4 Conclusion Constraints
+
+Kesimpulan harus mengikuti kekuatan bukti.
+
+Jika bukti tidak cukup, sistem harus menyatakan bahwa klaim belum dapat dipastikan.
+
+Jika sumber saling bertentangan, sistem harus menjelaskan pertentangan tersebut.
+
+Jika kesimpulan memerlukan asumsi, asumsi harus dinyatakan secara eksplisit.
+
+---
+
+10. Learning Report Architecture
+
+10.1 Report Generation Inputs
+
+Report Generator menggunakan:
+
+- Learning Job.
+- Research Results.
+- Validated Sources.
+- Claims.
+- Evidence Records.
+- Evidence Assessments.
+- Knowledge Records.
+- Model and Configuration Metadata yang relevan.
+
+10.2 Report Generation Rules
+
+Report Generator harus:
+
+- Menggunakan data yang telah tersimpan.
+- Mempertahankan referensi sumber.
+- Memisahkan fakta dan interpretasi.
+- Menampilkan keterbatasan.
+- Menampilkan ketidakpastian.
+- Menghindari klaim yang tidak didukung.
+- Menggunakan bahasa Indonesia.
+
+10.3 Report Versioning
+
+Setiap laporan harus memiliki identitas dan versi.
+
+Perubahan laporan tidak boleh menghilangkan laporan atau hasil historis tanpa mekanisme versioning yang jelas.
+
+10.4 Report Completion
+
+Job hanya dapat dinyatakan Completed apabila seluruh hasil wajib pipeline, termasuk Learning Report, sudah berhasil disimpan.
+
+---
+
+11. Model Integration Architecture
+
+11.1 Provider Independence
+
+Logika pipeline tidak boleh terikat langsung pada satu model atau provider.
+
+Model dipanggil melalui Model Provider Adapter.
+
+11.2 Invocation Metadata
+
+Setiap pemanggilan model yang relevan harus mencatat:
+
+- Invocation ID.
+- Job ID.
+- Stage Name.
+- Provider.
+- Model Identifier.
+- Model Version jika tersedia.
+- Prompt Configuration Reference.
+- Request Timestamp.
+- Response Timestamp.
+- Execution Status.
+- Error Information.
+- Token Usage atau penggunaan resource jika tersedia.
+
+11.3 Configuration Versioning
+
+Konfigurasi yang digunakan dalam satu job harus dapat diidentifikasi kembali.
+
+Perubahan konfigurasi harus menghasilkan versi baru atau identitas konfigurasi baru.
+
+Riwayat job harus mempertahankan referensi konfigurasi yang benar-benar digunakan.
+
+11.4 Provider Failure
+
+Kegagalan provider harus ditangani oleh adapter dan diteruskan sebagai hasil yang dapat dipahami Application Coordinator.
+
+Fallback ke provider lain hanya diperbolehkan apabila strategi fallback telah dikonfigurasi, diuji, dan dicatat.
+
+Sistem tidak boleh berpindah provider secara diam-diam lalu menganggap hasilnya setara tanpa pencatatan.
+
+---
+
+12. Interface and Application Contracts
+
+12.1 Internal Module Contracts
+
+Setiap modul harus berkomunikasi melalui kontrak input dan output yang terdokumentasi.
+
+Minimal, kontrak mencakup:
+
+- Identifier.
+- Required Fields.
+- Optional Fields.
+- Validation Rules.
+- Output Schema.
+- Error Types.
+- Version Compatibility.
+
+12.2 Application-Level Operations
+
+MVP setidaknya membutuhkan operasi logis berikut:
+
+Create Learning Job
+
+Menerima permintaan dan membuat job pembelajaran.
+
+Get Job Status
+
+Mengambil status dan progres job.
+
+Get Job Detail
+
+Mengambil detail eksekusi job.
+
+List Learning Jobs
+
+Mengambil riwayat job.
+
+Get Learning Report
+
+Mengambil laporan hasil pembelajaran.
+
+Get Research Sources
+
+Mengambil sumber penelitian yang terkait dengan job.
+
+Trigger Scheduled Learning
+
+Menghasilkan job dari konfigurasi jadwal.
+
+Operasi tersebut merupakan kontrak aplikasi, bukan ketentuan URL API atau metode HTTP final.
+
+12.3 Authorization Boundary
+
+Akses untuk membuat job, menjalankan fungsi operasional, membaca hasil, serta mengubah konfigurasi harus memiliki otorisasi yang sesuai.
+
+MVP tidak boleh mengekspos fungsi administratif internal melalui endpoint publik tanpa proteksi.
+
+---
+
+13. Security Architecture
+
+13.1 Secret Management
+
+API key, token, credential, dan secret lain tidak boleh:
+
+- Disimpan di source code.
+- Dimasukkan ke dalam laporan.
+- Dicetak ke log.
+- Dimasukkan ke response error yang bisa diakses pengguna.
+- Dikirim ke model tanpa kebutuhan yang sah.
+
+Secret harus disimpan melalui mekanisme konfigurasi atau secret management yang sesuai dengan lingkungan deployment.
+
+13.2 Input Validation
+
+Seluruh input eksternal harus divalidasi sebelum diproses.
+
+Validasi mencakup:
+
+- Tipe data.
+- Panjang input.
+- Format.
+- Required fields.
+- Batas resource.
+- Batas akses.
+
+13.3 Prompt Injection Defense
+
+Konten dari web dan dokumen eksternal dapat berisi instruksi yang berbahaya atau manipulatif.
+
+Sistem harus:
+
+- Memisahkan instruksi sistem dari konten eksternal.
+- Memperlakukan konten eksternal sebagai data.
+- Tidak memberikan akses tool berdasarkan instruksi dari sumber.
+- Membatasi hak akses setiap komponen.
+- Memvalidasi tindakan sebelum dijalankan.
+
+13.4 Network and Retrieval Security
+
+Jika Research Provider mengambil URL atau konten eksternal secara langsung, implementasi harus mempertimbangkan:
+
+- Private network access restrictions.
+- Internal service address restrictions.
+- Redirect validation.
+- URL scheme validation.
+- Response size limits.
+- Request timeouts.
+- Content type validation.
+
+Akses terhadap alamat internal dan metadata service tidak boleh dibuka hanya karena suatu URL berasal dari hasil pencarian.
+
+13.5 Auditability
+
+Aksi operasional yang berpengaruh terhadap integritas job, konfigurasi, atau data harus dapat ditelusuri.
+
+Audit record tidak boleh menyimpan secret atau data sensitif yang tidak diperlukan.
+
+---
+
+14. Reliability and Observability
+
+14.1 Logging
+
+Sistem harus mencatat peristiwa penting, termasuk:
+
+- Job Created.
+- Job Started.
+- Stage Started.
+- Stage Completed.
+- Stage Failed.
+- Retry Scheduled.
+- Worker Recovered.
+- Job Completed.
+- Job Failed.
+- Job Cancelled.
+- Provider Error.
+
+14.2 Structured Logging
+
+Log harus memiliki konteks yang cukup untuk menghubungkan kejadian.
+
+Field minimum jika relevan:
+
+- Timestamp.
+- Job ID.
+- Stage Run ID.
+- Component.
+- Event Type.
+- Severity.
+- Error Code.
+- Correlation ID.
+
+14.3 Metrics
+
+Metrik operasional minimum:
+
+- Total Jobs.
+- Completed Jobs.
+- Failed Jobs.
+- Active Jobs.
+- Stage Duration.
+- Job Duration.
+- Retry Count.
+- Provider Failure Count.
+- Resource Usage jika tersedia.
+
+Metrik harus menggambarkan kondisi aktual, bukan nilai estimasi yang disajikan sebagai data nyata.
+
+14.4 Health Monitoring
+
+Sistem harus menyediakan mekanisme untuk memeriksa:
+
+- Application Availability.
+- Database Connectivity.
+- Worker Availability.
+- Scheduler Availability.
+- Provider Availability jika didukung.
+
+Kegagalan satu provider eksternal tidak boleh otomatis dianggap sebagai kegagalan seluruh sistem.
+
+14.5 Backup and Recovery
+
+Sistem harus memiliki strategi backup terhadap data yang diperlukan untuk memulihkan:
+
+- Riwayat job.
+- Data penelitian.
+- Sumber.
+- Klaim dan bukti.
+- Knowledge Records.
+- Learning Reports.
+- Konfigurasi yang diperlukan untuk operasional.
+
+Backup baru boleh dianggap terverifikasi setelah proses restore berhasil diuji.
+
+RPO dan RTO harus ditentukan berdasarkan kebutuhan operasional dan kemampuan infrastruktur yang dipilih.
+
+---
+
+15. Deployment Architecture
+
+15.1 MVP Deployment Model
+
+Arsitektur deployment awal dapat terdiri dari:
+
+1. Application Runtime.
+2. Worker Runtime.
+3. Scheduler Runtime.
+4. Persistent Database.
+5. External Provider Connections.
+6. Logging and Monitoring.
+
+Komponen runtime boleh menggunakan codebase dan artefak deployment yang sama.
+
+Pemisahan proses dilakukan untuk mengisolasi pekerjaan terjadwal, request pengguna, dan pemrosesan yang berjalan lama.
+
+15.2 Deployment Constraints
+
+- Sistem harus dapat dijalankan tanpa memerlukan arsitektur multi-region.
+- Worker harus dapat dihentikan dan dijalankan kembali tanpa kehilangan seluruh progres.
+- Scheduler harus mencegah eksekusi ganda.
+- Database menjadi sumber kebenaran untuk status job dan data persisten.
+- Konfigurasi lingkungan harus dipisahkan dari source code.
+- Deployment tidak boleh merusak data historis.
+
+15.3 Scaling Strategy
+
+Scaling dilakukan secara bertahap berdasarkan bukti kebutuhan.
+
+Urutan yang disarankan:
+
+1. Optimasi query dan penggunaan resource.
+2. Pengaturan concurrency worker.
+3. Pemisahan proses scheduler dan worker apabila belum dipisahkan.
+4. Penambahan kapasitas database.
+5. Penggunaan queue infrastructure khusus jika diperlukan.
+6. Pemisahan modul menjadi layanan tersendiri apabila batas beban dan kebutuhan operasional membenarkannya.
+
+Microservices bukan target wajib MVP.
+
+---
+
+16. Testing Architecture
+
+16.1 Unit Testing
+
+Setiap modul harus dapat diuji secara terpisah.
+
+Fokus pengujian:
+
+- Input validation.
+- Status transition.
+- Idempotency.
+- Source validation rules.
+- Evidence mapping.
+- Knowledge persistence rules.
+- Report generation.
+- Error classification.
+
+16.2 Integration Testing
+
+Pengujian integrasi harus memverifikasi hubungan antar-komponen.
+
+Contoh:
+
+- Application Coordinator dengan Job Storage.
+- Worker dengan Job Queue.
+- Research Engine dengan Provider Adapter.
+- Source Validator dengan Source Records.
+- Evidence Evaluator dengan Claim dan Evidence Storage.
+- Knowledge Manager dengan Persistence Layer.
+- Report Generator dengan seluruh output pipeline.
+
+16.3 End-to-End Testing
+
+Setidaknya harus ada pengujian untuk satu siklus pembelajaran penuh:
+
+Create Job → Execute Pipeline → Store Knowledge → Generate Report → Retrieve Report
+
+16.4 Failure Testing
+
+Pengujian harus mencakup:
+
+- Provider timeout.
+- Provider rate limit.
+- Database connection failure.
+- Worker termination.
+- Duplicate job request.
+- Invalid input.
+- Missing source metadata.
+- Empty research result.
+- Conflicting evidence.
+- Report generation failure.
+- Retry exhaustion.
+
+16.5 Governance Testing
+
+Pengujian harus memastikan:
+
+- Konten eksternal tidak dapat mengubah system policy.
+- Model tidak dapat mengubah konfigurasi inti secara otomatis.
+- Penyimpanan knowledge tidak mengubah prompt atau parameter model.
+- Endpoint administratif dilindungi.
+- Secret tidak muncul pada log atau laporan.
+
+---
+
+17. Architecture Decision Boundaries
+
+Dokumen ini menetapkan keputusan arsitektur berikut sebagai baseline MVP:
+
+Area| Decision
+Architecture Style| Modular Monolith
+Processing Model| Asynchronous Job Processing
+Core Workflow| Sequential Learning Pipeline
+Job State| Persisted and Observable
+Pipeline State| Independently Tracked
+Job Recovery| Checkpoint-Based
+Idempotency| Stable Request Identity
+Data Provenance| Required
+Knowledge Storage| Persistent Reference Knowledge
+Model Integration| Provider Adapter
+External Content| Untrusted Input
+System Modification| Not Allowed Automatically
+Microservices| Deferred
+Automatic Faculty Progression| Deferred
+Founder Approval Workflow| Deferred
+
+Keputusan tersebut menjadi acuan untuk implementasi MVP.
+
+17.1 Implementation Decisions Still Open
+
+Hal berikut belum ditentukan oleh dokumen arsitektur ini:
+
+- Programming language.
+- Backend framework.
+- Frontend framework.
+- Database engine.
+- Database schema implementation.
+- Queue implementation.
+- Scheduler library.
+- Research provider.
+- Model provider.
+- Model routing strategy.
+- Deployment platform.
+- Authentication implementation.
+- Storage technology untuk dokumen atau snapshot.
+- Concrete retry values.
+- Resource limits.
+
+Setiap keputusan harus dicatat dalam dokumen teknis terkait atau Architecture Decision Record (ADR) apabila memiliki dampak arsitektur yang signifikan.
+
+---
+
+18. Future Architecture Evolution
+
+Arsitektur Cognis harus memungkinkan pengembangan berikutnya tanpa memaksa MVP membangunnya sekarang.
+
+Phase 2: Competency and Evaluation
+
+Potensi pengembangan:
+
+- Competency Registry.
+- Curriculum Management.
+- Learning Assessment.
+- Benchmark Management.
+- Competency Progress Tracking.
+
+Phase 3: Governed Improvement
+
+Potensi pengembangan:
+
+- Improvement Proposal Engine.
+- Founder Review Interface.
+- Approval Workflow.
+- Change Implementation.
+- Regression Testing.
+- Rollback Management.
+
+Phase 4: Advanced Intelligence
+
+Potensi pengembangan:
+
+- Multi-Agent Orchestration.
+- Specialized Research Agents.
+- Advanced Knowledge Retrieval.
+- Model Evaluation and Routing.
+- Advanced Long-Term Memory.
+- Controlled Fine-Tuning jika terbukti diperlukan.
+
+Setiap fase membutuhkan evaluasi dan keputusan pengembangan tersendiri.
+
+Tidak ada fase masa depan yang boleh dianggap otomatis aktif hanya karena telah tercantum dalam dokumen.
+
+---
+
+19. Architecture Risks
+
+19.1 Overengineering
+
+Risk:
+
+Membangun terlalu banyak layanan dan infrastruktur sebelum kebutuhan operasional terbukti.
+
+Mitigation:
+
+Gunakan modular monolith dan pisahkan deployment hanya jika ada alasan yang terukur.
+
+19.2 Data Provenance Loss
+
+Risk:
+
+Hasil penelitian tersimpan tanpa hubungan ke sumber dan bukti.
+
+Mitigation:
+
+Terapkan provenance sebagai bagian wajib dari model data.
+
+19.3 Duplicate Execution
+
+Risk:
+
+Scheduler, retry, atau request berulang menghasilkan job ganda.
+
+Mitigation:
+
+Gunakan idempotency key yang stabil dan pengamanan transaksi.
+
+19.4 Worker Crash
+
+Risk:
+
+Proses berhenti sebelum pipeline selesai.
+
+Mitigation:
+
+Gunakan persistent job state, checkpoint, lease, dan recovery mechanism.
+
+19.5 Provider Dependency
+
+Risk:
+
+Perubahan provider merusak logika pipeline.
+
+Mitigation:
+
+Gunakan provider adapter dan kontrak internal.
+
+19.6 False Confidence
+
+Risk:
+
+Model menyajikan kesimpulan yang terlihat kuat meskipun dukungan buktinya lemah.
+
+Mitigation:
+
+Pisahkan claim, evidence, assessment, dan conclusion.
+
+19.7 Governance Bypass
+
+Risk:
+
+Input eksternal atau komponen pipeline dapat memengaruhi aturan internal.
+
+Mitigation:
+
+Pertahankan trust boundary, access control, dan governance tests.
+
+---
+
+20. Architecture Completion Criteria
+
+Arsitektur MVP dianggap siap diimplementasikan apabila:
+
+1. Seluruh komponen utama memiliki tanggung jawab yang jelas.
+2. Aliran data utama telah didefinisikan.
+3. Job lifecycle telah memiliki status dan transisi yang konsisten.
+4. Status job terpisah dari status tahap pipeline.
+5. Retry dan recovery memiliki aturan yang jelas.
+6. Idempotency tidak bergantung pada timestamp eksekusi saat ini.
+7. Model data mempertahankan provenance.
+8. Integrasi provider memiliki batas adapter.
+9. Trust boundary untuk konten eksternal telah ditentukan.
+10. Kebutuhan observability telah didefinisikan.
+11. Batas keamanan dan governance telah ditentukan.
+12. Keputusan teknis yang belum dibuat tercatat secara eksplisit.
+13. Arsitektur dapat diuji melalui unit, integration, dan end-to-end tests.
+
+Dokumen ini tidak membuktikan bahwa implementasi telah selesai atau bahwa sistem sudah memenuhi seluruh persyaratan.
+
+Keberhasilan hanya dapat dinyatakan setelah implementasi dan pengujian memberikan bukti yang sesuai.
+
+---
+
+21. Final Architecture Principle
+
+Cognis harus memiliki arsitektur yang cukup sederhana untuk dibangun, cukup terstruktur untuk diuji, dan cukup kuat untuk dikembangkan.
+
+Kompleksitas bukan ukuran kecanggihan.
+
+Jumlah agent bukan ukuran kecerdasan.
+
+Jumlah data bukan ukuran pemahaman.
+
+Arsitektur yang baik adalah arsitektur yang membuat setiap proses dapat dijelaskan, setiap hasil dapat ditelusuri, setiap kegagalan dapat ditangani, dan setiap peningkatan dapat dibuktikan.
+
+Build the learning pipeline first. Prove reliability and evidence integrity. Expand autonomy only when the foundation deserves it.
