@@ -1,720 +1,905 @@
-Cognis AI
+PRODUCT REQUIREMENTS DOCUMENT (PRD)
 
-Product Requirements Document (PRD)
+COGNIS
 
-Project Name: Cognis AI
-Repository: "cognis"
 Document Version: 1.0
-Status: Initial Specification
-Product Category: AI Research and Autonomous Learning System
+Product Version: MVP v1
+Status: Proposed Baseline
+Document Owner: Founder
+Product Category: Autonomous Learning System
+Primary Language: Indonesian
+Primary Timezone: Asia/Jakarta
 
 ---
 
 1. Product Overview
 
-Cognis AI is a domain-specialized artificial intelligence system designed to conduct research, develop domain competencies, evaluate its own capabilities, and improve through a controlled autonomous learning process.
+1.1 Product Name
 
-Cognis is not intended to be just a conversational AI or a document retrieval system.
+Cognis
 
-Its primary purpose is to develop reliable analytical capabilities across interconnected domains, maintain an organized knowledge base, conduct evidence-based research, and demonstrate measurable improvements through independent evaluations.
+1.2 Product Vision
 
-The system will use existing AI models through provider integrations during its initial development. Its architecture must remain flexible enough to support different models and future fine-tuning initiatives.
+Cognis adalah Autonomous Learning System (ALS) yang dirancang untuk membangun dan mengembangkan pengetahuan khusus dalam bidang ekonomi, bisnis, geopolitik, keuangan, dan pasar finansial melalui proses penelitian, validasi sumber, evaluasi bukti, penyimpanan pengetahuan, serta evaluasi hasil pembelajaran secara terstruktur.
 
-The long-term objective is to develop an increasingly capable, specialized intelligence system through the Autonomous Learning System (ALS).
+Cognis tidak dirancang sekadar sebagai chatbot yang menjawab pertanyaan. Tujuan utamanya adalah membangun sistem pembelajaran berkelanjutan yang mampu:
 
-2. Product Vision
+1. Melakukan penelitian berdasarkan topik dan kurikulum.
+2. Mengidentifikasi serta memvalidasi sumber informasi.
+3. Mengevaluasi kualitas bukti dan kekuatan kesimpulan.
+4. Menyimpan hasil pembelajaran beserta asal-usul informasinya.
+5. Menghasilkan laporan pembelajaran yang dapat diperiksa manusia.
+6. Menyediakan fondasi teknis untuk pengembangan kemampuan pada tahap berikutnya.
 
-Build an AI system that continuously develops specialized knowledge and analytical competence through research, structured learning, evaluation, and controlled improvement.
+Pengembangan kemampuan Cognis harus didasarkan pada bukti, pengujian, dan hasil evaluasi, bukan klaim bahwa sistem telah menjadi lebih pintar.
 
-Cognis should eventually be capable of:
+1.3 Product Philosophy
 
-- Understanding complex economic and business problems.
-- Analyzing financial and market conditions.
-- Connecting geopolitical developments with economic consequences.
-- Conducting independent research using credible sources.
-- Identifying conflicting evidence and uncertainty.
-- Producing structured analytical reports.
-- Recognizing its own competency gaps.
-- Designing learning activities to address those gaps.
-- Demonstrating measurable improvements over time.
+Cognis dibangun berdasarkan prinsip berikut:
 
-The system must prioritize actual reasoning and task performance over the appearance of intelligence.
+Evidence over Claims
 
-3. Target Users
+Setiap kesimpulan harus memiliki dasar informasi yang bisa ditelusuri. Sistem tidak boleh mengarang sumber, data, maupun tingkat kepastian.
 
-Primary User
+Learning over Information Collection
 
-The initial primary user is the system owner, who supervises Cognis, provides research directions, reviews learning reports, and approves permanent changes.
+Mengumpulkan banyak artikel bukan berarti belajar. Cognis harus mampu mengidentifikasi temuan, hubungan antar-informasi, perbedaan pendapat, serta keterbatasan bukti.
 
-Future Users
+Traceability over Black-Box Decisions
 
-The architecture should allow additional authorized users to interact with Cognis through controlled access.
+Setiap hasil pembelajaran harus dapat ditelusuri ke proses penelitian, sumber, dan evaluasi yang menghasilkannya.
 
-Future user-facing capabilities may include:
+Controlled Autonomy
 
-- Research assistance.
-- Economic and business analysis.
-- Financial education.
-- Market research.
-- Structured learning.
-- Access to approved research outputs.
+Otomatisasi diperbolehkan dalam batas yang sudah ditentukan. Perubahan permanen terhadap kemampuan dan perilaku inti sistem tidak boleh dilakukan secara sepihak oleh AI.
 
-Multi-user capabilities must not compromise user privacy, data isolation, or administrative control.
+Measured Improvement
 
-4. Core Knowledge Domains
-
-Cognis will initially concentrate on five interconnected domains.
-
-4.1 Economics
-
-Competencies include:
-
-- Microeconomics.
-- Macroeconomics.
-- Monetary economics.
-- Fiscal policy.
-- International trade.
-- Economic history.
-- Economic schools of thought.
-- Central banking and monetary systems.
-- Economic indicators.
-- Economic crises and business cycles.
-
-4.2 Business
-
-Competencies include:
-
-- Business models.
-- Market research.
-- Competitive analysis.
-- Strategy development.
-- Operations management.
-- Entrepreneurship.
-- Unit economics.
-- Pricing and profitability.
-- Supply chains.
-- Business risk management.
-
-4.3 Geopolitics
-
-Competencies include:
-
-- International relations.
-- Geopolitical strategy.
-- International conflicts.
-- Resource competition.
-- Trade relations.
-- Energy security.
-- Political economy.
-- Strategic alliances.
-- Regional and global power dynamics.
-
-4.4 Finance
-
-Competencies include:
-
-- Financial statements.
-- Corporate finance.
-- Capital allocation.
-- Investment principles.
-- Banking systems.
-- Financial markets and institutions.
-- Risk management.
-- Portfolio theory.
-- Financial instruments.
-- Financial history.
-
-4.5 Financial Markets
-
-Competencies include:
-
-- Market structure.
-- Price discovery.
-- Market participants.
-- Liquidity.
-- Trading psychology.
-- Technical analysis.
-- Fundamental analysis.
-- Market microstructure.
-- Volatility.
-- Risk and position management.
-- Derivatives and leverage.
-
-These domains must not operate as isolated knowledge categories.
-
-Cognis should progressively develop cross-domain reasoning, including relationships such as:
-
-- Geopolitical conflict and energy prices.
-- Monetary policy and currency movements.
-- Interest rates and capital allocation.
-- Supply chains and business profitability.
-- Liquidity conditions and financial market behavior.
-
-5. Product Architecture at the Product Level
-
-Cognis is organized around six primary functional capabilities.
-
-5.1 Intelligence Layer
-
-Responsible for interacting with AI models and coordinating tasks that require reasoning, analysis, extraction, and communication.
-
-Responsibilities:
-
-- Model selection.
-- Model provider integration.
-- Task-specific model routing.
-- Response generation.
-- Reasoning workflows.
-- Structured output generation.
-
-Cognis must not depend on one permanent AI provider.
-
-5.2 Research Engine
-
-Responsible for gathering, assessing, and organizing external information.
-
-Responsibilities:
-
-- Research discovery.
-- Source retrieval.
-- Source credibility assessment.
-- Evidence extraction.
-- Cross-source comparison.
-- Citation management.
-- Research summarization.
-- Identification of conflicting information.
-
-Research outputs must distinguish facts, interpretations, assumptions, hypotheses, predictions, and uncertainty.
-
-5.3 Knowledge and Memory System
-
-Responsible for organizing information obtained from research and interactions.
-
-Knowledge must be separated into distinct categories:
-
-1. General knowledge: relatively stable concepts and principles.
-2. Contextual knowledge: information related to specific users, projects, or research tasks.
-3. Time-sensitive knowledge: information that requires current verification.
-4. Evaluated knowledge: information that has passed defined validation procedures.
-
-Storing information must not automatically make it authoritative or verified.
-
-5.4 Autonomous Learning System (ALS)
-
-Responsible for managing the system's learning lifecycle.
-
-The ALS must:
-
-- Identify competency gaps.
-- Set learning objectives.
-- Select learning resources.
-- Conduct research.
-- Create learning outputs.
-- Run competency evaluations.
-- Identify weaknesses.
-- Generate improvement proposals.
-- Request approval for permanent changes.
-- Apply approved changes.
-- Measure post-change performance.
-- Support rollback when improvements fail.
-
-The ALS is a central product capability, not an optional background feature.
-
-5.5 Competency Engine and Evaluation System
-
-Responsible for defining, measuring, and tracking Cognis's actual capabilities.
-
-Responsibilities:
-
-- Competency definitions.
-- Learning objectives.
-- Difficulty levels.
-- Assessment generation.
-- Evaluation rubrics.
-- Benchmark execution.
-- Performance history.
-- Weakness identification.
-- Competency progression.
-
-Competency must be measured through demonstrated task performance, not merely accumulated documents or self-assessed confidence.
-
-5.6 User Interaction Layer
-
-The initial interaction channel is Telegram.
-
-Responsibilities:
-
-- Receive user instructions.
-- Start research tasks.
-- Deliver research outputs.
-- Request daily learning briefs.
-- Send daily learning reports.
-- Present improvement proposals.
-- Receive approval or rejection.
-- Communicate task status and failures.
-
-The internal business logic must remain independent of Telegram so additional interfaces can be added later.
-
-6. Core User Workflows
-
-6.1 Research Workflow
-
-1. User submits a research question.
-2. Cognis interprets the objective and scope.
-3. Cognis identifies necessary research sources.
-4. Research Engine gathers relevant evidence.
-5. Cognis evaluates source quality.
-6. Intelligence Layer analyzes the findings.
-7. Cognis generates a structured report.
-8. User receives the result through Telegram.
-9. Research materials are stored with appropriate provenance and access controls.
-
-The system must communicate when evidence is insufficient or conflicting.
-
-6.2 Autonomous Learning Workflow
-
-1. ALS checks the active competency curriculum.
-2. ALS identifies learning priorities.
-3. ALS creates a learning objective.
-4. Research Engine gathers relevant materials.
-5. Cognis studies and organizes the information.
-6. Evaluation System tests the acquired competency.
-7. ALS records the result.
-8. ALS identifies remaining weaknesses.
-9. ALS proposes the next learning activity or system improvement.
-10. Permanent changes enter the human approval process.
-
-6.3 Daily Learning Workflow
-
-The initial intended schedule uses Asia/Jakarta time and must be configurable.
-
-07:00 WIB: Daily Brief Request
-
-If the user has not submitted a daily brief, Cognis sends a Telegram message requesting the day's research or learning direction.
-
-During the Day: Learning Execution
-
-Cognis processes approved learning activities using background jobs, checkpoints, resource budgets, and controlled retry behavior.
-
-18:00 WIB: Daily Learning Report
-
-Cognis delivers a structured report containing:
-
-- Learning objectives.
-- Topics studied.
-- Sources reviewed.
-- Important findings.
-- New concepts.
-- Competency evaluations.
-- Identified weaknesses.
-- Proposed next steps.
-- Changes requiring approval.
-
-The report must separate newly acquired information from verified competency improvements.
-
-Human Review
-
-The user can review the report and approve, reject, or request revisions to proposed permanent changes.
-
-A report being delivered does not automatically authorize its proposed changes.
-
-7. MVP Scope
-
-The MVP must establish the smallest usable foundation for Cognis without prematurely implementing the entire long-term vision.
-
-7.1 MVP Features
-
-A. Core Application
-
-- Basic application structure.
-- Configuration management.
-- Environment-based secret handling.
-- Modular service organization.
-- Error handling and structured logging.
-
-B. AI Model Integration
-
-- At least one working AI provider integration.
-- Replaceable provider interface.
-- Configurable model selection.
-- API error handling.
-- Request timeout handling.
-- Usage and cost tracking where available.
-
-C. Telegram Interface
-
-- Telegram bot connection.
-- Authorized user access.
-- Basic command handling.
-- Research request submission.
-- Result delivery.
-- Task status notifications.
-
-D. Research Engine
-
-- Research task creation.
-- Source retrieval through approved integrations.
-- Source metadata preservation.
-- Research summarization.
-- Citation tracking.
-- Structured reports.
-
-E. Knowledge Management
-
-- Persistent knowledge storage.
-- Basic categorization.
-- Source provenance.
-- Knowledge status and review state.
-- Search and retrieval.
-
-F. Autonomous Learning Foundation
-
-- Competency curriculum storage.
-- Learning objective creation.
-- Learning task execution.
-- Learning result recording.
-- Basic competency evaluation.
-- Improvement proposal generation.
-
-G. Human Approval
-
-- Proposal creation.
-- Proposal review.
-- Explicit approval and rejection.
-- Approval history.
-- Controlled application of approved changes.
-
-H. Operational Reliability
-
-- Asynchronous job processing.
-- Persistent job state.
-- Checkpoint and recovery support.
-- Bounded retries.
-- API and resource budgets.
-- Basic monitoring.
-
-7.2 MVP Exclusions
-
-The following are not required for the first MVP:
-
-- Training a foundation model from scratch.
-- Large-scale pretraining.
-- Fully autonomous model-weight modification.
-- Unrestricted autonomous code execution.
-- Unrestricted web scraping.
-- Autonomous financial transactions.
-- Broker or exchange trading execution.
-- Public multi-tenant SaaS launch.
-- Complex graphical dashboards.
-- Multi-agent orchestration without a demonstrated requirement.
-
-These may be considered in later development phases after the core system has demonstrated reliability and measurable value.
-
-8. Functional Requirements
-
-ID| Requirement| Priority
-FR-01| Cognis must accept research requests through Telegram.| Must
-FR-02| Cognis must integrate with at least one AI provider.| Must
-FR-03| AI providers must be replaceable through a defined interface.| Must
-FR-04| Research outputs must preserve source references.| Must
-FR-05| Research outputs must distinguish evidence from interpretation.| Must
-FR-06| Cognis must store research results persistently.| Must
-FR-07| Cognis must maintain an organized competency curriculum.| Must
-FR-08| ALS must create and track learning objectives.| Must
-FR-09| Cognis must evaluate learning results against defined criteria.| Must
-FR-10| Cognis must record evaluation history.| Must
-FR-11| ALS must identify competency gaps.| Must
-FR-12| ALS must generate improvement proposals.| Must
-FR-13| Permanent changes must require explicit authorization.| Must
-FR-14| The system must maintain an auditable approval history.| Must
-FR-15| Long-running jobs must support asynchronous processing.| Must
-FR-16| Jobs must support checkpointing and recovery.| Must
-FR-17| The system must enforce access controls.| Must
-FR-18| The system must track resource consumption where available.| Must
-FR-19| Cognis must support configurable daily learning schedules.| Should
-FR-20| Cognis should support multiple model providers.| Should
-FR-21| Cognis should support cross-domain analysis.| Should
-FR-22| Cognis should support competency progression reports.| Should
-
-9. Non-Functional Requirements
-
-9.1 Reliability
-
-- Long-running tasks must not depend on one uninterrupted API request.
-- Failed jobs must preserve enough state for diagnosis and recovery.
-- Retries must be bounded.
-- Duplicate task execution must be controlled.
-- Critical changes must be auditable.
-
-9.2 Security
-
-- Secrets must never be exposed in frontend code or committed to Git.
-- Only authorized users may access protected functionality.
-- AI-generated instructions must not bypass security controls.
-- Tool execution must follow explicit permissions.
-- Approval controls must be enforced independently of model-generated claims.
-
-9.3 Performance
-
-- Simple interactions should avoid unnecessary background jobs.
-- Long research activities should run asynchronously.
-- Resource-intensive operations must have configurable limits.
-- Model calls should be selected according to task requirements and cost.
-
-9.4 Maintainability
-
-- Components must have clearly defined responsibilities.
-- Provider integrations must be replaceable.
-- Important business logic must be testable independently.
-- Documentation must reflect actual system behavior.
-
-9.5 Scalability
-
-The initial deployment may use modest infrastructure.
-
-However, the architecture should allow future migration to larger infrastructure without requiring a complete application rewrite.
-
-10. Intelligence Quality Requirements
-
-Cognis must not claim to be improving merely because it processes more documents.
-
-Its intelligence development must be measured using a consistent evaluation framework.
-
-The system should be evaluated across:
-
-- Factual accuracy.
-- Source reliability.
-- Reasoning quality.
-- Causal analysis.
-- Quantitative reasoning.
-- Critical thinking.
-- Cross-domain understanding.
-- Uncertainty calibration.
-- Research completeness.
-- Task execution quality.
-
-Each competency must have measurable evaluation criteria.
-
-Benchmark changes must be versioned and documented.
-
-Historical results must remain available so improvements and regressions can be compared fairly.
-
-11. Governance and Approval Requirements
-
-Cognis must operate under human-supervised autonomy.
-
-The system may independently perform permitted research and learning tasks.
-
-However, it must not independently redefine its permanent operating rules.
-
-The approval process must include:
-
-1. Proposed change.
-2. Reason for the change.
-3. Evidence supporting the proposal.
-4. Expected benefit.
-5. Potential risks.
-6. Implementation scope.
-7. Evaluation plan.
-8. Rollback plan.
-9. Human decision.
-10. Final implementation status.
-
-A rejected proposal must not be silently applied.
-
-An approved proposal must still pass implementation and post-change verification.
-
-12. Initial Success Metrics
-
-Success must be measured through observable system behavior.
-
-Product Metrics
-
-- Successful completion rate of research jobs.
-- Research report delivery success rate.
-- Average API cost per completed task.
-- Task failure and recovery rate.
-- Citation completeness.
-- Approval workflow correctness.
-
-Intelligence Metrics
-
-- Accuracy on fixed benchmark cases.
-- Reasoning rubric scores.
-- Source evaluation quality.
-- Performance on unseen evaluation cases.
-- Cross-domain reasoning performance.
-- Calibration of uncertainty.
-- Regression frequency after approved changes.
-
-Learning Metrics
-
-- Number of competency gaps identified.
-- Percentage of learning objectives evaluated.
-- Measured improvement between comparable benchmark versions.
-- Number of proposals accepted or rejected.
-- Percentage of approved changes successfully verified.
-- Frequency and severity of regressions.
-
-No numerical performance target should be invented before baseline measurements exist.
-
-Targets must be defined after the initial benchmark and operational baseline are established.
-
-13. Development Phases
-
-Phase 1: Specification and Foundation
-
-Objectives:
-
-- Complete product and architecture specifications.
-- Establish repository instructions.
-- Define ALS behavior.
-- Define competency curriculum.
-- Define evaluation framework.
-- Define governance and security requirements.
-
-Exit criteria:
-
-- Core specifications are documented.
-- Major architecture decisions are recorded.
-- Requirements are internally consistent.
-- Unresolved decisions are explicitly listed.
-
-Phase 2: Core Infrastructure
-
-Objectives:
-
-- Establish application foundation.
-- Implement configuration and secret handling.
-- Implement database integration.
-- Implement job processing.
-- Establish logging and basic monitoring.
-
-Exit criteria:
-
-- Application starts reliably.
-- Persistent data operations work.
-- Background jobs can be created and recovered.
-- Basic tests pass.
-
-Phase 3: AI and Research Engine
-
-Objectives:
-
-- Integrate AI provider.
-- Build provider abstraction.
-- Implement research workflows.
-- Preserve source metadata.
-- Generate structured research reports.
-
-Exit criteria:
-
-- Research tasks can complete end-to-end.
-- Sources can be traced.
-- Failures are handled and reported correctly.
-
-Phase 4: ALS and Competency Engine
-
-Objectives:
-
-- Implement competency curriculum storage.
-- Implement learning objectives.
-- Implement learning task workflows.
-- Implement evaluation and historical tracking.
-- Implement improvement proposals.
-
-Exit criteria:
-
-- ALS completes a learning cycle.
-- Evaluations produce structured results.
-- Weaknesses can be identified.
-- Improvement proposals can be generated.
-
-Phase 5: Telegram and Human Governance
-
-Objectives:
-
-- Implement Telegram interaction.
-- Implement daily brief workflow.
-- Implement daily learning reports.
-- Implement approval and rejection.
-- Record governance history.
-
-Exit criteria:
-
-- User can interact with Cognis through Telegram.
-- Approval controls work correctly.
-- Unauthorized changes are blocked.
-- Scheduled workflows can recover from failures.
-
-Phase 6: Reliability and Controlled Evolution
-
-Objectives:
-
-- Improve performance and operational reliability.
-- Expand independent benchmarks.
-- Test rollback procedures.
-- Evaluate model alternatives.
-- Prepare future fine-tuning capabilities.
-
-Exit criteria:
-
-- Core workflows pass defined tests.
-- Benchmark results are reproducible.
-- Approved changes are verifiable.
-- Regression and recovery procedures work.
-
-14. Key Product Constraints
-
-The project must account for:
-
-- Limited initial infrastructure.
-- API cost constraints.
-- Rate limits and provider availability.
-- Long-running research workloads.
-- Limited compute resources.
-- Data provenance requirements.
-- Security and authorization.
-- Human review capacity.
-
-Architecture choices must reflect these constraints rather than assume unlimited compute, budget, or API access.
-
-15. Open Decisions
-
-The following decisions must be evaluated and documented before their implementation becomes permanent:
-
-1. Final database technology.
-2. Final AI provider strategy.
-3. Research and search provider selection.
-4. Vector search requirements and implementation.
-5. Background job infrastructure.
-6. Authentication and user authorization model.
-7. Hosting and deployment architecture.
-8. Data retention and backup policies.
-9. Future fine-tuning strategy.
-10. Long-term multi-user product model.
-
-Do not silently convert these open decisions into permanent architectural commitments.
-
-16. Definition of MVP Completion
-
-The Cognis MVP is considered functionally complete when:
-
-- A user can submit a research request through Telegram.
-- Cognis can conduct a research workflow using an integrated model.
-- Research results contain traceable sources.
-- Results can be stored and retrieved.
-- ALS can execute a defined learning cycle.
-- Competency evaluations can be recorded.
-- ALS can generate improvement proposals.
-- The user can approve or reject proposals.
-- Permanent changes are blocked without authorization.
-- Long-running tasks can recover from failures.
-- Relevant tests and security checks pass.
-- Operational limitations are documented.
-
-A working chatbot alone does not qualify as a completed Cognis MVP.
+Peningkatan kemampuan harus dibuktikan melalui evaluasi yang dapat diulang dan dibandingkan.
 
 ---
 
-End of Document
+2. Problem Statement
+
+Sistem AI pada umumnya dapat menghasilkan jawaban dan melakukan penelitian, tetapi memiliki sejumlah kelemahan ketika digunakan sebagai sistem pembelajaran jangka panjang:
+
+1. Informasi yang dikumpulkan dapat bercampur antara fakta, opini, asumsi, dan spekulasi.
+2. Kualitas sumber tidak selalu dievaluasi secara konsisten.
+3. Kesimpulan dapat kehilangan konteks dan asal-usul bukti.
+4. Informasi lama dapat digunakan tanpa mempertimbangkan perubahan kondisi.
+5. Riwayat penelitian belum tentu membentuk basis pengetahuan yang terstruktur.
+6. Klaim peningkatan kemampuan AI sering tidak disertai pengujian yang memadai.
+7. Perubahan sistem secara otomatis berpotensi menghasilkan perilaku yang tidak diinginkan.
+
+Cognis berupaya menyelesaikan masalah tersebut dengan membangun satu pipeline pembelajaran yang konsisten, dapat diulang, dan dapat diaudit.
+
+---
+
+3. Product Goals
+
+3.1 Primary Goals
+
+MVP v1 harus membuktikan lima kemampuan utama:
+
+G1. Automated Research
+
+Cognis mampu menjalankan penelitian berdasarkan topik pembelajaran yang telah ditentukan tanpa harus menerima instruksi manual pada setiap tahap.
+
+G2. Source Validation
+
+Cognis mampu memeriksa kelayakan sumber dan mencatat informasi yang dibutuhkan untuk menilai kredibilitas serta relevansinya.
+
+G3. Evidence Evaluation
+
+Cognis mampu mengidentifikasi klaim, menghubungkannya dengan bukti, membedakan fakta dan interpretasi, serta mencatat ketidakpastian.
+
+G4. Knowledge Persistence
+
+Cognis mampu menyimpan hasil pembelajaran secara terstruktur dengan metadata, riwayat, dan referensi sumber yang dapat ditelusuri.
+
+G5. Learning Reporting
+
+Cognis mampu menghasilkan laporan pembelajaran yang menjelaskan apa yang diteliti, apa yang ditemukan, seberapa kuat buktinya, dan apa yang masih belum diketahui.
+
+3.2 Secondary Goals
+
+MVP juga diharapkan menyediakan fondasi untuk:
+
+- Pelacakan riwayat pembelajaran.
+- Pelacakan versi model dan konfigurasi prompt.
+- Evaluasi performa pipeline.
+- Pengembangan kurikulum berbasis kompetensi.
+- Pengembangan mekanisme evaluasi kemampuan pada versi berikutnya.
+
+Fitur sekunder tidak boleh menghambat penyelesaian pipeline utama.
+
+---
+
+4. Non-Goals
+
+Fitur berikut secara eksplisit bukan bagian dari MVP v1:
+
+1. Self-modification terhadap prompt inti, policy, arsitektur, atau aturan sistem.
+2. AI menyetujui perubahan permanen yang diusulkannya sendiri.
+3. Automatic Founder Approval Workflow.
+4. Automatic Competency Aggregation.
+5. Automatic Faculty Promotion atau kenaikan tingkat pembelajaran.
+6. Model training atau fine-tuning secara otomatis.
+7. Pengembangan model foundation sendiri dari awal.
+8. Sistem multi-agent kompleks yang belum terbukti dibutuhkan oleh pipeline.
+9. Sistem percakapan umum seperti chatbot konsumen.
+10. Integrasi Telegram sebagai persyaratan wajib MVP.
+11. Sistem multi-region, autoscaling kompleks, dan high availability tingkat enterprise.
+12. Sistem model-regression monitoring tingkat lanjut.
+
+Fitur tersebut dapat dipertimbangkan pada versi berikutnya berdasarkan kebutuhan dan hasil evaluasi MVP.
+
+---
+
+5. Target Domain
+
+Cognis memiliki lima domain pengetahuan utama.
+
+5.1 Economics
+
+Mencakup:
+
+- Makroekonomi.
+- Mikroekonomi.
+- Kebijakan moneter dan fiskal.
+- Inflasi dan suku bunga.
+- Pertumbuhan ekonomi.
+- Perdagangan internasional.
+- Struktur dan perkembangan ekonomi Indonesia.
+- Teori dan pemikiran ekonomi.
+
+5.2 Business
+
+Mencakup:
+
+- Strategi bisnis.
+- Model bisnis.
+- Operasional perusahaan.
+- Manajemen dan organisasi.
+- Ekonomi industri.
+- Persaingan pasar.
+- Kewirausahaan.
+- Analisis perusahaan.
+
+5.3 Geopolitics
+
+Mencakup:
+
+- Hubungan internasional.
+- Konflik dan keamanan global.
+- Kepentingan strategis negara.
+- Energi dan sumber daya.
+- Perdagangan dan rantai pasok global.
+- Kebijakan luar negeri.
+- Risiko geopolitik.
+
+5.4 Finance
+
+Mencakup:
+
+- Sistem keuangan.
+- Perbankan.
+- Pasar modal.
+- Manajemen risiko.
+- Instrumen keuangan.
+- Keuangan perusahaan.
+- Kebijakan dan regulasi keuangan.
+- Sistem pembayaran.
+
+5.5 Financial Markets
+
+Mencakup:
+
+- Pasar saham.
+- Pasar obligasi.
+- Forex.
+- Komoditas.
+- Emas.
+- Cryptocurrency.
+- Analisis fundamental.
+- Analisis teknikal.
+- Struktur pasar dan likuiditas.
+- Psikologi serta perilaku pelaku pasar.
+
+Kelima domain tersebut menjadi batas utama pengetahuan Cognis pada MVP. Pengembangan domain baru harus melalui keputusan pengembangan produk, bukan penambahan otomatis oleh AI.
+
+---
+
+6. Target User
+
+6.1 Primary User
+
+Founder atau operator yang bertanggung jawab menentukan arah pembelajaran, memantau hasil, serta mengevaluasi kualitas sistem.
+
+6.2 User Needs
+
+Pengguna membutuhkan sistem yang:
+
+- Dapat menjalankan penelitian secara terjadwal.
+- Tidak sekadar mengumpulkan informasi.
+- Menghasilkan kesimpulan dengan bukti yang jelas.
+- Menampilkan sumber informasi yang digunakan.
+- Menjelaskan keterbatasan penelitian.
+- Menyimpan hasil pembelajaran untuk ditinjau kembali.
+- Memiliki riwayat proses yang dapat diperiksa.
+- Tidak mengubah perilaku inti sistem tanpa kendali manusia.
+
+MVP difokuskan pada kebutuhan operator utama. Dukungan banyak pengguna bukan persyaratan yang harus diselesaikan sebelum pipeline pembelajaran dapat dibuktikan.
+
+---
+
+7. Core Product Workflow
+
+7.1 Main Learning Pipeline
+
+Pipeline utama Cognis:
+
+Scheduler → Research → Source Validation → Evidence Evaluation → Knowledge Storage → Learning Report
+
+Setiap tahapan harus menghasilkan keluaran yang dapat digunakan oleh tahap selanjutnya.
+
+7.2 Stage 1: Scheduler
+
+Scheduler bertanggung jawab memulai proses pembelajaran.
+
+Functional Requirements:
+
+- FR-SCH-001: Sistem harus mendukung pemicu pembelajaran secara terjadwal.
+- FR-SCH-002: Sistem harus mendukung pemicu pembelajaran secara manual untuk kebutuhan pengujian dan operasional.
+- FR-SCH-003: Sistem harus menggunakan konfigurasi waktu yang jelas, termasuk timezone.
+- FR-SCH-004: Sistem harus mencatat waktu rencana, waktu mulai, dan waktu selesai setiap job.
+- FR-SCH-005: Sistem harus mencegah eksekusi ganda untuk job yang sama ketika terjadi pengulangan pemicu.
+- FR-SCH-006: Sistem harus mencatat kegagalan pemicu atau kegagalan pembuatan job.
+
+Expected Output:
+
+- Job ID.
+- Topik pembelajaran.
+- Domain pembelajaran.
+- Waktu eksekusi.
+- Status job.
+- Konfigurasi pembelajaran yang digunakan.
+
+7.3 Stage 2: Research
+
+Research bertanggung jawab mengumpulkan informasi yang relevan terhadap topik pembelajaran.
+
+Functional Requirements:
+
+- FR-RES-001: Sistem harus mampu melakukan pencarian informasi berdasarkan topik.
+- FR-RES-002: Sistem harus mampu mengumpulkan materi dari sumber eksternal yang didukung.
+- FR-RES-003: Sistem harus menyimpan metadata setiap materi yang ditemukan.
+- FR-RES-004: Sistem harus mengutamakan sumber primer dan sumber yang relevan.
+- FR-RES-005: Sistem harus membedakan informasi faktual, opini, interpretasi, dan dugaan.
+- FR-RES-006: Sistem harus mencatat waktu penelitian dilakukan.
+- FR-RES-007: Sistem harus mencatat kegagalan pencarian atau pengambilan materi.
+- FR-RES-008: Sistem tidak boleh menganggap banyaknya materi sebagai ukuran keberhasilan pembelajaran.
+
+Expected Output:
+
+- Research ID.
+- Topik penelitian.
+- Daftar sumber yang ditemukan.
+- Metadata sumber.
+- Ringkasan awal informasi.
+- Waktu penelitian.
+- Status penelitian.
+
+7.4 Stage 3: Source Validation
+
+Source Validation bertanggung jawab mengevaluasi kelayakan sumber penelitian.
+
+Functional Requirements:
+
+- FR-SRC-001: Sistem harus memeriksa apakah sumber dapat diakses.
+- FR-SRC-002: Sistem harus mencatat identitas dan URL sumber apabila tersedia.
+- FR-SRC-003: Sistem harus mencatat penerbit atau organisasi yang menerbitkan sumber apabila tersedia.
+- FR-SRC-004: Sistem harus mencatat tanggal publikasi dan tanggal pembaruan apabila tersedia.
+- FR-SRC-005: Sistem harus mengevaluasi relevansi sumber terhadap topik.
+- FR-SRC-006: Sistem harus mengevaluasi otoritas dan transparansi sumber.
+- FR-SRC-007: Sistem harus mengidentifikasi sumber yang tidak memiliki informasi memadai.
+- FR-SRC-008: Sistem harus mencatat alasan ketika sumber dinilai lemah atau tidak layak digunakan.
+- FR-SRC-009: Sistem tidak boleh mengarang metadata sumber yang tidak ditemukan.
+
+Dimensi evaluasi sumber minimal mencakup:
+
+1. Authority: kredibilitas penerbit atau penulis.
+2. Relevance: keterkaitan dengan topik.
+3. Recency: kebaruan informasi sesuai karakter topik.
+4. Transparency: kejelasan data, metode, dan referensi.
+5. Accessibility: kemampuan sistem mengakses dan memeriksa materi.
+
+Sumber yang gagal divalidasi tidak boleh diam-diam diperlakukan sebagai sumber terpercaya.
+
+Expected Output:
+
+- Source ID.
+- Metadata sumber.
+- Hasil validasi.
+- Alasan penilaian.
+- Keterbatasan sumber.
+- Status kelayakan sumber.
+
+7.5 Stage 4: Evidence Evaluation
+
+Evidence Evaluation bertanggung jawab mengevaluasi kekuatan bukti dan kesimpulan.
+
+Functional Requirements:
+
+- FR-EVD-001: Sistem harus mengidentifikasi klaim utama dari materi penelitian.
+- FR-EVD-002: Sistem harus menghubungkan klaim dengan sumber yang mendukungnya.
+- FR-EVD-003: Sistem harus membedakan bukti langsung dan interpretasi.
+- FR-EVD-004: Sistem harus mengidentifikasi bukti yang bertentangan.
+- FR-EVD-005: Sistem harus menandai klaim yang tidak memiliki dukungan memadai.
+- FR-EVD-006: Sistem harus menjelaskan keterbatasan bukti.
+- FR-EVD-007: Sistem harus membedakan fakta, inferensi, hipotesis, dan spekulasi.
+- FR-EVD-008: Sistem tidak boleh menyajikan kesimpulan yang lemah seolah-olah telah terbukti.
+- FR-EVD-009: Sistem harus menyimpan dasar evaluasi agar dapat diperiksa kembali.
+
+Setiap kesimpulan penting minimal memiliki:
+
+- Pernyataan klaim.
+- Referensi bukti.
+- Hubungan antara bukti dan klaim.
+- Penilaian kekuatan dukungan.
+- Bukti yang bertentangan apabila ditemukan.
+- Keterbatasan dan ketidakpastian.
+
+Penilaian keyakinan model tidak boleh dianggap sebagai bukti kebenaran dengan sendirinya.
+
+Expected Output:
+
+- Claim ID.
+- Pernyataan klaim.
+- Referensi bukti.
+- Hasil evaluasi.
+- Tingkat dukungan bukti.
+- Kontradiksi.
+- Ketidakpastian.
+- Kesimpulan evaluasi.
+
+7.6 Stage 5: Knowledge Storage
+
+Knowledge Storage bertanggung jawab menyimpan hasil penelitian dan evaluasi.
+
+Functional Requirements:
+
+- FR-KNO-001: Sistem harus menyimpan hasil penelitian yang telah diproses.
+- FR-KNO-002: Sistem harus menyimpan hubungan antara pengetahuan dan sumber asalnya.
+- FR-KNO-003: Sistem harus menyimpan hasil evaluasi bukti.
+- FR-KNO-004: Sistem harus menyimpan metadata waktu dan identitas job.
+- FR-KNO-005: Sistem harus menghindari duplikasi data yang tidak diperlukan.
+- FR-KNO-006: Sistem harus mempertahankan riwayat perubahan data.
+- FR-KNO-007: Sistem harus mampu menandai informasi yang sudah kedaluwarsa atau berpotensi tidak relevan.
+- FR-KNO-008: Sistem tidak boleh menghapus informasi lama secara otomatis hanya karena ditemukan informasi baru.
+- FR-KNO-009: Sistem harus memungkinkan penelusuran dari hasil pembelajaran kembali ke sumber aslinya.
+
+Pengetahuan yang disimpan pada MVP merupakan basis pengetahuan referensial yang memiliki provenance.
+
+Penyimpanan pengetahuan tidak berarti model telah dilatih ulang, prompt inti telah berubah, atau policy sistem telah dimodifikasi.
+
+Expected Output:
+
+- Knowledge ID.
+- Isi pengetahuan.
+- Domain dan topik.
+- Referensi klaim.
+- Referensi sumber.
+- Metadata penelitian.
+- Waktu penyimpanan.
+- Informasi versi atau riwayat.
+
+7.7 Stage 6: Learning Report
+
+Learning Report bertanggung jawab menghasilkan laporan akhir dari satu proses pembelajaran.
+
+Functional Requirements:
+
+- FR-RPT-001: Sistem harus menghasilkan laporan setelah pipeline selesai.
+- FR-RPT-002: Laporan harus menjelaskan topik dan tujuan pembelajaran.
+- FR-RPT-003: Laporan harus menjelaskan sumber yang digunakan.
+- FR-RPT-004: Laporan harus menjelaskan temuan utama.
+- FR-RPT-005: Laporan harus membedakan fakta, interpretasi, dan hipotesis.
+- FR-RPT-006: Laporan harus menjelaskan kekuatan dan keterbatasan bukti.
+- FR-RPT-007: Laporan harus mencantumkan pertentangan informasi apabila ditemukan.
+- FR-RPT-008: Laporan harus menjelaskan bagian yang belum dapat disimpulkan.
+- FR-RPT-009: Laporan harus menyimpan identitas job dan waktu proses.
+- FR-RPT-010: Laporan harus menggunakan bahasa Indonesia sebagai bahasa utama.
+- FR-RPT-011: Laporan harus dapat diakses kembali setelah proses selesai.
+
+Minimum Report Structure:
+
+1. Identitas pembelajaran.
+2. Topik dan tujuan penelitian.
+3. Ringkasan eksekutif.
+4. Temuan utama.
+5. Bukti dan sumber pendukung.
+6. Perbedaan informasi atau kontradiksi.
+7. Analisis dan interpretasi.
+8. Keterbatasan penelitian.
+9. Kesimpulan.
+10. Pertanyaan atau kebutuhan penelitian lanjutan.
+
+Expected Output:
+
+- Report ID.
+- Job ID.
+- Ringkasan pembelajaran.
+- Temuan.
+- Referensi sumber.
+- Hasil evaluasi.
+- Kesimpulan.
+- Keterbatasan.
+- Waktu pembuatan laporan.
+
+---
+
+8. Job Lifecycle Requirements
+
+Setiap proses pembelajaran harus memiliki identitas job yang unik dan status yang dapat dilacak.
+
+8.1 Job Observability
+
+Sistem setidaknya harus dapat membedakan kondisi berikut:
+
+- Queued: job menunggu eksekusi.
+- Running: job sedang diproses.
+- Completed: seluruh pipeline berhasil diselesaikan.
+- Failed: job gagal dan tidak dapat menyelesaikan proses.
+- Cancelled: job dihentikan secara eksplisit.
+
+Status teknis tambahan dapat ditentukan dalam Technical Design, tetapi tidak boleh mencampurkan status eksekusi dengan keputusan persetujuan manusia.
+
+8.2 Job History
+
+Setiap job harus mencatat:
+
+- Job ID.
+- Pemicu job.
+- Topik dan domain.
+- Waktu pembuatan.
+- Waktu mulai.
+- Waktu selesai.
+- Status akhir.
+- Tahap terakhir yang berhasil.
+- Ringkasan kegagalan jika ada.
+- Versi model dan konfigurasi yang digunakan.
+
+8.3 Failure Handling
+
+Jika sebuah tahap gagal:
+
+1. Sistem harus mencatat tahap yang gagal.
+2. Sistem harus mencatat alasan kegagalan jika dapat diketahui.
+3. Sistem harus mempertahankan hasil tahap sebelumnya yang sudah tersimpan dengan aman.
+4. Sistem harus mengikuti kebijakan retry yang ditentukan oleh konfigurasi teknis.
+5. Sistem tidak boleh menandai job sebagai Completed apabila pipeline belum selesai.
+
+Kegagalan satu job tidak boleh merusak riwayat job lain.
+
+---
+
+9. Product Interface Requirements
+
+MVP membutuhkan akses operasional yang memungkinkan Founder memeriksa proses dan hasil pembelajaran.
+
+Minimum interface capabilities:
+
+1. Melihat daftar job pembelajaran.
+2. Melihat status job.
+3. Menjalankan pembelajaran secara manual.
+4. Melihat detail satu job.
+5. Membaca laporan pembelajaran.
+6. Menelusuri sumber yang digunakan.
+7. Melihat informasi kegagalan.
+8. Mengakses riwayat pembelajaran.
+
+Antarmuka boleh menggunakan web interface, API, atau mekanisme operasional yang sudah tersedia pada proyek.
+
+Namun, seluruh kemampuan inti harus dapat diakses dan diverifikasi tanpa mengandalkan klaim yang hanya muncul dalam log model.
+
+Integrasi Telegram bukan persyaratan wajib MVP v1.
+
+---
+
+10. Language and Output Standards
+
+10.1 Primary Language
+
+Bahasa Indonesia menjadi bahasa utama untuk seluruh laporan dan penjelasan yang ditampilkan kepada pengguna.
+
+Istilah teknis bahasa Inggris boleh digunakan apabila lebih tepat, tetapi harus dijelaskan ketika diperlukan.
+
+10.2 Writing Standards
+
+Hasil pembelajaran harus:
+
+- Jelas dan terstruktur.
+- Tidak bertele-tele.
+- Tidak menggunakan klaim tanpa dasar.
+- Tidak menyamakan korelasi dengan sebab-akibat.
+- Tidak menghilangkan informasi yang bertentangan.
+- Tidak membuat angka atau sumber fiktif.
+- Tidak menyembunyikan ketidakpastian.
+- Tidak menggunakan bahasa yang memberikan kesan pasti ketika bukti masih lemah.
+
+10.3 Analytical Standards
+
+Untuk topik ekonomi, bisnis, geopolitik, keuangan, dan pasar finansial, Cognis harus mempertimbangkan konteks waktu dan kondisi ketika informasi tersebut berlaku.
+
+Data historis tidak boleh diperlakukan sebagai kondisi terkini.
+
+Prediksi harus dipisahkan dari fakta dan harus menyebutkan asumsi yang digunakan.
+
+---
+
+11. Governance and Autonomy Boundaries
+
+11.1 Permitted Autonomy
+
+Pada MVP, Cognis diperbolehkan secara otomatis:
+
+- Menjalankan job terjadwal.
+- Melakukan penelitian.
+- Mengumpulkan materi.
+- Mengevaluasi sumber.
+- Mengevaluasi bukti.
+- Menyimpan hasil pembelajaran sebagai pengetahuan referensial.
+- Menghasilkan laporan.
+- Mencatat kegagalan dan hasil evaluasi.
+
+11.2 Restricted Actions
+
+Pada MVP, Cognis tidak diperbolehkan secara otomatis:
+
+- Mengubah system prompt permanen.
+- Mengubah policy atau security rules.
+- Mengubah arsitektur sistem.
+- Mengubah konfigurasi inti secara permanen.
+- Mengubah kurikulum utama secara permanen.
+- Mengubah standar evaluasi secara permanen.
+- Mengaktifkan kemampuan baru tanpa proses pengembangan.
+- Menghapus aturan governance.
+- Mengklaim dirinya meningkat kemampuannya tanpa evaluasi.
+
+11.3 Future Governance Model
+
+Mekanisme pengajuan perubahan oleh AI, persetujuan Founder, penerapan perubahan, pengujian, dan rollback merupakan bagian dari arah pengembangan ALS berikutnya.
+
+Fitur tersebut tidak menjadi ketergantungan MVP v1.
+
+Pemisahan ini harus tetap dipertahankan agar sistem pembelajaran tidak memperoleh kewenangan mengubah aturan yang mengendalikan dirinya sendiri.
+
+---
+
+12. Model and Provider Requirements
+
+MVP harus memiliki pengelolaan penggunaan model yang dapat ditelusuri.
+
+Functional Requirements:
+
+- FR-MOD-001: Sistem harus mencatat model yang digunakan untuk setiap job.
+- FR-MOD-002: Sistem harus mencatat provider model.
+- FR-MOD-003: Sistem harus mencatat versi atau identitas model apabila tersedia.
+- FR-MOD-004: Sistem harus mencatat konfigurasi prompt atau versi prompt yang digunakan.
+- FR-MOD-005: Sistem harus mencatat kegagalan pemanggilan model.
+- FR-MOD-006: Sistem harus dapat membedakan hasil dari model atau konfigurasi yang berbeda.
+- FR-MOD-007: Sistem tidak boleh menganggap perpindahan model sebagai peningkatan kemampuan otomatis.
+
+Pilihan provider dan mekanisme integrasi teknis ditentukan dalam dokumen desain teknis.
+
+---
+
+13. Non-Functional Requirements
+
+13.1 Reliability
+
+- NFR-REL-001: Kegagalan satu job tidak boleh menghilangkan data job lain.
+- NFR-REL-002: Proses yang gagal harus memiliki catatan kegagalan.
+- NFR-REL-003: Sistem harus dapat melanjutkan operasional setelah kegagalan yang dapat dipulihkan.
+- NFR-REL-004: Status job harus mencerminkan kondisi proses sebenarnya.
+
+13.2 Data Integrity
+
+- NFR-DAT-001: Setiap laporan harus terhubung dengan job asalnya.
+- NFR-DAT-002: Setiap klaim penting dalam laporan harus dapat ditelusuri ke bukti atau diberi label belum terverifikasi.
+- NFR-DAT-003: Identitas sumber harus dipertahankan.
+- NFR-DAT-004: Sistem tidak boleh mengubah kegagalan validasi menjadi keberhasilan secara diam-diam.
+- NFR-DAT-005: Perubahan data harus mempertahankan riwayat yang diperlukan untuk audit.
+
+13.3 Security
+
+- NFR-SEC-001: Kredensial dan API key tidak boleh disimpan dalam source code.
+- NFR-SEC-002: Akses terhadap fungsi operasional harus dibatasi sesuai kebutuhan.
+- NFR-SEC-003: Input eksternal harus diperlakukan sebagai data yang tidak tepercaya.
+- NFR-SEC-004: Instruksi yang ditemukan dalam sumber penelitian tidak boleh otomatis diperlakukan sebagai instruksi sistem.
+- NFR-SEC-005: Sistem harus melindungi data dan konfigurasi internal dari perubahan yang tidak berwenang.
+
+13.4 Resource Efficiency
+
+- NFR-RES-001: Proses penelitian harus memiliki batas penggunaan resource.
+- NFR-RES-002: Pemanggilan model dan sumber eksternal harus memperhitungkan biaya serta batas penggunaan.
+- NFR-RES-003: Kegagalan provider tidak boleh menyebabkan retry tanpa batas.
+- NFR-RES-004: Sistem harus mencatat penggunaan resource yang relevan apabila tersedia.
+- NFR-RES-005: Desain harus memungkinkan penggunaan model berbeda berdasarkan kebutuhan tugas.
+
+13.5 Maintainability
+
+- NFR-MNT-001: Komponen pipeline harus memiliki tanggung jawab yang jelas.
+- NFR-MNT-002: Kegagalan setiap tahap harus dapat diidentifikasi.
+- NFR-MNT-003: Perubahan pada satu tahap tidak boleh menimbulkan ketergantungan tersembunyi pada tahap lain.
+- NFR-MNT-004: Implementasi harus dapat diuji secara terpisah dan secara end-to-end.
+
+---
+
+14. Acceptance Criteria
+
+MVP v1 dinyatakan memenuhi tujuan produk apabila seluruh kriteria berikut berhasil diverifikasi.
+
+14.1 Scheduler
+
+- Job dapat dijalankan secara manual.
+- Job dapat dipicu oleh jadwal yang telah dikonfigurasi.
+- Setiap job memiliki identitas yang dapat dilacak.
+- Pemicu berulang tidak menghasilkan eksekusi ganda untuk permintaan yang sama.
+
+14.2 Research
+
+- Sistem dapat meneliti topik yang telah ditentukan.
+- Hasil penelitian memiliki identitas sumber.
+- Kegagalan pengambilan materi tercatat.
+- Materi yang ditemukan dapat diteruskan ke tahap validasi.
+
+14.3 Source Validation
+
+- Sumber dievaluasi berdasarkan dimensi yang ditentukan.
+- Sumber yang lemah dapat diidentifikasi.
+- Metadata yang tidak ditemukan tidak boleh dibuat-buat.
+- Hasil validasi dapat diperiksa kembali.
+
+14.4 Evidence Evaluation
+
+- Klaim utama dapat diidentifikasi.
+- Klaim dapat dihubungkan dengan bukti.
+- Informasi yang bertentangan dapat ditandai.
+- Ketidakpastian dan keterbatasan bukti ditampilkan.
+- Kesimpulan yang tidak memiliki dukungan memadai tidak disajikan sebagai fakta.
+
+14.5 Knowledge Storage
+
+- Hasil pembelajaran dapat disimpan.
+- Hubungan antara pengetahuan, klaim, dan sumber dipertahankan.
+- Pengetahuan dapat ditemukan kembali.
+- Riwayat asal-usul data tidak hilang.
+
+14.6 Learning Report
+
+- Laporan dihasilkan dari job yang selesai.
+- Laporan dapat dibaca dan diakses kembali.
+- Laporan memiliki referensi sumber.
+- Keterbatasan penelitian dinyatakan.
+- Laporan tidak memuat sumber atau data yang direkayasa oleh model.
+
+14.7 Governance
+
+- Tidak ada perubahan permanen terhadap prompt inti, policy, atau arsitektur yang dilakukan secara otomatis.
+- Sistem tidak dapat menyetujui perubahan permanen yang diusulkannya sendiri.
+- Batas kewenangan otomatis dapat diverifikasi melalui pengujian.
+
+14.8 End-to-End Verification
+
+Sistem harus berhasil menyelesaikan satu siklus penuh:
+
+Scheduler → Research → Source Validation → Evidence Evaluation → Knowledge Storage → Learning Report
+
+Pengujian harus membuktikan bahwa:
+
+1. Setiap tahap menerima input yang sesuai.
+2. Setiap tahap menghasilkan output yang dapat diperiksa.
+3. Identitas job dan hubungan antar-data tetap konsisten.
+4. Kegagalan dapat dicatat tanpa merusak data sebelumnya.
+5. Laporan akhir dapat ditelusuri ke sumber penelitian.
+
+---
+
+15. Success Metrics
+
+Keberhasilan MVP tidak diukur dari seberapa pintar Cognis mengaku dirinya sendiri.
+
+Pengukuran awal menggunakan metrik berikut.
+
+15.1 Pipeline Completion Rate
+
+Mengukur persentase job yang berhasil menyelesaikan seluruh pipeline.
+
+Target pilot awal: minimal 8 dari 10 job pengujian berhasil diselesaikan.
+
+15.2 Source Traceability
+
+Mengukur persentase klaim penting dalam laporan yang memiliki referensi bukti atau label eksplisit bahwa klaim tersebut belum terverifikasi.
+
+Target: 100% klaim penting memenuhi ketentuan tersebut.
+
+15.3 Data Provenance Integrity
+
+Mengukur kemampuan sistem mempertahankan hubungan antara job, penelitian, sumber, klaim, pengetahuan, dan laporan.
+
+Target: seluruh objek pada pengujian end-to-end memiliki hubungan yang benar.
+
+15.4 Failure Observability
+
+Mengukur apakah kegagalan dapat diketahui melalui catatan job dan tahap yang gagal.
+
+Target: seluruh skenario kegagalan yang diuji menghasilkan status dan catatan yang sesuai.
+
+15.5 Report Quality
+
+Kualitas laporan dievaluasi melalui pemeriksaan manusia berdasarkan:
+
+- Relevansi terhadap topik.
+- Ketepatan penggunaan sumber.
+- Kekuatan bukti.
+- Konsistensi kesimpulan.
+- Transparansi ketidakpastian.
+- Keterbacaan laporan.
+
+Hasil evaluasi kualitas laporan harus dicatat untuk menentukan baseline peningkatan pada versi berikutnya.
+
+15.6 Measurement Integrity
+
+Tidak boleh ada klaim keberhasilan atau peningkatan performa yang tidak memiliki hasil pengujian pendukung.
+
+Target angka untuk kualitas analisis dan akurasi kesimpulan harus ditetapkan setelah baseline pengujian tersedia.
+
+---
+
+16. MVP Development Priorities
+
+Urutan prioritas implementasi:
+
+P0 - Core Learning Pipeline
+
+Seluruh komponen berikut wajib tersedia:
+
+1. Scheduler.
+2. Research.
+3. Source Validation.
+4. Evidence Evaluation.
+5. Knowledge Storage.
+6. Learning Report.
+7. Job lifecycle dan observability.
+8. End-to-end testing.
+
+Tanpa seluruh komponen ini, MVP belum dianggap selesai.
+
+P1 - Operational Reliability
+
+Setelah pipeline utama berfungsi:
+
+1. Peningkatan error handling.
+2. Mekanisme retry yang terkontrol.
+3. Penguatan data integrity.
+4. Riwayat dan pencarian job.
+5. Monitoring penggunaan resource.
+6. Pengujian skenario kegagalan.
+
+P2 - Future Expansion Foundation
+
+Persiapan untuk versi selanjutnya:
+
+1. Competency tracking.
+2. Curriculum progression.
+3. Learning quality benchmarks.
+4. Candidate improvement proposals.
+5. Founder approval workflow.
+6. Controlled system improvement.
+7. Rollback management.
+
+P2 tidak boleh menjadi alasan untuk menunda penyelesaian P0.
+
+---
+
+17. Key Risks
+
+17.1 Hallucinated Research
+
+Risk: Model menghasilkan sumber, data, atau temuan yang tidak benar-benar ditemukan.
+
+Mitigation: Validasi sumber, penyimpanan metadata, pemeriksaan referensi, dan pengujian traceability.
+
+17.2 Weak Evidence Evaluation
+
+Risk: Model menerima kesimpulan dari bukti yang tidak cukup atau tidak relevan.
+
+Mitigation: Evaluasi hubungan klaim dan bukti, pencatatan kontradiksi, serta pemeriksaan manusia terhadap sampel laporan.
+
+17.3 Outdated Information
+
+Risk: Informasi lama digunakan untuk menjelaskan kondisi terkini.
+
+Mitigation: Pencatatan tanggal informasi dan evaluasi recency sesuai karakter topik.
+
+17.4 Excessive Automation
+
+Risk: Sistem memperoleh kewenangan terlalu besar sebelum kualitas proses pembelajaran terbukti.
+
+Mitigation: Memisahkan kemampuan penelitian otomatis dari perubahan permanen sistem.
+
+17.5 Uncontrolled Resource Usage
+
+Risk: Penelitian dan pemanggilan model menghasilkan biaya atau penggunaan resource yang tidak terkendali.
+
+Mitigation: Batas resource, retry terbatas, pencatatan penggunaan, dan konfigurasi operasional.
+
+17.6 False Learning Claims
+
+Risk: Sistem mengklaim mengalami peningkatan kemampuan hanya karena memiliki lebih banyak data atau menghasilkan laporan lebih panjang.
+
+Mitigation: Pengukuran berbasis benchmark dan perbandingan hasil evaluasi yang konsisten.
+
+---
+
+18. Dependencies and Open Decisions
+
+Keputusan berikut harus diselesaikan dalam dokumen desain dan implementasi terkait, bukan diasumsikan telah ditentukan oleh PRD.
+
+1. Provider dan mekanisme web research.
+2. Provider model dan strategi penggunaan model.
+3. Teknologi backend dan database.
+4. Teknologi scheduler dan mekanisme job execution.
+5. Mekanisme penyimpanan dokumen dan knowledge retrieval.
+6. Mekanisme autentikasi serta otorisasi operasional.
+7. Format metadata dan skema data.
+8. Batas penggunaan resource dan biaya.
+9. Metode evaluasi sumber dan bukti secara teknis.
+10. Mekanisme backup dan recovery.
+
+Keputusan teknis harus didokumentasikan pada dokumen yang menjadi tanggung jawabnya.
+
+Apabila terdapat keputusan yang belum ditentukan, implementasi harus mencatatnya sebagai open decision dan tidak menyamarkannya sebagai keputusan final.
+
+---
+
+19. Definition of MVP Completion
+
+MVP v1 dapat dinyatakan selesai apabila:
+
+1. Seluruh tahapan core learning pipeline telah diimplementasikan.
+2. Pipeline dapat dijalankan secara manual dan terjadwal.
+3. Setiap tahapan memiliki input dan output yang dapat diverifikasi.
+4. Sumber dan bukti dapat ditelusuri dari laporan.
+5. Pengetahuan dapat disimpan dan ditemukan kembali.
+6. Job lifecycle dan kegagalan dapat dipantau.
+7. Pengujian unit, integrasi, dan end-to-end yang relevan telah dijalankan.
+8. Tidak terdapat pelanggaran terhadap batas governance MVP.
+9. Dokumentasi implementasi sesuai dengan kondisi sistem yang benar-benar berjalan.
+10. Hasil pengujian dan keterbatasan MVP dilaporkan secara jujur.
+
+Fitur yang belum masuk dalam ruang lingkup MVP tidak boleh digunakan sebagai alasan untuk mengklaim MVP telah gagal, selama seluruh acceptance criteria MVP telah terpenuhi.
+
+Sebaliknya, dokumentasi yang lengkap tanpa implementasi dan pengujian yang berhasil tidak dapat dianggap sebagai penyelesaian MVP.
+
+---
+
+20. Final Product Principle
+
+Cognis harus berkembang melalui proses pembelajaran yang dapat dibuktikan.
+
+Sistem tidak dinilai berdasarkan banyaknya informasi yang dikumpulkan, panjangnya laporan, jumlah model yang digunakan, atau kompleksitas arsitekturnya.
+
+Sistem dinilai berdasarkan kemampuannya untuk:
+
+- Menemukan informasi yang relevan.
+- Memvalidasi sumber.
+- Menilai kekuatan bukti.
+- Menghasilkan kesimpulan yang proporsional.
+- Menyimpan pengetahuan dengan provenance.
+- Menjelaskan keterbatasannya.
+- Menghasilkan pembelajaran yang dapat diperiksa dan diuji kembali.
+
+Prinsip utama Cognis: jangan mengklaim tahu apabila bukti belum cukup, dan jangan mengklaim berkembang apabila peningkatannya belum terukur.
